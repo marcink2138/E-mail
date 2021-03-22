@@ -12,7 +12,7 @@ public class MyClient {
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
             dout.writeUTF("Hello server");
             dout.flush();
-            dout.close();//JD
+            dout.close();//JDD
             s.close();
         } catch (UnknownHostException e) {
             e.printStackTrace();
