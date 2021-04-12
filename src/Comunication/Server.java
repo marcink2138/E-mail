@@ -8,7 +8,7 @@ import java.util.List;
 public class Server {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // don't need to specify a hostname, it will be the current machine
-        ServerSocket ss = new ServerSocket(7777);
+        ServerSocket ss = new ServerSocket(6666);
         System.out.println("ServerSocket awaiting connections...");
         Socket socket = ss.accept(); // blocking call, this will wait until a connection is attempted on this port.
         System.out.println("Connection from " + socket + "!");

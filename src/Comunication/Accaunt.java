@@ -12,6 +12,10 @@ public class Accaunt {
         this.password = password;
     }
 
+    public void display(){
+
+    }
+
     public void addMail(Mail mail){
         listOfMails.add(mail);
     }
@@ -31,5 +35,12 @@ public class Accaunt {
 
     public ArrayList<Mail> getListOfMails() {
         return listOfMails;
+    }
+
+    public static void main(String[] args) {
+        Accaunt konto = new Accaunt("jebedisa", "polska");
+        Mail mail1 = new Mail("dis to zwierz", "jajkos", "dis", 0, "Polska", "20.20.20");
+        konto.addMail(mail1);
+        konto.getListOfMails().get(0).display();
     }
 }

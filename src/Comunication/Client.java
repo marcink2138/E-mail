@@ -8,7 +8,7 @@ import java.util.List;
 public class Client {
     public static void main(String[] args) throws IOException {
         // need host and port, we want to connect to the ServerSocket at port 7777
-        Socket socket = new Socket("localhost", 7777);
+        Socket socket = new Socket("localhost", 6666);
         System.out.println("Connected!");
 
         // get the output stream from the socket.
