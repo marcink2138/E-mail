@@ -39,7 +39,7 @@ public class Accaunt {
 
     public static void main(String[] args) {
         Accaunt konto = new Accaunt("jebedisa", "polska");
-        Mail mail1 = new Mail("dis to zwierz", "jajkos", "dis", 0, "Polska", "20.20.20");
+        Mail mail1 = new Mail("mail", "jajkos", "dis", 0, "Polska", "20.20.20", "dis to zwierz");
         konto.addMail(mail1);
         konto.getListOfMails().get(0).display();
     }

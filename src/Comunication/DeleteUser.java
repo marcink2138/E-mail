@@ -4,8 +4,8 @@ public class DeleteUser extends Message{
     private String name;
     private String password;
 
-    public DeleteUser(String text, String name, String password){
-        super(text);
+    public DeleteUser(String comand, String name, String password){
+        super(comand);
         this.name = name;
         this.password = password;
     }

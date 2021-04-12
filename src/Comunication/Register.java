@@ -5,8 +5,8 @@ public class Register extends Message{
     private String password = null;
     private String passwordConfimation = null;
 
-    public Register(String text, String name, String password, String passwordConfimation){
-        super(text);
+    public Register(String comand, String name, String password, String passwordConfimation){
+        super(comand);
         this.name = name;
         this.password = password;
         this.passwordConfimation = passwordConfimation;

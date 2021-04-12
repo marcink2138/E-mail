@@ -6,15 +6,17 @@ public class Mail extends Message{
     private String sender = null;
     private String title = null;
     private String date = null;
+    private String text = null;
     private int id = 0;
 
 
-    public Mail(String text, String reciver, String sender, int id, String title, String date) {
-        super(text);
+    public Mail(String comand, String reciver, String sender, int id, String title, String date, String text) {
+        super(comand);
         this.reciver = reciver;
         this.sender = sender;
         this.title = title;
         this.date = date;
+        this.text = text;
         this.id = id;
     }
 
@@ -23,7 +25,7 @@ public class Mail extends Message{
         System.out.println("Nadawca: " + sender + ".");
         System.out.println("Tytul: " + title + ".");
         System.out.println("Data: " + date + ".");
-        System.out.println(getText());
+        System.out.println(text);
     }
 
     public String getReciver() {

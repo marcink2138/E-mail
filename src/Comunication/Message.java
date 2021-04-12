@@ -3,14 +3,14 @@ package Comunication;
 import java.io.Serializable;
 
 public class Message implements Serializable{
-    private String text = null;
+    private String comand = null;
 
-    public Message(String text) {
-        this.text = text;
+    public Message(String comand) {
+        this.comand = comand;
     }
 
-    public String getText() {
-        return text;
+    public String getComand() {
+        return comand;
     }
 
 }

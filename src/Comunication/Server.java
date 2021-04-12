@@ -23,7 +23,7 @@ public class Server {
         System.out.println("Received [" + listOfMessages.size() + "] messages from: " + socket);
         // print out the text of every message
         System.out.println("All messages:");
-        listOfMessages.forEach((msg)-> System.out.println(msg.getText()));
+        listOfMessages.forEach((msg)-> System.out.println(msg.getComand()));
 
         System.out.println("Closing sockets.");
         ss.close();
