@@ -19,7 +19,7 @@ public class Client {
         // make a bunch of messages to send.
         List<Message> messages = new ArrayList<>();
         messages.add(new Message("Hello from the other side!"));
-        messages.add(new Message("How are you doing?"));
+        messages.add(new LogIn("How are you doing?", "xd", "1234"));
         messages.add(new Message("What time is it?"));
         messages.add(new Message("Hi hi hi hi."));
 
