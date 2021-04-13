@@ -1,6 +1,8 @@
 package TEST;
 
-public class Message_test {
+import java.io.Serializable;
+
+public class Message_test implements Serializable {
     private String alert;
     private String account;
 
