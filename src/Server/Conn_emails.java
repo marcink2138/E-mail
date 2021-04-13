@@ -20,8 +20,12 @@ public class Conn_emails {
         connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza
     }
 
-    public void createInbox(String acc) {
-
+    public void createInbox(String acc) throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS ? (messId int NOT NULL AUTO_INCREMENT, " +
+                "sender varchar(30), date_ varchar(20), messege text, PRIMARY KEY (messId))";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, acc);
+        preparedStatement.executeUpdate();
     }
 
     public void deleteInbox(String acc) {
@@ -38,6 +42,14 @@ public class Conn_emails {
 
     public void deleteMess(String acc, int id) {
 
+    }
+
+    public void insertMess(String acc, String from, String date, String messege){
+
+    }
+
+    public void closeConn() throws SQLException {
+        connection.close();
     }
 
 }

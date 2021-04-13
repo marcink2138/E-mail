@@ -1,6 +1,8 @@
 package Server;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 // "jdbc:mysql://localhost:3306/Inbox" -> Inbox
 // "jdbc:mysql://localhost:3306/Email accounts" -> konta
@@ -62,10 +64,15 @@ public class Conn_acc {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Conn_acc a = new Conn_acc();
+        //Conn_acc a = new Conn_acc();
         //a.createAccount("JESTEMBOGIEM", "polska");
-        a.getAcc("JESTEMBOGIEM1", "polska");
+        //a.getAcc("JESTEMBOGIEM1", "polska");
         //a.deleteAccount("marianczello@pl.com");
-        a.closeConn();
+        //a.closeConn();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String a = dtf.format(now);
+        System.out.println(a);
     }
 }
