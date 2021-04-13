@@ -24,12 +24,14 @@ public class servertest {
 
         // read the list of messages from the socket
         List<Message_test> listOfMessages = (List<Message_test>) objectInputStream.readObject();
-        System.out.println("Received [" + listOfMessages.size() + "] messages from: " + socket);
+        //System.out.println("Received [" + listOfMessages.size() + "] messages from: " + socket);
         // print out the text of every message
-        System.out.println("All messages:");
-        listOfMessages.forEach((msg)-> System.out.println(msg.getAlert()));
+        //System.out.println("All messages:");
+        //listOfMessages.forEach((msg)-> System.out.println(msg.getAlert()));
 
         System.out.println("Closing sockets.");
+
+        System.out.println(listOfMessages.get(0).getMessageId());
         ss.close();
         socket.close();
     }
