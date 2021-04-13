@@ -1,13 +1,17 @@
 package Server;
 
+import Comunication.Mail;
+import Comunication.Message;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 // "jdbc:mysql://localhost:3306/Inbox" -> Inbox
 // "jdbc:mysql://localhost:3306/Email accounts" -> konta
 public class Conn_acc {
-    private static Connection connection;
+    private Connection connection;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
@@ -21,27 +25,28 @@ public class Conn_acc {
         connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza
     }
 
-    public boolean createAccount(String acc, String password) throws SQLException {
+    public void createAccount(String acc, String password) throws SQLException {
         String sql = "INSERT INTO Accounts (Email_addr,password) VALUES (?,?)";
+        Conn_emails inbox = new Conn_emails();
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, acc);
         preparedStatement.setString(2, password);
-        try {
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Konto o danym emailu znajduje sie w bazie danych");
-            return false;
-        }
+        preparedStatement.executeUpdate();
+        inbox.createInbox(acc);
+        System.out.println("Konto o danym emailu znajduje sie w bazie danych");
         System.out.println("Konto zostalo zalozone");
-        return true;
+        inbox.closeConn();
 
     }
 
     public void deleteAccount(String acc) throws SQLException {
         String sql = "DELETE FROM Accounts WHERE Email_addr = ?";
+        Conn_emails inbox = new Conn_emails();
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, acc);
         preparedStatement.executeUpdate();
+        inbox.deleteInbox(acc);
+        inbox.closeConn();
     }
 
     public void closeConn() throws SQLException {
@@ -63,16 +68,17 @@ public class Conn_acc {
         }
     }
 
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         //Conn_acc a = new Conn_acc();
-        //a.createAccount("JESTEMBOGIEM", "polska");
-        //a.getAcc("JESTEMBOGIEM1", "polska");
-        //a.deleteAccount("marianczello@pl.com");
-        //a.closeConn();
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String a = dtf.format(now);
-        System.out.println(a);
+        //Conn_emails b = new Conn_emails();
+        //a.deleteAccount("marcin@kercz@jd.pl");
+        //b.deleteMess("marcin@karcz@jd.pl", 1);
+        //ArrayList<Mail> t = new ArrayList<>();
+        //Message w = new Mail("mess","ab","ab",2,"cf","ag","sdadsa");
+        //w=(Mail)w;
+        //t = b.getListMess("marcin@karcz@jd.pl");
+        //for (int i =0; i<t.size(); i++)
+        //    System.out.println((Message)t.get(i).getComand());
     }
 }
