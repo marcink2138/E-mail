@@ -7,7 +7,7 @@ public class DeleteMail extends Message {
         this.messageId = messageId;
     }
 
-    public int getMessageId(){
+    public int getId(){
         return messageId;
     }
 }

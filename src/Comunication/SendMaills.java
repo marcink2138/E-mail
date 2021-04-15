@@ -2,10 +2,10 @@ package Comunication;
 
 import java.util.ArrayList;
 
-public class GetMailStatus extends Message{
+public class SendMaills extends Message{
     private ArrayList<Message> listOfMails = new ArrayList<>();
 
-    public GetMailStatus(String alert, String account, boolean status, ArrayList<Message> listOfMails){
+    public SendMaills(String alert, String account, boolean status, ArrayList<Message> listOfMails){
         super(alert, account, status);
         this.listOfMails = listOfMails;
     }

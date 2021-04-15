@@ -1,5 +1,5 @@
 package Comunication;
-/*
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -20,10 +20,10 @@ public class clienttest {
 
         // make a bunch of messages to send.
         ArrayList<Message> maillist = new ArrayList<>();
-        maillist.add(new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
-        maillist.add(new SendMail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
+        maillist.add(new Mail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
+        maillist.add(new Mail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
         List<Message> messages = new ArrayList<>();
-        messages.add((new GetMailStatus("xd", "xd", true, maillist)));
+        messages.add((new SendMaills("xd", "xd", true, maillist)));
 
         System.out.println("Sending messages to the ServerSocket");
         objectOutputStream.writeObject(messages);
@@ -33,4 +33,3 @@ public class clienttest {
         socket.close();
     }
 }
-*/

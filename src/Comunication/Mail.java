@@ -1,13 +1,14 @@
 package Comunication;
 
-public class Mail {
+public class Mail extends Message {
     private String title;
     private String reciver;
     private String date;
     private String text;
     private int messageId;
 
-    public Mail(String sender, int messageId, String title, String date, String text) {
+    public Mail(String alert, String account, boolean status, String sender, int messageId, String title, String date, String text) {
+        super(alert, account, status);
         this.reciver = sender;
         this.messageId = messageId;
         this.title = title;
@@ -35,7 +36,4 @@ public class Mail {
         return text;
     }
 
-    public void display() {
-
-    }
 }
