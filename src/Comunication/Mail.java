@@ -1,23 +1,23 @@
 package Comunication;
 
-public class Mail extends Message {
+public class Mail extends Message{
     private String title;
-    private String sender;
+    private String reciver;
     private String date;
     private String text;
     private int messageId;
 
-    public Mail(String account, String sender, int messageId, String title, String date, String text) {
-        super("mess", account);
-        this.sender = sender;
+    public Mail(String alert, String account, boolean status, String sender, int messageId, String title, String date, String text) {
+        super(alert, account, status);
+        this.reciver = sender;
         this.messageId = messageId;
         this.title = title;
         this.date = date;
         this.text = text;
     }
 
-    public String getSender() {
-        return sender;
+    public String getReciver() {
+        return reciver;
     }
 
     public int getMessageId() {
@@ -34,11 +34,6 @@ public class Mail extends Message {
 
     public String getText() {
         return text;
-    }
-
-    public static void main(String args[]) {
-        Message test = new Mail("jd", "ab", 2, "wf", "tr", "asdasddsa");
-
     }
 
     public void display() {

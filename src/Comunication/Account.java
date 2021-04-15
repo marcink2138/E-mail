@@ -38,9 +38,6 @@ public class Account {
     }
 
     public static void main(String[] args) {
-        Account konto = new Account("jebedisa", "polska");
-        Mail mail1 = new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa");
-        konto.addMail(mail1);
-        konto.getListOfMails().get(0).display();
+
     }
 }

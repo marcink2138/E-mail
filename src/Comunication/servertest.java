@@ -29,7 +29,7 @@ public class servertest {
 
         System.out.println("Closing sockets.");
 
-        System.out.println(listOfMessages.get(0).getMessageId());
+        System.out.println(listOfMessages.get(0).getMail().getTitle());
         ss.close();
         socket.close();
     }

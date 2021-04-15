@@ -10,7 +10,7 @@ import java.util.List;
 public class clienttest {
     public static void main(String[] args) throws IOException {
         // need host and port, we want to connect to the ServerSocket at port 7777
-        Socket socket = new Socket("192.168.178.69", 6666);
+        Socket socket = new Socket("localhost", 6666);
         System.out.println("Connected!");
 
         // get the output stream from the socket.
@@ -20,9 +20,7 @@ public class clienttest {
 
         // make a bunch of messages to send.
         List<Message> messages = new ArrayList<>();
-        messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));
-        messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));
-        messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));
+        messages.add(new SendMail("alert", "dis", true, new Mail("alert", "xd", true, "xd", 22, "xd", "xd", "xd")));
 
         System.out.println("Sending messages to the ServerSocket");
         objectOutputStream.writeObject(messages);

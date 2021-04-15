@@ -36,7 +36,7 @@ public class Conn_emails {
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
     }
-
+/*
     public ArrayList<Mail> getListMess(String acc) throws SQLException {
         ArrayList<Mail> messages = new ArrayList<>();
         String sql = "SELECT * FROM {0}";
@@ -48,7 +48,7 @@ public class Conn_emails {
                     resultSet.getString("date_"), resultSet.getString("message")));
         return messages;
     }
-
+*/
 
     public void deleteMess(String acc, int id) throws SQLException {
         String sql = "DELETE FROM {0} WHERE messId = ?";
