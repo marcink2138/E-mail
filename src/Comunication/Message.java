@@ -35,7 +35,7 @@ public class Message implements Serializable {
     }
 
     public int getMessageId() {
-        return 0;
+        return -1;
     }
 
     public String getTitle() {
