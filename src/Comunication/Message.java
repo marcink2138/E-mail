@@ -1,65 +1,64 @@
 package Comunication;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Message implements Serializable {
-    private String alert;
+    private String command;
     private String account;
+    private boolean status;
 
-    public Message(String alert, String account) {
-        this.alert = alert;
+    public Message(String alert, String account, boolean status) {
+        this.command = alert;
         this.account = account;
+        this.status = status;
     }
 
-    public String getAlert() {
-        return alert;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public String getCommand() {
+        return command;
     }
 
     public String getAccount() {
         return account;
     }
 
-    public void setSender() {
-    }
-
-    public String getSender() {
-        return null;
-    }
-
-    public void setTitle() {
-    }
-
-    public String getTitle() {
-        return null;
-    }
-
-    public void setDate() {
-    }
-
-    public String getDate() {
-        return null;
-    }
-
-    public void setId() {
-    }
-
-    public int getMessageId() {
-        return -1;
-    }
-
-    public void setPassword(){
-
+    public boolean isStatus() {
+        return status;
     }
 
     public String getPassword(){
         return null;
     }
 
+    public String getTitle(){
+        return null;
+    }
+
+    public String getData(){
+        return null;
+    }
+
+    public String getReciver(){
+        return null;
+    }
+
     public String getText(){
+        return null;
+    }
+
+    public int getId(){
+        return -1;
+    }
+
+    public String getNewpassword(){
+        return null;
+    }
+
+    public ArrayList<Message> getListofemails(){
         return null;
     }
 }
