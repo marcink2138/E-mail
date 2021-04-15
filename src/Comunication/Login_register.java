@@ -1,4 +1,4 @@
-package TEST;
+package Comunication;
 
 public class Login_register extends Message {
     private String password;

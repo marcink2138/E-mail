@@ -1,4 +1,4 @@
-package TEST;
+package Comunication;
 
 import java.io.IOException;
 import java.io.InputStream;

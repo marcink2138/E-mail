@@ -1,4 +1,4 @@
-package TEST;
+package Comunication;
 
 public class Mail extends Message {
     private String title;

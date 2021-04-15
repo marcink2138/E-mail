@@ -1,4 +1,4 @@
-package TEST;
+package Comunication;
 
 public class DeleteUser extends Message {
     public DeleteUser(String account) {

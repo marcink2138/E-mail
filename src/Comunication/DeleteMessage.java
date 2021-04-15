@@ -1,4 +1,4 @@
-package TEST;
+package Comunication;
 
 public class DeleteMessage extends Message {
     int messageId;
