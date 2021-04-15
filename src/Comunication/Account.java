@@ -1,5 +1,5 @@
 package Comunication;
-
+/*
 import java.util.ArrayList;
 
 public class Account {
@@ -41,3 +41,4 @@ public class Account {
 
     }
 }
+*/

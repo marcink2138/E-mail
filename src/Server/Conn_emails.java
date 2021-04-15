@@ -1,6 +1,6 @@
 package Server;
 
-import Comunication.Mail;
+//import Comunication.Mail;
 
 import java.sql.*;
 import java.text.MessageFormat;
@@ -23,18 +23,34 @@ public class Conn_emails {
         connection = DriverManager.getConnection(URL, login, passwd);              //Establishing connection with DB
     }
 
-    public void createInbox(String acc) throws SQLException {
+    public boolean createInbox(String acc) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS {0} (messId int NOT NULL AUTO_INCREMENT, " +
                 "sender varchar(30) NOT NULL , title varchar (20) NOT NULL ,date_ varchar(20) NOT NULL , " +
                 "message text NOT NULL , PRIMARY KEY (messId))";
         preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
+
+        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 1) {
+            System.out.println("Utworzony skrzynke odbiorcza");
+            return true;
+        } else {
+            System.out.println("Istnieje juz taka skrzynka odbiorcza");
+            return false;
+        }
+
     }
 
-    public void deleteInbox(String acc) throws SQLException {
-        String sql = "DROP TABLE {0}";
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
+    public boolean deleteInbox(String acc) throws SQLException {
+        try {
+            String sql = "DROP TABLE {0}";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
+            System.out.println("Udalo usunac sie skrzynke odbiorcza");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Brak skrzynki odbiorczej dla danego konta");
+            return false;
+        }
+
     }
 /*
     public ArrayList<Mail> getListMess(String acc) throws SQLException {
@@ -50,21 +66,37 @@ public class Conn_emails {
     }
 */
 
-    public void deleteMess(String acc, int id) throws SQLException {
-        String sql = "DELETE FROM {0} WHERE messId = ?";
-        preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
-        preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
+    public boolean deleteMess(String acc, int id) throws SQLException {
+        try {
+            String sql = "DELETE FROM {0} WHERE messId = ?";
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println("Udane usuniecie maila");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Brak rekordu lub tabeli");
+            return false;
+        }
+
     }
 
-    public void insertMess(String acc, String sender, String title, String date, String messege) throws SQLException {
-        String sql = "INSERT INTO {0} (sender, title, date_, message) VALUES (?, ?, ?, ?)";
-        preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
-        preparedStatement.setString(1, sender);
-        preparedStatement.setString(2, title);
-        preparedStatement.setString(3, date);
-        preparedStatement.setString(4, messege);
-        preparedStatement.executeUpdate();
+    public boolean insertMess(String acc, String sender, String title, String date, String messege) throws SQLException {
+        try {
+            String sql = "INSERT INTO {0} (sender, title, date_, message) VALUES (?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement.setString(1, sender);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, date);
+            preparedStatement.setString(4, messege);
+            preparedStatement.executeUpdate();
+            System.out.println("Zapisano wiadomosc");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Brak skrzynki odbiorczej");
+            return false;
+        }
+
     }
 
     private String string_converter(String str) {
@@ -77,7 +109,8 @@ public class Conn_emails {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Conn_emails a = new Conn_emails();
-        a.createInbox("msadk");
+        a.insertMess("lpsad","dsa","dsa","cafsasf","asdasdasd");
+
 
     }
 }

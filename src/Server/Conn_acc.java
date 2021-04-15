@@ -19,35 +19,51 @@ public class Conn_acc {
         connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza
     }
 
-    public void createAccount(String acc, String password) throws SQLException {
-        String sql = "INSERT INTO Accounts (Email_addr,password) VALUES (?,?)";
-        Conn_emails inbox = new Conn_emails();
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, acc);
-        preparedStatement.setString(2, password);
-        preparedStatement.executeUpdate();
-        inbox.createInbox(acc);
-        System.out.println("Konto o danym emailu znajduje sie w bazie danych");
-        System.out.println("Konto zostalo zalozone");
-        inbox.closeConn();
-
+    public boolean createAccount(String acc, String password) throws SQLException {
+        try {
+            String sql = "INSERT INTO Accounts (Email_addr,password) VALUES (?,?)";
+            Conn_emails inbox = new Conn_emails();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, acc);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+            inbox.createInbox(acc);
+            inbox.closeConn();
+            System.out.println("Konto zostalo zalozone");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Konto o danym emailu znajduje sie w bazie danych");
+            return false;
+        }
     }
 
-    public void deleteAccount(String acc) throws SQLException {
-        String sql = "DELETE FROM Accounts WHERE Email_addr = ?";
-        Conn_emails inbox = new Conn_emails();
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, acc);
-        preparedStatement.executeUpdate();
-        inbox.deleteInbox(acc);
-        inbox.closeConn();
+    public boolean deleteAccount(String acc) throws SQLException {
+        try {
+            String sql = "DELETE FROM Accounts WHERE Email_addr = ?";
+            Conn_emails inbox = new Conn_emails();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, acc);
+            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==1) {
+                inbox.deleteInbox(acc);
+                inbox.closeConn();
+                System.out.println("Konto zostalo usuniete");
+                return true;
+            }else {
+                System.out.println("Brak takiego konta");
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("Brak takiego konta");
+            return false;
+        }
     }
 
     public void closeConn() throws SQLException {
         connection.close();
     }
 
-    public boolean getAcc(String acc, String password) throws SQLException {
+    public boolean isAcc(String acc, String password) throws SQLException {
         String sql = "SELECT * FROM Accounts WHERE Email_addr = ? AND password = ?";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, acc);
@@ -62,17 +78,21 @@ public class Conn_acc {
         }
     }
 
+    public boolean changePassword(String acc, String password, String new_password) throws SQLException {
+        if (isAcc(acc, password)) {
+            String sql = "UPDATE Accounts SET password = ? WHERE Email_addr = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, new_password);
+            preparedStatement.setString(2, acc);
+            preparedStatement.executeUpdate();
+            return true;
+        } else
+            return false;
+    }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        //Conn_acc a = new Conn_acc();
-        //Conn_emails b = new Conn_emails();
-        //a.deleteAccount("marcin@kercz@jd.pl");
-        //b.deleteMess("marcin@karcz@jd.pl", 1);
-        //ArrayList<Mail> t = new ArrayList<>();
-        //Message w = new Mail("mess","ab","ab",2,"cf","ag","sdadsa");
-        //w=(Mail)w;
-        //t = b.getListMess("marcin@karcz@jd.pl");
-        //for (int i =0; i<t.size(); i++)
-        //    System.out.println((Message)t.get(i).getComand());
+        Conn_acc a = new Conn_acc();
+
+        a.createAccount("Abc", "jfjfjfj");
     }
 }
