@@ -9,4 +9,13 @@ public class ChangePassword extends Message{
         this.password = password;
         this.newpassword = newpassword;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getNewpassword() {
+        return newpassword;
+    }
 }

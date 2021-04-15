@@ -1,14 +1,13 @@
 package Comunication;
 
-public class Mail extends Message{
+public class Mail {
     private String title;
     private String reciver;
     private String date;
     private String text;
     private int messageId;
 
-    public Mail(String alert, String account, boolean status, String sender, int messageId, String title, String date, String text) {
-        super(alert, account, status);
+    public Mail(String sender, int messageId, String title, String date, String text) {
         this.reciver = sender;
         this.messageId = messageId;
         this.title = title;

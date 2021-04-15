@@ -20,7 +20,7 @@ public class clienttest {
 
         // make a bunch of messages to send.
         List<Message> messages = new ArrayList<>();
-        messages.add(new SendMail("alert", "dis", true, new Mail("alert", "xd", true, "xd", 22, "xd", "xd", "xd")));
+        messages.add(new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
 
         System.out.println("Sending messages to the ServerSocket");
         objectOutputStream.writeObject(messages);

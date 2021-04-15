@@ -30,11 +30,31 @@ public class Message implements Serializable {
         return status;
     }
 
-    public Mail getMail() {return null;}
+    public String getReciver() {
+        return null;
+    }
+
+    public int getMessageId() {
+        return 0;
+    }
+
+    public String getTitle() {
+        return null;
+    }
+
+    public String getDate() {
+        return null;
+    }
+
+    public String getText() {
+        return null;
+    }
 
     public int getId(){
         return -1;
     }
+
+    public String getPassword(){return null;}
 
     public String getNewpassword(){
         return null;
