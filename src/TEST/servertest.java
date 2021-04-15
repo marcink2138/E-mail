@@ -1,7 +1,5 @@
 package TEST;
 
-import Comunication.Message;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -23,7 +21,7 @@ public class servertest {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
         // read the list of messages from the socket
-        List<Message_test> listOfMessages = (List<Message_test>) objectInputStream.readObject();
+        List<Message> listOfMessages = (List<Message>) objectInputStream.readObject();
         //System.out.println("Received [" + listOfMessages.size() + "] messages from: " + socket);
         // print out the text of every message
         //System.out.println("All messages:");

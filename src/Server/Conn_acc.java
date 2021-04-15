@@ -1,12 +1,6 @@
 package Server;
 
-import Comunication.Mail;
-import Comunication.Message;
-
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 // "jdbc:mysql://localhost:3306/Inbox" -> Inbox
 // "jdbc:mysql://localhost:3306/Email accounts" -> konta

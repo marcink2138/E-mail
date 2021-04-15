@@ -1,6 +1,6 @@
 package TEST;
 
-public class Login_register extends Message_test {
+public class Login_register extends Message {
     private String password;
     public Login_register(String alert, String account, String password) {
         super(alert, account);

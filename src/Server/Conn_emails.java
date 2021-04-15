@@ -1,7 +1,6 @@
 package Server;
 
 import Comunication.Mail;
-import Comunication.Message;
 
 import java.sql.*;
 import java.text.MessageFormat;

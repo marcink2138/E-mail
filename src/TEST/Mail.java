@@ -1,6 +1,6 @@
 package TEST;
 
-public class Mail extends Message_test {
+public class Mail extends Message {
     private String title;
     private String sender;
     private String date;
@@ -37,7 +37,11 @@ public class Mail extends Message_test {
     }
 
     public static void main(String args[]) {
-        Message_test test = new Mail("jd", "ab", 2, "wf", "tr", "asdasddsa");
+        Message test = new Mail("jd", "ab", 2, "wf", "tr", "asdasddsa");
+
+    }
+
+    public void display() {
 
     }
 }

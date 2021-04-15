@@ -1,13 +1,13 @@
-package Comunication;
+package TEST;
 
 import java.util.ArrayList;
 
-public class Accaunt {
+public class Account {
     private String emailAdress;
     private String password;
     private ArrayList<Mail> listOfMails = new ArrayList<>();
 
-    public Accaunt(String emailAdress, String password){
+    public Account(String emailAdress, String password){
         this.emailAdress = emailAdress;
         this.password = password;
     }
@@ -22,7 +22,7 @@ public class Accaunt {
 
     //czy zamiast tego Mail nie wystarczy int
     public void deleteMail(Mail mail){
-        listOfMails.remove(mail.getId());
+        listOfMails.remove(mail.getMessageId());
     }
 
     public String getEmailAdress() {
@@ -38,8 +38,8 @@ public class Accaunt {
     }
 
     public static void main(String[] args) {
-        Accaunt konto = new Accaunt("jebedisa", "polska");
-        Mail mail1 = new Mail("mail", "jajkos", "dis", 0, "Polska", "20.20.20", "dis to zwierz");
+        Account konto = new Account("jebedisa", "polska");
+        Mail mail1 = new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa");
         konto.addMail(mail1);
         konto.getListOfMails().get(0).display();
     }

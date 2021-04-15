@@ -1,8 +1,8 @@
 package TEST;
 
-public class DeleteMessageTest extends Message_test {
+public class DeleteMessage extends Message {
     int messageId;
-    public DeleteMessageTest(String alert, String account, int messageId) {
+    public DeleteMessage(String alert, String account, int messageId) {
         super(alert, account);
         this.messageId = messageId;
     }

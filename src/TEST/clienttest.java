@@ -1,8 +1,5 @@
 package TEST;
 
-import Comunication.LogIn;
-import Comunication.Message;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -22,7 +19,7 @@ public class clienttest {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
         // make a bunch of messages to send.
-        List<Message_test> messages = new ArrayList<>();
+        List<Message> messages = new ArrayList<>();
         messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));
         messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));
         messages.add(new Mail("kd", "sad",22,"dasda", "dasads", "dsadsa"));

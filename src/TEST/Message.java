@@ -2,11 +2,11 @@ package TEST;
 
 import java.io.Serializable;
 
-public class Message_test implements Serializable {
+public class Message implements Serializable {
     private String alert;
     private String account;
 
-    public Message_test(String alert, String account) {
+    public Message(String alert, String account) {
         this.alert = alert;
         this.account = account;
     }
