@@ -60,7 +60,7 @@ public class Message implements Serializable {
         return null;
     }
 
-    public ArrayList<Message> getListofemails(){
+    public ArrayList<Message> getListOfMails(){
         return null;
     }
 }

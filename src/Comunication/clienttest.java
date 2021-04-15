@@ -19,12 +19,16 @@ public class clienttest {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
         // make a bunch of messages to send.
+        ArrayList<Message> maillist = new ArrayList<>();
+        maillist.add(new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
+        maillist.add(new SendMail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
         List<Message> messages = new ArrayList<>();
-        messages.add(new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
+        messages.add((new GetMailStatus("xd", "xd", true, maillist)));
 
         System.out.println("Sending messages to the ServerSocket");
         objectOutputStream.writeObject(messages);
 
+        //new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd")
         System.out.println("Closing socket and terminating program.");
         socket.close();
     }
