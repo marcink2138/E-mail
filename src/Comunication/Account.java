@@ -1,28 +1,28 @@
 package Comunication;
-/*
+
 import java.util.ArrayList;
 
 public class Account {
     private String emailAdress;
     private String password;
-    private ArrayList<Mail> listOfMails = new ArrayList<>();
+    private ArrayList<Message> listOfMails = new ArrayList<>();
 
     public Account(String emailAdress, String password){
         this.emailAdress = emailAdress;
         this.password = password;
     }
 
-    public void display(){
-
-    }
-
-    public void addMail(Mail mail){
+    public void addMail(Message mail){
         listOfMails.add(mail);
     }
 
-    //czy zamiast tego Mail nie wystarczy int
-    public void deleteMail(Mail mail){
-        listOfMails.remove(mail.getMessageId());
+    public void deleteMail(Message mail){
+        for(int j = (listOfMails.size() - 1); j >= 0; j--){
+            if(listOfMails.get(j).getMessageId() == mail.getMessageId()){
+                listOfMails.remove(j);
+                return;
+            }
+        }
     }
 
     public String getEmailAdress() {
@@ -33,12 +33,23 @@ public class Account {
         return password;
     }
 
-    public ArrayList<Mail> getListOfMails() {
+    public ArrayList<Message> getListOfMails() {
         return listOfMails;
     }
 
-    public static void main(String[] args) {
+    public void clear(){
+        this.listOfMails.clear();
+    }
 
+    public void setEmailAdress(String emailAdress) {
+        this.emailAdress = emailAdress;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setListOfMails(ArrayList<Message> listOfMails) {
+        this.listOfMails = listOfMails;
     }
 }
-*/

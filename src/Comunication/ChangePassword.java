@@ -15,7 +15,7 @@ public class ChangePassword extends Message{
     }
 
     @Override
-    public String getNewpassword() {
+    public String getNewPassword() {
         return newpassword;
     }
 }

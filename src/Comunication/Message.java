@@ -56,7 +56,7 @@ public class Message implements Serializable {
 
     public String getPassword(){return null;}
 
-    public String getNewpassword(){
+    public String getNewPassword(){
         return null;
     }
 
