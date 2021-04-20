@@ -1,8 +1,6 @@
 package Comunication;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +9,17 @@ public class Client {
     private Socket socket = null;
     private ObjectOutputStream objectOutputStream = null;
     private boolean isWorking = false;
+    private InterpretterClient interpretterClient = null;
+    private ObjectInputStream objectInputStream= null;
+    private Account account = null;
 
     public Client(int port, String addres) throws IOException {
         this.socket = new Socket(addres, port);
         OutputStream outputStream = socket.getOutputStream();
         this.objectOutputStream = new ObjectOutputStream(outputStream);
         this.isWorking = true;
+        this.interpretterClient = new InterpretterClient();
+        this.account = new Account("Brak", "Brak");
     }
 
     public void closeClient() throws IOException {
@@ -24,12 +27,17 @@ public class Client {
         this.isWorking = false;
     }
 
-    public void send(Message message) throws IOException {
+    public void send(Message message) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(message);
+        read();
+        closeClient();
     }
 
-    public void read(){
-
+    public void read() throws IOException, ClassNotFoundException {
+        InputStream inputStream = socket.getInputStream();
+        this.objectInputStream = new ObjectInputStream(inputStream);
+        Message message = (Message) objectInputStream.readObject();
+        interpretterClient.Do(message, account);
     }
 
     public boolean isWorking() {
@@ -44,14 +52,13 @@ public class Client {
         return objectOutputStream;
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Client client = new Client(6666, "localhost");
         ArrayList<Message> maillist = new ArrayList<>();
         maillist.add(new Mail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
         maillist.add(new Mail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
-        SendMaills mail = new SendMaills("dis", "papiez", true, maillist);
+        SendMaills mail = new SendMaills("Register", "papiez", true, maillist);
         client.send(mail);
-        client.closeClient();
 
     }
 

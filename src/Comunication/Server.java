@@ -1,17 +1,17 @@
 package Comunication;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
-public class Server {
+public class Server extends Thread{
     private Socket socket = null;
     private ServerSocket serverSocket = null;
     private ObjectInputStream objectInputStream = null;
     private boolean isWorking = false;
+    private InterpretterServer interpretterServer;
+    private ObjectOutputStream objectOutputStream = null;
 
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
@@ -29,6 +29,9 @@ public class Server {
 
     public void listen() throws IOException, ClassNotFoundException {
         Message message = (Message) objectInputStream.readObject();
+        OutputStream outputStream = socket.getOutputStream();
+        this.objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(message);
         System.out.println(message.getCommand());
     }
 

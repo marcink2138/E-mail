@@ -2,6 +2,9 @@ package Comunication;
 
 public class InterpretterClient {
 
+    public InterpretterClient(){
+    }
+
     public void Do(Message message, Account account){
 
         switch (message.getCommand()){
