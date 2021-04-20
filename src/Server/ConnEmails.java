@@ -2,6 +2,10 @@ package Server;
 
 //import Comunication.Mail;
 
+import Comunication.Mail;
+import Comunication.Message;
+import Comunication.SendMaills;
+
 import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -9,11 +13,11 @@ import java.util.ArrayList;
 // "jdbc:mysql://localhost:3306/Inbox" -> Inbox
 // "jdbc:mysql://localhost:3306/Email accounts" -> email acc
 
-public class Conn_emails {
+public class ConnEmails {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
-    public Conn_emails() throws SQLException {
+    public ConnEmails() throws SQLException {
         //URL of database
         String URL = "jdbc:mysql://localhost:3306/Inbox";
         //password to database
@@ -29,7 +33,7 @@ public class Conn_emails {
                 "message text NOT NULL , PRIMARY KEY (messId))";
         preparedStatement = connection.prepareStatement(sql);
 
-        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 1) {
+        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 0) {
             System.out.println("Utworzony skrzynke odbiorcza");
             return true;
         } else {
@@ -52,28 +56,41 @@ public class Conn_emails {
         }
 
     }
-/*
-    public ArrayList<Mail> getListMess(String acc) throws SQLException {
-        ArrayList<Mail> messages = new ArrayList<>();
-        String sql = "SELECT * FROM {0}";
-        preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next())
-            messages.add(new Mail("mess", acc, resultSet.getString("sender"),
-                    resultSet.getInt("messId"), resultSet.getString("title"),
-                    resultSet.getString("date_"), resultSet.getString("message")));
-        return messages;
+
+    public Message getListMess(String acc) throws SQLException {
+        try {
+            ArrayList<Message> messages = new ArrayList<>();
+            String sql = "SELECT * FROM {0}";
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                messages.add(new Mail("SendMails", acc, true, resultSet.getString("sender"),
+                        resultSet.getInt("messId"), resultSet.getString("title"),
+                        resultSet.getString("date_"), resultSet.getString("message")));
+            }
+            if (messages.size() != 0)
+                return new SendMaills("SendMails", null, true, messages);
+            else
+                return new SendMaills("SendMails", null, false, null);
+        }catch (Exception e){
+            System.out.println("Fatal error");
+            return new SendMaills("Fail", null, false, null);
+        }
     }
-*/
+
 
     public boolean deleteMess(String acc, int id) throws SQLException {
         try {
             String sql = "DELETE FROM {0} WHERE messId = ?";
             preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-            System.out.println("Udane usuniecie maila");
-            return true;
+            if (preparedStatement.executeUpdate()!=0) {
+                System.out.println("Udane usuniecie maila");
+                return true;
+            }else {
+                System.out.println("Brak rekordu lub tabeli");
+                return false;
+            }
         } catch (Exception e) {
             System.out.println("Brak rekordu lub tabeli");
             return false;
@@ -108,7 +125,7 @@ public class Conn_emails {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Conn_emails a = new Conn_emails();
+        ConnEmails a = new ConnEmails();
         a.insertMess("lpsad","dsa","dsa","cafsasf","asdasdasd");
 
 

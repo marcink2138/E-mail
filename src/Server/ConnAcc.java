@@ -4,12 +4,12 @@ import java.sql.*;
 
 // "jdbc:mysql://localhost:3306/Inbox" -> Inbox
 // "jdbc:mysql://localhost:3306/Email accounts" -> konta
-public class Conn_acc {
+public class ConnAcc {
     private Connection connection;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
-    public Conn_acc() throws SQLException {
+    public ConnAcc() throws SQLException {
         //URL bazy
         String URL = "jdbc:mysql://localhost:3306/Email accounts";
         //haslo do bazy
@@ -22,7 +22,7 @@ public class Conn_acc {
     public boolean createAccount(String acc, String password) throws SQLException {
         try {
             String sql = "INSERT INTO Accounts (Email_addr,password) VALUES (?,?)";
-            Conn_emails inbox = new Conn_emails();
+            ConnEmails inbox = new ConnEmails();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, acc);
             preparedStatement.setString(2, password);
@@ -37,14 +37,14 @@ public class Conn_acc {
         }
     }
 
-    public boolean deleteAccount(String acc) throws SQLException {
+    public boolean deleteAccount(String acc, String password) throws SQLException {
         try {
-            String sql = "DELETE FROM Accounts WHERE Email_addr = ?";
-            Conn_emails inbox = new Conn_emails();
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, acc);
-            preparedStatement.executeUpdate();
-            if (preparedStatement.executeUpdate()==1) {
+            if (isAcc(acc, password)) {
+                String sql = "DELETE FROM Accounts WHERE Email_addr = ?";
+                ConnEmails inbox = new ConnEmails();
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, acc);
+                preparedStatement.executeUpdate();
                 inbox.deleteInbox(acc);
                 inbox.closeConn();
                 System.out.println("Konto zostalo usuniete");
@@ -91,7 +91,7 @@ public class Conn_acc {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Conn_acc a = new Conn_acc();
+        ConnAcc a = new ConnAcc();
 
         a.createAccount("Abc", "jfjfjfj");
     }
