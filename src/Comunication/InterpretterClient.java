@@ -5,18 +5,18 @@ public class InterpretterClient {
     public InterpretterClient(){
     }
 
-    public void Do(Message message, Account account){
+    public boolean Do(Message message, Account account){
 
         switch (message.getCommand()){
             case "Mail":
                 if(message.isStatus()) {
                     account.addMail(message);
                     System.out.println("Udało sie wysłac");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udało sie wysłac");
-                    break;
+                    return false;
                 }
             case "LogIn":
                 if(message.isStatus()) {
@@ -24,65 +24,63 @@ public class InterpretterClient {
                     account.setPassword(message.getPassword());
                     //wyslac by pobrac maile
                     System.out.println("Zalogowano");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udało sie zalogowac");
-                    break;
+                    return false;
                 }
             case "Register":
                 if(message.isStatus()) {
                     System.out.println("Zarejestrowano");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udalo sie zarejestrowac");
-                    break;
+                    return false;
                 }
             case "SendMails":
                 if(message.isStatus()) {
                     account.clear();
                     account.setListOfMails(message.getListOfMails());
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udalo sie pobrac maili");
-                    break;
+                    return false;
                 }
             case "DeleteAccount":
                 if(message.isStatus()) {
                     System.out.println("Usunieto");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udalo sie usunac");
-                    break;
+                    return false;
                 }
             case "DeleteMail":
                 if(message.isStatus()) {
                     account.deleteMail(message);
                     System.out.println("Usunieto");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udalo sie usunac");
-                    break;
+                    return false;
                 }
             case "ChangePassword":
                 if(message.isStatus()) {
                     account.setPassword(message.getNewPassword());
                     System.out.println("Zmieniono haslo");
-                    break;
+                    return true;
                 }
                 else {
                     System.out.println("Nie udalo sie zmienic hasla");
-                    break;
+                    return false;
                 }
-            case "":
-                break;
             default:
                 System.out.println("Bład");
-                break;
+                return false;
         }
     }
 }

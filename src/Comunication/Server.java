@@ -10,7 +10,7 @@ public class Server extends Thread{
     private ServerSocket serverSocket = null;
     private ObjectInputStream objectInputStream = null;
     private boolean isWorking = false;
-    private InterpretterServer interpretterServer;
+    //private InterpretterServer interpretterServer;
     private ObjectOutputStream objectOutputStream = null;
 
     public Server(int port) throws IOException {
