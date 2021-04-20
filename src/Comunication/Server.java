@@ -7,8 +7,55 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
-public class servertest {
+public class Server {
+    private Socket socket = null;
+    private ServerSocket serverSocket = null;
+    private ObjectInputStream objectInputStream = null;
+    private boolean isWorking = false;
+
+    public Server(int port) throws IOException {
+        this.serverSocket = new ServerSocket(port);
+        this.socket = serverSocket.accept();
+        InputStream inputStream = socket.getInputStream();
+        this.objectInputStream = new ObjectInputStream(inputStream);
+        this.isWorking = true;
+    }
+
+    public void closeServer() throws IOException {
+        serverSocket.close();
+        socket.close();
+        this.isWorking = false;
+    }
+
+    public void listen() throws IOException, ClassNotFoundException {
+        Message message = (Message) objectInputStream.readObject();
+        System.out.println(message.getCommand());
+    }
+
+    public boolean isWorking() {
+        return isWorking;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public ObjectInputStream getObjectInputStream() {
+        return objectInputStream;
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Server server = new Server(6666);
+        server.listen();
+        server.closeServer();
+
+    }
+
+    /*public static void main(String[] args) throws IOException, ClassNotFoundException {
         // don't need to specify a hostname, it will be the current machine
         ServerSocket ss = new ServerSocket(6666);
         System.out.println("ServerSocket awaiting connections...");
@@ -32,5 +79,5 @@ public class servertest {
         System.out.println(listOfMessages.get(0).getListOfMails().get(1).getTitle());
         ss.close();
         socket.close();
-    }
+    }*/
 }
