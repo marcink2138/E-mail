@@ -54,7 +54,7 @@ public class Server extends Thread{
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Server server = new Server(6666);
         server.listen();
-        server.closeServer();
+
 
     }
 

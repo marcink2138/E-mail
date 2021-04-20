@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Client {
     private Socket socket = null;
+    private int port = -1;
+    private String address = null;
     private ObjectOutputStream objectOutputStream = null;
     private boolean isWorking = false;
     private InterpretterClient interpretterClient = null;
@@ -14,12 +16,17 @@ public class Client {
     private Account account = null;
 
     public Client(int port, String addres) throws IOException {
-        this.socket = new Socket(addres, port);
+        this.port = port;
+        this.address = addres;
+        this.interpretterClient = new InterpretterClient();
+        this.account = new Account("Brak", "Brak");
+    }
+
+    public void openConection() throws IOException {
+        this.socket = new Socket(address, port);
         OutputStream outputStream = socket.getOutputStream();
         this.objectOutputStream = new ObjectOutputStream(outputStream);
         this.isWorking = true;
-        this.interpretterClient = new InterpretterClient();
-        this.account = new Account("Brak", "Brak");
     }
 
     public void closeClient() throws IOException {
@@ -28,6 +35,7 @@ public class Client {
     }
 
     public void send(Message message) throws IOException, ClassNotFoundException {
+        openConection();
         objectOutputStream.writeObject(message);
         read();
         closeClient();
