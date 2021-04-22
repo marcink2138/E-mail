@@ -13,10 +13,10 @@ public class ConnAcc {
         //URL bazy
         String URL = "jdbc:mysql://localhost:3306/Email accounts";
         //haslo do bazy
-        String passwd = "admin";
+        String password = "admin";
         //login do bazy
         String login = "root";
-        connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza
+        connection = DriverManager.getConnection(URL, login, password);              //Laczenie z baza
     }
 
     public boolean createAccount(String acc, String password) throws SQLException {

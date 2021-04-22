@@ -1,9 +1,8 @@
 package Comunication;
-
+import Server.InterpretterServer;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 
 public class Server extends Thread{
     private Socket socket = null;
