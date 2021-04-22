@@ -4,6 +4,7 @@ import Comunication.Message;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLException;
 
 public class ClientHandling extends Thread{
@@ -28,7 +29,13 @@ public class ClientHandling extends Thread{
                 outcomingMessage = interpretterServer.Do(incomingMessage);
                 streamProcessing.sendData(outcomingMessage);
             } catch (IOException | ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
+                try {
+                    socket.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                System.out.println("Zakonczono polaczenie z " + socket.getRemoteSocketAddress());
+                return;
             }
         }
     }
