@@ -21,19 +21,19 @@ public class ConnEmails {
         //URL of database
         String URL = "jdbc:mysql://localhost:3306/Inbox";
         //password to database
-        String passwd = "admin";
+        String password = "admin";
         //login to database
         String login = "root";
-        connection = DriverManager.getConnection(URL, login, passwd);              //Establishing connection with DB
+        connection = DriverManager.getConnection(URL, login, password);              //Establishing connection with DB
     }
 
-    public boolean createInbox(String acc) throws SQLException {
+    public boolean createInbox(String account) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS {0} (messId int NOT NULL AUTO_INCREMENT, " +
                 "sender varchar(30) NOT NULL , title varchar (20) NOT NULL ,date_ varchar(20) NOT NULL , " +
                 "message text NOT NULL , PRIMARY KEY (messId))";
         preparedStatement = connection.prepareStatement(sql);
 
-        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 0) {
+        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(account))) == 0) {
             System.out.println("Utworzony skrzynke odbiorcza");
             return true;
         } else {
@@ -43,11 +43,11 @@ public class ConnEmails {
 
     }
 
-    public boolean deleteInbox(String acc) throws SQLException {
+    public boolean deleteInbox(String account) throws SQLException {
         try {
             String sql = "DROP TABLE {0}";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(account)));
             System.out.println("Udalo usunac sie skrzynke odbiorcza");
             return true;
         } catch (Exception e) {
@@ -57,14 +57,14 @@ public class ConnEmails {
 
     }
 
-    public Message getListMess(String acc) throws SQLException {
+    public Message getListMess(String account) throws SQLException {
         try {
             ArrayList<Message> messages = new ArrayList<>();
             String sql = "SELECT * FROM {0}";
-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                messages.add(new Mail("SendMails", acc, true, resultSet.getString("sender"),
+                messages.add(new Mail("SendMails", account, true, resultSet.getString("sender"),
                         resultSet.getInt("messId"), resultSet.getString("title"),
                         resultSet.getString("date_"), resultSet.getString("message")));
             }
@@ -72,22 +72,22 @@ public class ConnEmails {
                 return new SendMaills("SendMails", null, true, messages);
             else
                 return new SendMaills("SendMails", null, false, null);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Fatal error");
             return new SendMaills("Fail", null, false, null);
         }
     }
 
 
-    public boolean deleteMess(String acc, int id) throws SQLException {
+    public boolean deleteMess(String account, int id) throws SQLException {
         try {
             String sql = "DELETE FROM {0} WHERE messId = ?";
-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
             preparedStatement.setInt(1, id);
-            if (preparedStatement.executeUpdate()!=0) {
+            if (preparedStatement.executeUpdate() != 0) {
                 System.out.println("Udane usuniecie maila");
                 return true;
-            }else {
+            } else {
                 System.out.println("Brak rekordu lub tabeli");
                 return false;
             }
@@ -98,10 +98,10 @@ public class ConnEmails {
 
     }
 
-    public boolean insertMess(String acc, String sender, String title, String date, String messege) throws SQLException {
+    public boolean insertMess(String account, String sender, String title, String date, String messege) throws SQLException {
         try {
             String sql = "INSERT INTO {0} (sender, title, date_, message) VALUES (?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
+            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
             preparedStatement.setString(1, sender);
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, date);
@@ -116,8 +116,8 @@ public class ConnEmails {
 
     }
 
-    private String string_converter(String str) {
-        return "`" + str + "`";
+    private String string_converter(String account) {
+        return "`" + account + "`";
     }
 
     public void closeConn() throws SQLException {
@@ -126,7 +126,7 @@ public class ConnEmails {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ConnEmails a = new ConnEmails();
-        a.insertMess("lpsad","dsa","dsa","cafsasf","asdasdasd");
+        a.insertMess("lpsad", "dsa", "dsa", "cafsasf", "asdasdasd");
 
 
     }
