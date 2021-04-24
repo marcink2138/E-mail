@@ -1,5 +1,6 @@
 package Visual;
 
+import Comunication.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginSceneControler {
+    public Client client = new Client(6666, "localhost");
     public Button LoginButton;
     public Button RegisterButton;
     public Label LoginLabel;
@@ -22,6 +24,7 @@ public class LoginSceneControler {
     public TextField LoginTextField;
     public TextField PasswordTextField;
     public Label AlertLabel;
+
 
     public void RegisterClick(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RegisterScene.fxml")));
@@ -33,7 +36,10 @@ public class LoginSceneControler {
     }
 
     public void LoginClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        MainPageControler mainPageControler = fxmlLoader.getController();
+        mainPageControler.setClient(client);
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));

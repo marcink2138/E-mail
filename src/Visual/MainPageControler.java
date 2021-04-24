@@ -1,5 +1,6 @@
 package Visual;
 
+import Comunication.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainPageControler {
+    private Client client;
     public Button RefreshButton;
     public Button NewMailButton;
     public Button DeleteMailButton;
@@ -28,6 +30,10 @@ public class MainPageControler {
     public Label DateLabel;
     public TextArea TextAreaField;
     public VBox ListOfMailsView;
+
+    public void setClient(Client client){
+        this.client = client;
+    }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
         ArrayList<Button> listOfButtons = new ArrayList<>();
