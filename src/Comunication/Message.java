@@ -8,6 +8,7 @@ public class Message implements Serializable {
     private String account;
     private boolean status;
 
+
     public Message(String alert, String account, boolean status) {
         this.command = alert;
         this.account = account;
@@ -50,13 +51,15 @@ public class Message implements Serializable {
         return null;
     }
 
-    public String getPassword(){return null;}
-
-    public String getNewPassword(){
+    public String getPassword() {
         return null;
     }
 
-    public ArrayList<Message> getListOfMails(){
+    public String getNewPassword() {
+        return null;
+    }
+
+    public ArrayList<Message> getListOfMails() {
         return null;
     }
 }

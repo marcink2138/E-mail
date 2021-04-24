@@ -1,31 +1,30 @@
 package Comunication;
 
+import Server.StreamProcessing;
+
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
     private Socket socket = null;
-    private int port = -1;
-    private String address = null;
-    private ObjectOutputStream objectOutputStream = null;
+    private final int port;
+    private final String address;
     private boolean isWorking = false;
-    private InterpretterClient interpretterClient = null;
-    private ObjectInputStream objectInputStream= null;
-    private Account account = null;
+    private InterpretterClient interpretterClient;
+    private Account account;
+    private StreamProcessing streamProcessing;
+    private Message messageTosend;
 
-    public Client(int port, String addres) throws IOException {
+    public Client(int port, String addres) {
         this.port = port;
         this.address = addres;
         this.interpretterClient = new InterpretterClient();
-        this.account = new Account("Brak", "Brak");
+        this.account = new Account(null, null);
     }
 
     public void openConection() throws IOException {
         this.socket = new Socket(address, port);
-        OutputStream outputStream = socket.getOutputStream();
-        this.objectOutputStream = new ObjectOutputStream(outputStream);
+        streamProcessing = new StreamProcessing(this.socket);
         this.isWorking = true;
     }
 
@@ -34,18 +33,14 @@ public class Client {
         this.isWorking = false;
     }
 
-    public void send(Message message) throws IOException, ClassNotFoundException {
-        openConection();
-        objectOutputStream.writeObject(message);
-        read();
-        closeClient();
+    public void send(Message messageTosend) throws IOException, ClassNotFoundException {
+        this.messageTosend = messageTosend;
+        streamProcessing.sendData(messageTosend);
     }
 
-    public void read() throws IOException, ClassNotFoundException {
-        InputStream inputStream = socket.getInputStream();
-        this.objectInputStream = new ObjectInputStream(inputStream);
-        Message message = (Message) objectInputStream.readObject();
-        interpretterClient.Do(message, account);
+    public boolean read() throws IOException, ClassNotFoundException {
+        Message recivedMessage = streamProcessing.readData();
+        return interpretterClient.Do(recivedMessage, account, messageTosend);
     }
 
     public boolean isWorking() {
@@ -56,42 +51,35 @@ public class Client {
         return socket;
     }
 
-    public ObjectOutputStream getObjectOutputStream() {
-        return objectOutputStream;
+    public Account getAccount() {
+        return account;
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Client client = new Client(6666, "localhost");
-        ArrayList<Message> maillist = new ArrayList<>();
-        maillist.add(new Mail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
-        maillist.add(new Mail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
-        SendMaills mail = new SendMaills("Register", "papiez", true, maillist);
-        client.send(mail);
+        Client client = new Client(6666, "192.168.178.69");
+        Message m = new LoginRegisterDeleteAccount("LogIn", "koszkakoszka", true, "marcin1");
+        client.openConection();
+
+        client.send(m);
+        System.out.println(client.read());
+        System.out.println(client.getAccount().getPassword());
+        Message c = new Message("SendMails", "koszkakoszka", true);
+
+        client.send(m);
+        System.out.println(client.read());
+        for (int i = 0; i < client.getAccount().getListOfMails().size(); i++)
+            System.out.println(client.getAccount().getListOfMails().get(i).getText());
+        client.closeClient();
+
+        client.openConection();
+        client.send(m);
+        System.out.println(client.read());
+        System.out.println(client.getAccount().getPassword());
+        m = new LoginRegisterDeleteAccount("Register", "marianczello", true, "kocham psy");
+
+        client.send(m);
 
     }
 
-    /*public static void main(String[] args) throws IOException {
-        // need host and port, we want to connect to the ServerSocket at port 7777
-        Socket socket = new Socket("localhost", 6666);
-        System.out.println("Connected!");
 
-        // get the output stream from the socket.
-        OutputStream outputStream = socket.getOutputStream();
-        // create an object output stream from the output stream so we can send an object through it
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-
-        // make a bunch of messages to send.
-        ArrayList<Message> maillist = new ArrayList<>();
-        maillist.add(new Mail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
-        maillist.add(new Mail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
-        List<Message> messages = new ArrayList<>();
-        messages.add((new SendMaills("xd", "xd", true, maillist)));
-
-        System.out.println("Sending messages to the ServerSocket");
-        objectOutputStream.writeObject(messages);
-
-        System.out.println("Closing socket and terminating program.");
-        socket.close();
-    }
-*/
 }
