@@ -31,11 +31,14 @@ public class MainPageControler {
     public TextArea TextAreaField;
     public VBox ListOfMailsView;
 
+
+
     public void setClient(Client client){
         this.client = client;
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
+       /*
         ArrayList<Button> listOfButtons = new ArrayList<>();
         for(int i = 0; i < 3; i++){
             Button buttonmail = new Button(Integer.toString(i));
@@ -46,6 +49,9 @@ public class MainPageControler {
             layout.getChildren().add(listOfButtons.get(i));
         }
         this.ListOfMailsView = layout;
+
+        */
+        TitleLabel.setText(client.getAccount().getEmailAdress());
     }
 
     public void NewMailButtonClick(ActionEvent actionEvent) {

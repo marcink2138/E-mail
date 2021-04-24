@@ -1,6 +1,8 @@
 package Visual;
 
 import Comunication.Client;
+import Comunication.LoginRegisterDeleteAccount;
+import Comunication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +18,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginSceneControler {
-    public Client client = new Client(6666, "localhost");
+    public Client client = new Client(6666, "192.168.178.69");
     public Button LoginButton;
     public Button RegisterButton;
     public Label LoginLabel;
@@ -35,14 +37,23 @@ public class LoginSceneControler {
 
     }
 
-    public void LoginClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        MainPageControler mainPageControler = fxmlLoader.getController();
-        mainPageControler.setClient(client);
-        //bierzemy scene głowna
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 500));
-        window.show();
+    public void LoginClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        Message m = new LoginRegisterDeleteAccount("LogIn", LoginTextField.getText(), true, PasswordTextField.getText());
+        client.openConection();
+        client.send(m);
+        if (client.read()) {
+            client.getAccount().setEmailAdress(LoginTextField.getText());
+            client.getAccount().setPassword(PasswordTextField.getText());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            MainPageControler mainPageControler = fxmlLoader.getController();
+            mainPageControler.setClient(client);
+            //bierzemy scene głowna
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(new Scene(root, 800, 500));
+            window.show();
+        }else {
+            LoginTextField.setText("błąd");
+        }
     }
 }
