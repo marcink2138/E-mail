@@ -3,12 +3,12 @@ package Comunication;
 public class InterpretterClient {
 
 
-    public boolean Do(Message recivedMessage, Account account, Message sentMessage) {
+    public boolean Do(Message recivedMessage, Account account, Message sendMessage) {
 
         switch (recivedMessage.getCommand()) {
             case "Mail":
                 if (recivedMessage.isStatus()) {
-                    account.addMail(sentMessage);
+                    account.addMail(sendMessage);
                     System.out.println("Udało sie wysłac");
                     return true;
                 } else {
@@ -17,8 +17,8 @@ public class InterpretterClient {
                 }
             case "LogIn":
                 if (recivedMessage.isStatus()) {
-                    account.setEmailAdress(sentMessage.getAccount());
-                    account.setPassword(sentMessage.getPassword());
+                    account.setEmailAdress(sendMessage.getAccount());
+                    account.setPassword(sendMessage.getPassword());
                     //wyslac by pobrac maile
                     System.out.println("Zalogowano");
                     return true;
@@ -62,7 +62,7 @@ public class InterpretterClient {
                 }
             case "ChangePassword":
                 if (recivedMessage.isStatus()) {
-                    account.setPassword(sentMessage.getNewPassword());
+                    account.setPassword(sendMessage.getNewPassword());
                     System.out.println("Zmieniono haslo");
                     return true;
                 } else {

@@ -33,7 +33,7 @@ public class Client {
         this.isWorking = false;
     }
 
-    public void send(Message messageTosend) throws IOException, ClassNotFoundException {
+    public void send(Message messageTosend) throws IOException {
         this.messageTosend = messageTosend;
         streamProcessing.sendData(messageTosend);
     }
