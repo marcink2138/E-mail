@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Visual.MainPageControler"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
+   <top>
+      <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButtonClick" text="Refresh" />
+            <Button fx:id="NewMailButton" mnemonicParsing="false" onAction="#NewMailButtonClick" text="New Mail" />
+            <Button fx:id="DeleteMailButton" mnemonicParsing="false" onAction="#DeleteMailButtonClick" text="Delete Mail" />
+            <Button fx:id="ChangePasswordButton" mnemonicParsing="false" onAction="#ChangePasswordButtonClick" text="Change Password" />
+            <Button fx:id="LogOotButton" mnemonicParsing="false" onAction="#LogOotButtonClick" text="Log Out" />
+            <Button fx:id="DeleteAccountButton" mnemonicParsing="false" onAction="#DeleteAccountButtonClick" text="Delete Account" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></HBox>
+   </top>
+   <left>
+      <VBox fx:id="ListOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="11.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="TitleLabel" prefHeight="17.0" prefWidth="500.0" text="Title:" />
+               </children>
+            </HBox>
+            <HBox prefHeight="10.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="FromLabel" prefHeight="17.0" prefWidth="527.0" text="From:" />
+               </children>
+            </HBox>
+            <HBox prefHeight="6.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="ToLabel" prefHeight="0.0" prefWidth="400.0" text="To:" />
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="DateLabel" prefHeight="17.0" prefWidth="666.0" text="Date:" />
+               </children>
+            </HBox>
+            <TextArea fx:id="TextAreaField" prefHeight="365.0" prefWidth="400.0" />
+         </children></VBox>
+   </center>
+</BorderPane>

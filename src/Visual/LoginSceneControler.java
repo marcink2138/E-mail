@@ -32,8 +32,11 @@ public class LoginSceneControler {
 
     }
 
-    public void LoginClick(ActionEvent actionEvent) {
-        AlertLabel.setText("Couldnt log in");
-        AlertLabel.setTextFill(Color.web("Red"));
+    public void LoginClick(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        //bierzemy scene głowna
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root, 800, 500));
+        window.show();
     }
 }
