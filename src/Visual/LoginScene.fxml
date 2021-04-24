@@ -12,9 +12,9 @@
             <Label fx:id="LoginLabel" prefHeight="17.0" prefWidth="245.0" text="Login:" />
             <TextField fx:id="LoginTextField" promptText="Login" />
             <Label fx:id="PasswordLabel" prefHeight="17.0" prefWidth="217.0" text="Password:" />
-            <TextField fx:id="PasswordTextField" promptText="Password" />
+            <PasswordField fx:id="PasswordTextField" promptText="Password" />
             <Button fx:id="LoginButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#LoginClick" prefHeight="25.0" prefWidth="233.0" text="Login" textAlignment="CENTER" />
-            <Button fx:id="RegisterButton" mnemonicParsing="false" onAction="#RegisterClick" prefHeight="25.0" prefWidth="232.0" text="Register" textAlignment="CENTER" />
+            <Button fx:id="RegisterButton" mnemonicParsing="false" onAction="#RegisterClick" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #6495ed;" text="Register" textAlignment="CENTER" />
             <Label fx:id="AlertLabel" prefHeight="17.0" prefWidth="239.0" />
          </children>
       </VBox>
