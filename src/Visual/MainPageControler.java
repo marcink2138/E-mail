@@ -51,7 +51,7 @@ public class MainPageControler {
         this.ListOfMailsView = layout;
 
         */
-        FromLabel.setText(client.getAccount().getEmailAdress());
+        DateLabel.setText(client.getAccount().getEmailAdress());
     }
 
     public void NewMailButtonClick(ActionEvent actionEvent) {
