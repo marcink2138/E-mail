@@ -14,15 +14,15 @@ public class StreamProcessing {
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();
         outputStream.flush();
-        objectInputStream = new ObjectInputStream(inputStream);
-        objectOutputStream = new ObjectOutputStream(outputStream);
     }
 
     public Message readData() throws IOException, ClassNotFoundException {
+        objectInputStream = new ObjectInputStream(inputStream);
         return (Message) objectInputStream.readObject();
     }
 
     public void sendData(Message message) throws IOException {
+        objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream.writeObject(message);
     }
 }

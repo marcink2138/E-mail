@@ -32,7 +32,7 @@ public class ClientHandling extends Thread{
                 try {
                     socket.close();
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                    System.out.println("Zakonczono polaczenie z " + socket.getRemoteSocketAddress());
                 }
                 System.out.println("Zakonczono polaczenie z " + socket.getRemoteSocketAddress());
                 return;
