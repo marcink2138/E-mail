@@ -26,6 +26,7 @@ public class LoginSceneControler {
     public TextField LoginTextField;
     public TextField PasswordTextField;
     public Label AlertLabel;
+    public Button tempButton;
 
 
     public void RegisterClick(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -53,7 +54,16 @@ public class LoginSceneControler {
             window.setScene(new Scene(root, 800, 500));
             window.show();
         }else {
-            LoginTextField.setText("błąd");
+            AlertLabel.setText("Couldn't Login");
+            AlertLabel.setTextFill(Color.web("Red"));
         }
+    }
+
+    public void TempClick(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        //bierzemy scene głowna
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root, 800, 500));
+        window.show();
     }
 }

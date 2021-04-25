@@ -1,6 +1,9 @@
 package Visual;
 
+import Comunication.Account;
 import Comunication.Client;
+import Comunication.Mail;
+import Comunication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainPageControler {
+    public javafx.scene.layout.BorderPane BorderPane;
+    public ListView xd;
     private Client client;
     public Button RefreshButton;
     public Button NewMailButton;
@@ -38,20 +45,16 @@ public class MainPageControler {
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
-       /*
-        ArrayList<Button> listOfButtons = new ArrayList<>();
-        for(int i = 0; i < 3; i++){
-            Button buttonmail = new Button(Integer.toString(i));
-            listOfButtons.add(buttonmail);
-        }
-        VBox layout = new VBox();
-        for(int i = 0; i < 3; i++){
-            layout.getChildren().add(listOfButtons.get(i));
-        }
-        this.ListOfMailsView = layout;
+        Account account = new Account("xd", "xd");
+        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "1", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "2", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "3", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "4", "2", "xd"));
 
-        */
-        DateLabel.setText(client.getAccount().getEmailAdress());
+        xd.getItems().addAll(account.getListOfMails().get(0).getTitle());
+        xd.getItems().addAll(account.getListOfMails().get(1).getTitle());
+
+
     }
 
     public void NewMailButtonClick(ActionEvent actionEvent) {
