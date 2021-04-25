@@ -1,0 +1,16 @@
+Index: .idea/compiler.xml
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+deleted file mode 100644
+--- a/.idea/compiler.xml	(revision 0309b7d84cb10b027267840d4e21f6762c79b959)
++++ /dev/null	(revision 0309b7d84cb10b027267840d4e21f6762c79b959)
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <excludeFromCompile>
+-      <directory url="file://$PROJECT_DIR$/src/Visual" includeSubdirectories="true" />
+-    </excludeFromCompile>
+-  </component>
+-</project>
+\ No newline at end of file

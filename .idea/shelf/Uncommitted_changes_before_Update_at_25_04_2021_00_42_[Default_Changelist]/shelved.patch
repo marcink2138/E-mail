@@ -1,0 +1,19 @@
+Index: src/Visual/MainPageControler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Visual;\r\n\r\nimport Comunication.Client;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.TextArea;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Objects;\r\n\r\npublic class MainPageControler {\r\n    private Client client;\r\n    public Button RefreshButton;\r\n    public Button NewMailButton;\r\n    public Button DeleteMailButton;\r\n    public Button ChangePasswordButton;\r\n    public Button LogOotButton;\r\n    public Button DeleteAccountButton;\r\n    public Label TitleLabel;\r\n    public Label FromLabel;\r\n    public Label ToLabel;\r\n    public Label DateLabel;\r\n    public TextArea TextAreaField;\r\n    public VBox ListOfMailsView;\r\n\r\n\r\n\r\n    public void setClient(Client client){\r\n        this.client = client;\r\n    }\r\n\r\n    public void RefreshButtonClick(ActionEvent actionEvent) {\r\n       /*\r\n        ArrayList<Button> listOfButtons = new ArrayList<>();\r\n        for(int i = 0; i < 3; i++){\r\n            Button buttonmail = new Button(Integer.toString(i));\r\n            listOfButtons.add(buttonmail);\r\n        }\r\n        VBox layout = new VBox();\r\n        for(int i = 0; i < 3; i++){\r\n            layout.getChildren().add(listOfButtons.get(i));\r\n        }\r\n        this.ListOfMailsView = layout;\r\n\r\n        */\r\n        TitleLabel.setText(client.getAccount().getEmailAdress());\r\n    }\r\n\r\n    public void NewMailButtonClick(ActionEvent actionEvent) {\r\n        TextAreaField.setText(\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\");\r\n    }\r\n\r\n    public void DeleteMailButtonClick(ActionEvent actionEvent) {\r\n    }\r\n\r\n    public void ChangePasswordButtonClick(ActionEvent actionEvent) {\r\n    }\r\n\r\n    public void LogOotButtonClick(ActionEvent actionEvent) throws IOException {\r\n        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(\"LoginScene.fxml\")));\r\n        //bierzemy scene głowna\r\n        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();\r\n        window.setScene(new Scene(root, 800, 500));\r\n        window.show();\r\n    }\r\n\r\n    public void DeleteAccountButtonClick(ActionEvent actionEvent) {\r\n    }\r\n\r\n    public void ShowMailClick(ActionEvent actionEvent) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Visual/MainPageControler.java b/src/Visual/MainPageControler.java
+--- a/src/Visual/MainPageControler.java	(revision 35c4b856b9545c318c2c739e9a73883ce09e7d3d)
++++ b/src/Visual/MainPageControler.java	(date 1619303965926)
+@@ -51,7 +51,7 @@
+         this.ListOfMailsView = layout;
+ 
+         */
+-        TitleLabel.setText(client.getAccount().getEmailAdress());
++        FromLabel.setText(client.getAccount().getEmailAdress());
+     }
+ 
+     public void NewMailButtonClick(ActionEvent actionEvent) {

@@ -1,0 +1,54 @@
+Index: .idea/libraries/lib.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"lib\">\r\n    <CLASSES>\r\n      <root url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" />\r\n    </SOURCES>\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" recursive=\"false\" />\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" recursive=\"false\" type=\"SOURCES\" />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/lib.xml b/.idea/libraries/lib.xml
+--- a/.idea/libraries/lib.xml	(revision dede68471c6a8b9a12b9b304d2c0123bb217e23d)
++++ b/.idea/libraries/lib.xml	(date 1619300824178)
+@@ -1,13 +1,7 @@
+ <component name="libraryTable">
+   <library name="lib">
+-    <CLASSES>
+-      <root url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+-    </CLASSES>
++    <CLASSES />
+     <JAVADOC />
+-    <SOURCES>
+-      <root url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+-    </SOURCES>
+-    <jarDirectory url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" />
+-    <jarDirectory url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
++    <SOURCES />
+   </library>
+ </component>
+\ No newline at end of file
+Index: .idea/libraries/lib2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"lib\">\r\n    <CLASSES>\r\n      <root url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" />\r\n    </SOURCES>\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" recursive=\"false\" />\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib\" recursive=\"false\" type=\"SOURCES\" />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/lib2.xml b/.idea/libraries/lib2.xml
+--- a/.idea/libraries/lib2.xml	(revision dede68471c6a8b9a12b9b304d2c0123bb217e23d)
++++ b/.idea/libraries/lib2.xml	(date 1619300668028)
+@@ -1,13 +1,9 @@
+ <component name="libraryTable">
+   <library name="lib">
+     <CLASSES>
+-      <root url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
++      <root url="file://$PROJECT_DIR$/../javafx/javafx-sdk-11.0.2" />
+     </CLASSES>
+     <JAVADOC />
+-    <SOURCES>
+-      <root url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+-    </SOURCES>
+-    <jarDirectory url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" />
+-    <jarDirectory url="file://$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
++    <SOURCES />
+   </library>
+ </component>
+\ No newline at end of file

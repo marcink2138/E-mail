@@ -1,0 +1,110 @@
+Index: src/Comunication/servertest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Comunication;\r\n\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.ObjectInputStream;\r\nimport java.net.ServerSocket;\r\nimport java.net.Socket;\r\nimport java.util.List;\r\n\r\npublic class servertest {\r\n    public static void main(String[] args) throws IOException, ClassNotFoundException {\r\n        // don't need to specify a hostname, it will be the current machine\r\n        ServerSocket ss = new ServerSocket(6666);\r\n        System.out.println(\"ServerSocket awaiting connections...\");\r\n        Socket socket = ss.accept(); // blocking call, this will wait until a connection is attempted on this port.\r\n        System.out.println(\"Connection from \" + socket + \"!\");\r\n\r\n        // get the input stream from the connected socket\r\n        InputStream inputStream = socket.getInputStream();\r\n        // create a DataInputStream so we can read data from it.\r\n        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);\r\n\r\n        // read the list of messages from the socket\r\n        List<Message> listOfMessages = (List<Message>) objectInputStream.readObject();\r\n        //System.out.println(\"Received [\" + listOfMessages.size() + \"] messages from: \" + socket);\r\n        // print out the text of every message\r\n        //System.out.println(\"All messages:\");\r\n        //listOfMessages.forEach((msg)-> System.out.println(msg.getAlert()));\r\n\r\n        System.out.println(\"Closing sockets.\");\r\n\r\n        System.out.println(listOfMessages.get(0).getListOfMails().get(1).getTitle());\r\n        ss.close();\r\n        socket.close();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Comunication/servertest.java b/src/Comunication/servertest.java
+--- a/src/Comunication/servertest.java	(revision 4bf4c829d4ea3dec3770827d2ca0f8af34540ea9)
++++ b/src/Comunication/servertest.java	(date 1618527348660)
+@@ -21,7 +21,7 @@
+         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+ 
+         // read the list of messages from the socket
+-        List<Message> listOfMessages = (List<Message>) objectInputStream.readObject();
++        Message listOfMessages = (Message) objectInputStream.readObject();
+         //System.out.println("Received [" + listOfMessages.size() + "] messages from: " + socket);
+         // print out the text of every message
+         //System.out.println("All messages:");
+@@ -29,7 +29,7 @@
+ 
+         System.out.println("Closing sockets.");
+ 
+-        System.out.println(listOfMessages.get(0).getListOfMails().get(1).getTitle());
++        System.out.println(listOfMessages.getListOfMails().get(0).getTitle());
+         ss.close();
+         socket.close();
+     }
+Index: src/Comunication/clienttest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Comunication;\r\n\r\nimport java.io.IOException;\r\nimport java.io.ObjectOutputStream;\r\nimport java.io.OutputStream;\r\nimport java.net.Socket;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class clienttest {\r\n    public static void main(String[] args) throws IOException {\r\n        // need host and port, we want to connect to the ServerSocket at port 7777\r\n        Socket socket = new Socket(\"localhost\", 6666);\r\n        System.out.println(\"Connected!\");\r\n\r\n        // get the output stream from the socket.\r\n        OutputStream outputStream = socket.getOutputStream();\r\n        // create an object output stream from the output stream so we can send an object through it\r\n        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);\r\n\r\n        // make a bunch of messages to send.\r\n        ArrayList<Message> maillist = new ArrayList<>();\r\n        maillist.add(new Mail(\"mail\", \"dis\", true, \"ja\", 22, \"xd\", \"jak pan jezus powiedzial\", \"xd\"));\r\n        maillist.add(new Mail(\"mail\", \"dis\", true, \"ja\", 23, \"xdd\", \"jak pan jezus powiedzial\", \"xd\"));\r\n        List<Message> messages = new ArrayList<>();\r\n        messages.add((new SendMaills(\"xd\", \"xd\", true, maillist)));\r\n\r\n        System.out.println(\"Sending messages to the ServerSocket\");\r\n        objectOutputStream.writeObject(messages);\r\n\r\n        //new SendMail(\"mail\", \"dis\", true, \"ja\", 22, \"xd\", \"jak pan jezus powiedzial\", \"xd\")\r\n        System.out.println(\"Closing socket and terminating program.\");\r\n        socket.close();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Comunication/clienttest.java b/src/Comunication/clienttest.java
+--- a/src/Comunication/clienttest.java	(revision 4bf4c829d4ea3dec3770827d2ca0f8af34540ea9)
++++ b/src/Comunication/clienttest.java	(date 1618918553903)
+@@ -1,14 +1,28 @@
+ package Comunication;
+ 
+ import java.io.IOException;
++import java.io.InputStream;
+ import java.io.ObjectOutputStream;
+ import java.io.OutputStream;
+ import java.net.Socket;
+ import java.util.ArrayList;
+ import java.util.List;
++import java.util.Random;
++import java.util.Scanner;
+ 
+ public class clienttest {
++    public static int NWD(int a, int b) {
++        while (b != 0) {
++            int c = a % b;
++            a = b;
++            b = c;
++        }
++        return a;
++    }
++
+     public static void main(String[] args) throws IOException {
++
++       /*
+         // need host and port, we want to connect to the ServerSocket at port 7777
+         Socket socket = new Socket("localhost", 6666);
+         System.out.println("Connected!");
+@@ -22,14 +36,38 @@
+         ArrayList<Message> maillist = new ArrayList<>();
+         maillist.add(new Mail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd"));
+         maillist.add(new Mail("mail", "dis", true, "ja", 23, "xdd", "jak pan jezus powiedzial", "xd"));
+-        List<Message> messages = new ArrayList<>();
+-        messages.add((new SendMaills("xd", "xd", true, maillist)));
+-
++        //List<Message> messages = new ArrayList<>();
++        //messages.add((new SendMaills("xd", "xd", true, maillist)));
++        Message a = new SendMaills("xd", "xd", true, maillist);
+         System.out.println("Sending messages to the ServerSocket");
+-        objectOutputStream.writeObject(messages);
++        objectOutputStream.writeObject(a);
+ 
+         //new SendMail("mail", "dis", true, "ja", 22, "xd", "jak pan jezus powiedzial", "xd")
+         System.out.println("Closing socket and terminating program.");
+         socket.close();
++
++        int temp = 0;
++
++        Random generator = new Random();
++        clienttest c = new clienttest();
++        for (int i = 1; i <= 10000000; i++) {
++            int a = generator.nextInt();
++            int b = generator.nextInt();
++            if (NWD(a,b)==1 || NWD(a,b) == -1)
++                temp++;
++        }
++        System.out.println(temp);
++
++        */
++        try (Socket s = new Socket("time-A.timefreq.bldrdoc.gov", 13))
++        {
++            InputStream inStream = s.getInputStream();
++            Scanner in = new Scanner(inStream);
++            while (in.hasNextLine())
++            {
++                String line = in.nextLine();
++                System.out.println(line);
++            }
++        }
+     }
+ }

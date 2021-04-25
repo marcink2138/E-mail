@@ -1,0 +1,171 @@
+Index: src/Server/ConnEmails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Server;\r\n\r\n//import Comunication.Mail;\r\n\r\nimport Comunication.Mail;\r\nimport Comunication.Message;\r\nimport Comunication.SendMaills;\r\n\r\nimport java.sql.*;\r\nimport java.text.MessageFormat;\r\nimport java.util.ArrayList;\r\n\r\n// \"jdbc:mysql://localhost:3306/Inbox\" -> Inbox\r\n// \"jdbc:mysql://localhost:3306/Email accounts\" -> email acc\r\n\r\npublic class ConnEmails {\r\n    private Connection connection;\r\n    private PreparedStatement preparedStatement;\r\n\r\n    public ConnEmails() throws SQLException {\r\n        //URL of database\r\n        String URL = \"jdbc:mysql://localhost:3306/Inbox\";\r\n        //password to database\r\n        String passwd = \"admin\";\r\n        //login to database\r\n        String login = \"root\";\r\n        connection = DriverManager.getConnection(URL, login, passwd);              //Establishing connection with DB\r\n    }\r\n\r\n    public boolean createInbox(String acc) throws SQLException {\r\n        String sql = \"CREATE TABLE IF NOT EXISTS {0} (messId int NOT NULL AUTO_INCREMENT, \" +\r\n                \"sender varchar(30) NOT NULL , title varchar (20) NOT NULL ,date_ varchar(20) NOT NULL , \" +\r\n                \"message text NOT NULL , PRIMARY KEY (messId))\";\r\n        preparedStatement = connection.prepareStatement(sql);\r\n\r\n        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 0) {\r\n            System.out.println(\"Utworzony skrzynke odbiorcza\");\r\n            return true;\r\n        } else {\r\n            System.out.println(\"Istnieje juz taka skrzynka odbiorcza\");\r\n            return false;\r\n        }\r\n\r\n    }\r\n\r\n    public boolean deleteInbox(String acc) throws SQLException {\r\n        try {\r\n            String sql = \"DROP TABLE {0}\";\r\n            preparedStatement = connection.prepareStatement(sql);\r\n            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));\r\n            System.out.println(\"Udalo usunac sie skrzynke odbiorcza\");\r\n            return true;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Brak skrzynki odbiorczej dla danego konta\");\r\n            return false;\r\n        }\r\n\r\n    }\r\n\r\n    public Message getListMess(String acc) throws SQLException {\r\n        try {\r\n            ArrayList<Message> messages = new ArrayList<>();\r\n            String sql = \"SELECT * FROM {0}\";\r\n            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n            while (resultSet.next()) {\r\n                messages.add(new Mail(\"SendMails\", acc, true, resultSet.getString(\"sender\"),\r\n                        resultSet.getInt(\"messId\"), resultSet.getString(\"title\"),\r\n                        resultSet.getString(\"date_\"), resultSet.getString(\"message\")));\r\n            }\r\n            if (messages.size() != 0)\r\n                return new SendMaills(\"SendMails\", null, true, messages);\r\n            else\r\n                return new SendMaills(\"SendMails\", null, false, null);\r\n        }catch (Exception e){\r\n            System.out.println(\"Fatal error\");\r\n            return new SendMaills(\"Fail\", null, false, null);\r\n        }\r\n    }\r\n\r\n\r\n    public boolean deleteMess(String acc, int id) throws SQLException {\r\n        try {\r\n            String sql = \"DELETE FROM {0} WHERE messId = ?\";\r\n            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));\r\n            preparedStatement.setInt(1, id);\r\n            if (preparedStatement.executeUpdate()!=0) {\r\n                System.out.println(\"Udane usuniecie maila\");\r\n                return true;\r\n            }else {\r\n                System.out.println(\"Brak rekordu lub tabeli\");\r\n                return false;\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Brak rekordu lub tabeli\");\r\n            return false;\r\n        }\r\n\r\n    }\r\n\r\n    public boolean insertMess(String acc, String sender, String title, String date, String messege) throws SQLException {\r\n        try {\r\n            String sql = \"INSERT INTO {0} (sender, title, date_, message) VALUES (?, ?, ?, ?)\";\r\n            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));\r\n            preparedStatement.setString(1, sender);\r\n            preparedStatement.setString(2, title);\r\n            preparedStatement.setString(3, date);\r\n            preparedStatement.setString(4, messege);\r\n            preparedStatement.executeUpdate();\r\n            System.out.println(\"Zapisano wiadomosc\");\r\n            return true;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Brak skrzynki odbiorczej\");\r\n            return false;\r\n        }\r\n\r\n    }\r\n\r\n    private String string_converter(String str) {\r\n        return \"`\" + str + \"`\";\r\n    }\r\n\r\n    public void closeConn() throws SQLException {\r\n        connection.close();\r\n    }\r\n\r\n    public static void main(String[] args) throws SQLException, ClassNotFoundException {\r\n        ConnEmails a = new ConnEmails();\r\n        a.insertMess(\"lpsad\",\"dsa\",\"dsa\",\"cafsasf\",\"asdasdasd\");\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Server/ConnEmails.java b/src/Server/ConnEmails.java
+--- a/src/Server/ConnEmails.java	(revision b87e5039bd5019a11e1f79f800b6ad82bcaa1d11)
++++ b/src/Server/ConnEmails.java	(date 1618959509303)
+@@ -21,19 +21,19 @@
+         //URL of database
+         String URL = "jdbc:mysql://localhost:3306/Inbox";
+         //password to database
+-        String passwd = "admin";
++        String password = "admin";
+         //login to database
+         String login = "root";
+-        connection = DriverManager.getConnection(URL, login, passwd);              //Establishing connection with DB
++        connection = DriverManager.getConnection(URL, login, password);              //Establishing connection with DB
+     }
+ 
+-    public boolean createInbox(String acc) throws SQLException {
++    public boolean createInbox(String account) throws SQLException {
+         String sql = "CREATE TABLE IF NOT EXISTS {0} (messId int NOT NULL AUTO_INCREMENT, " +
+                 "sender varchar(30) NOT NULL , title varchar (20) NOT NULL ,date_ varchar(20) NOT NULL , " +
+                 "message text NOT NULL , PRIMARY KEY (messId))";
+         preparedStatement = connection.prepareStatement(sql);
+ 
+-        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc))) == 0) {
++        if (preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(account))) == 0) {
+             System.out.println("Utworzony skrzynke odbiorcza");
+             return true;
+         } else {
+@@ -43,11 +43,11 @@
+ 
+     }
+ 
+-    public boolean deleteInbox(String acc) throws SQLException {
++    public boolean deleteInbox(String account) throws SQLException {
+         try {
+             String sql = "DROP TABLE {0}";
+             preparedStatement = connection.prepareStatement(sql);
+-            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(acc)));
++            preparedStatement.executeUpdate(MessageFormat.format(sql, string_converter(account)));
+             System.out.println("Udalo usunac sie skrzynke odbiorcza");
+             return true;
+         } catch (Exception e) {
+@@ -57,14 +57,14 @@
+ 
+     }
+ 
+-    public Message getListMess(String acc) throws SQLException {
++    public Message getListMess(String account) throws SQLException {
+         try {
+             ArrayList<Message> messages = new ArrayList<>();
+             String sql = "SELECT * FROM {0}";
+-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
++            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
+             ResultSet resultSet = preparedStatement.executeQuery();
+             while (resultSet.next()) {
+-                messages.add(new Mail("SendMails", acc, true, resultSet.getString("sender"),
++                messages.add(new Mail("SendMails", account, true, resultSet.getString("sender"),
+                         resultSet.getInt("messId"), resultSet.getString("title"),
+                         resultSet.getString("date_"), resultSet.getString("message")));
+             }
+@@ -72,22 +72,22 @@
+                 return new SendMaills("SendMails", null, true, messages);
+             else
+                 return new SendMaills("SendMails", null, false, null);
+-        }catch (Exception e){
++        } catch (Exception e) {
+             System.out.println("Fatal error");
+             return new SendMaills("Fail", null, false, null);
+         }
+     }
+ 
+ 
+-    public boolean deleteMess(String acc, int id) throws SQLException {
++    public boolean deleteMess(String account, int id) throws SQLException {
+         try {
+             String sql = "DELETE FROM {0} WHERE messId = ?";
+-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
++            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
+             preparedStatement.setInt(1, id);
+-            if (preparedStatement.executeUpdate()!=0) {
++            if (preparedStatement.executeUpdate() != 0) {
+                 System.out.println("Udane usuniecie maila");
+                 return true;
+-            }else {
++            } else {
+                 System.out.println("Brak rekordu lub tabeli");
+                 return false;
+             }
+@@ -98,10 +98,10 @@
+ 
+     }
+ 
+-    public boolean insertMess(String acc, String sender, String title, String date, String messege) throws SQLException {
++    public boolean insertMess(String account, String sender, String title, String date, String messege) throws SQLException {
+         try {
+             String sql = "INSERT INTO {0} (sender, title, date_, message) VALUES (?, ?, ?, ?)";
+-            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(acc)));
++            preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
+             preparedStatement.setString(1, sender);
+             preparedStatement.setString(2, title);
+             preparedStatement.setString(3, date);
+@@ -116,8 +116,8 @@
+ 
+     }
+ 
+-    private String string_converter(String str) {
+-        return "`" + str + "`";
++    private String string_converter(String account) {
++        return "`" + account + "`";
+     }
+ 
+     public void closeConn() throws SQLException {
+@@ -126,7 +126,7 @@
+ 
+     public static void main(String[] args) throws SQLException, ClassNotFoundException {
+         ConnEmails a = new ConnEmails();
+-        a.insertMess("lpsad","dsa","dsa","cafsasf","asdasdasd");
++        a.insertMess("lpsad", "dsa", "dsa", "cafsasf", "asdasdasd");
+ 
+ 
+     }
+Index: src/Server/ConnAcc.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Server;\r\n\r\nimport java.sql.*;\r\n\r\n// \"jdbc:mysql://localhost:3306/Inbox\" -> Inbox\r\n// \"jdbc:mysql://localhost:3306/Email accounts\" -> konta\r\npublic class ConnAcc {\r\n    private Connection connection;\r\n    private ResultSet resultSet;\r\n    private PreparedStatement preparedStatement;\r\n\r\n    public ConnAcc() throws SQLException {\r\n        //URL bazy\r\n        String URL = \"jdbc:mysql://localhost:3306/Email accounts\";\r\n        //haslo do bazy\r\n        String passwd = \"admin\";\r\n        //login do bazy\r\n        String login = \"root\";\r\n        connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza\r\n    }\r\n\r\n    public boolean createAccount(String acc, String password) throws SQLException {\r\n        try {\r\n            String sql = \"INSERT INTO Accounts (Email_addr,password) VALUES (?,?)\";\r\n            ConnEmails inbox = new ConnEmails();\r\n            preparedStatement = connection.prepareStatement(sql);\r\n            preparedStatement.setString(1, acc);\r\n            preparedStatement.setString(2, password);\r\n            preparedStatement.executeUpdate();\r\n            inbox.createInbox(acc);\r\n            inbox.closeConn();\r\n            System.out.println(\"Konto zostalo zalozone\");\r\n            return true;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Konto o danym emailu znajduje sie w bazie danych\");\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public boolean deleteAccount(String acc, String password) throws SQLException {\r\n        try {\r\n            if (isAcc(acc, password)) {\r\n                String sql = \"DELETE FROM Accounts WHERE Email_addr = ?\";\r\n                ConnEmails inbox = new ConnEmails();\r\n                preparedStatement = connection.prepareStatement(sql);\r\n                preparedStatement.setString(1, acc);\r\n                preparedStatement.executeUpdate();\r\n                inbox.deleteInbox(acc);\r\n                inbox.closeConn();\r\n                System.out.println(\"Konto zostalo usuniete\");\r\n                return true;\r\n            }else {\r\n                System.out.println(\"Brak takiego konta\");\r\n                return false;\r\n            }\r\n        }catch (Exception e){\r\n            System.out.println(\"Brak takiego konta\");\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public void closeConn() throws SQLException {\r\n        connection.close();\r\n    }\r\n\r\n    public boolean isAcc(String acc, String password) throws SQLException {\r\n        String sql = \"SELECT * FROM Accounts WHERE Email_addr = ? AND password = ?\";\r\n        preparedStatement = connection.prepareStatement(sql);\r\n        preparedStatement.setString(1, acc);\r\n        preparedStatement.setString(2, password);\r\n        resultSet = preparedStatement.executeQuery();\r\n        if (resultSet.next()) {\r\n            System.out.println(\"Konto znajduje sie w bazie danych\");\r\n            return true;\r\n        } else {\r\n            System.out.println(\"Brak konta\");\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public boolean changePassword(String acc, String password, String new_password) throws SQLException {\r\n        if (isAcc(acc, password)) {\r\n            String sql = \"UPDATE Accounts SET password = ? WHERE Email_addr = ?\";\r\n            preparedStatement = connection.prepareStatement(sql);\r\n            preparedStatement.setString(1, new_password);\r\n            preparedStatement.setString(2, acc);\r\n            preparedStatement.executeUpdate();\r\n            return true;\r\n        } else\r\n            return false;\r\n    }\r\n\r\n    public static void main(String[] args) throws SQLException, ClassNotFoundException {\r\n        ConnAcc a = new ConnAcc();\r\n\r\n        a.createAccount(\"Abc\", \"jfjfjfj\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Server/ConnAcc.java b/src/Server/ConnAcc.java
+--- a/src/Server/ConnAcc.java	(revision b87e5039bd5019a11e1f79f800b6ad82bcaa1d11)
++++ b/src/Server/ConnAcc.java	(date 1618959509313)
+@@ -13,10 +13,10 @@
+         //URL bazy
+         String URL = "jdbc:mysql://localhost:3306/Email accounts";
+         //haslo do bazy
+-        String passwd = "admin";
++        String password = "admin";
+         //login do bazy
+         String login = "root";
+-        connection = DriverManager.getConnection(URL, login, passwd);              //Laczenie z baza
++        connection = DriverManager.getConnection(URL, login, password);              //Laczenie z baza
+     }
+ 
+     public boolean createAccount(String acc, String password) throws SQLException {
+Index: src/Comunication/Server.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Comunication;\r\n\r\nimport java.io.*;\r\nimport java.net.ServerSocket;\r\nimport java.net.Socket;\r\nimport java.util.List;\r\n\r\npublic class Server extends Thread{\r\n    private Socket socket = null;\r\n    private ServerSocket serverSocket = null;\r\n    private ObjectInputStream objectInputStream = null;\r\n    private boolean isWorking = false;\r\n    private InterpretterServer interpretterServer;\r\n    private ObjectOutputStream objectOutputStream = null;\r\n\r\n    public Server(int port) throws IOException {\r\n        this.serverSocket = new ServerSocket(port);\r\n        this.socket = serverSocket.accept();\r\n        InputStream inputStream = socket.getInputStream();\r\n        this.objectInputStream = new ObjectInputStream(inputStream);\r\n        this.isWorking = true;\r\n    }\r\n\r\n    public void closeServer() throws IOException {\r\n        serverSocket.close();\r\n        socket.close();\r\n        this.isWorking = false;\r\n    }\r\n\r\n    public void listen() throws IOException, ClassNotFoundException {\r\n        Message message = (Message) objectInputStream.readObject();\r\n        OutputStream outputStream = socket.getOutputStream();\r\n        this.objectOutputStream = new ObjectOutputStream(outputStream);\r\n        objectOutputStream.writeObject(message);\r\n        System.out.println(message.getCommand());\r\n    }\r\n\r\n    public boolean isWorking() {\r\n        return isWorking;\r\n    }\r\n\r\n    public Socket getSocket() {\r\n        return socket;\r\n    }\r\n\r\n    public ServerSocket getServerSocket() {\r\n        return serverSocket;\r\n    }\r\n\r\n    public ObjectInputStream getObjectInputStream() {\r\n        return objectInputStream;\r\n    }\r\n\r\n    public static void main(String[] args) throws IOException, ClassNotFoundException {\r\n        Server server = new Server(6666);\r\n        server.listen();\r\n\r\n\r\n    }\r\n\r\n    /*public static void main(String[] args) throws IOException, ClassNotFoundException {\r\n        // don't need to specify a hostname, it will be the current machine\r\n        ServerSocket ss = new ServerSocket(6666);\r\n        System.out.println(\"ServerSocket awaiting connections...\");\r\n        Socket socket = ss.accept(); // blocking call, this will wait until a connection is attempted on this port.\r\n        System.out.println(\"Connection from \" + socket + \"!\");\r\n\r\n        // get the input stream from the connected socket\r\n        InputStream inputStream = socket.getInputStream();\r\n        // create a DataInputStream so we can read data from it.\r\n        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);\r\n\r\n        // read the list of messages from the socket\r\n        List<Message> listOfMessages = (List<Message>) objectInputStream.readObject();\r\n        //System.out.println(\"Received [\" + listOfMessages.size() + \"] messages from: \" + socket);\r\n        // print out the text of every message\r\n        //System.out.println(\"All messages:\");\r\n        //listOfMessages.forEach((msg)-> System.out.println(msg.getAlert()));\r\n\r\n        System.out.println(\"Closing sockets.\");\r\n\r\n        System.out.println(listOfMessages.get(0).getListOfMails().get(1).getTitle());\r\n        ss.close();\r\n        socket.close();\r\n    }*/\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Comunication/Server.java b/src/Comunication/Server.java
+--- a/src/Comunication/Server.java	(revision b87e5039bd5019a11e1f79f800b6ad82bcaa1d11)
++++ b/src/Comunication/Server.java	(date 1618952757130)
+@@ -1,9 +1,8 @@
+ package Comunication;
+-
++import Server.InterpretterServer;
+ import java.io.*;
+ import java.net.ServerSocket;
+ import java.net.Socket;
+-import java.util.List;
+ 
+ public class Server extends Thread{
+     private Socket socket = null;
