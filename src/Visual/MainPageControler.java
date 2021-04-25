@@ -46,7 +46,7 @@ public class MainPageControler {
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
-        //clearListView();
+        clearListView();
         loadListview();
     }
 
@@ -91,16 +91,14 @@ public class MainPageControler {
     }
 
     public void ListViewClicked(MouseEvent mouseEvent) {
-        if (ListView.getSelectionModel().getSelectedItem() == null || ListView.getSelectionModel().isEmpty() )
+        if (ListView.getSelectionModel().getSelectedItem() == null || ListView.getSelectionModel().isEmpty())
             return;
-        if (client.getAccount().getListOfMails().size()!=0) {
-            int which = ListView.getSelectionModel().getSelectedIndex();
-            titleTextfield.setText(client.getAccount().getListOfMails().get(which).getTitle());
-            fromTextfield.setText(client.getAccount().getListOfMails().get(which).getReciver());
-            toTextfield.setText(client.getAccount().getListOfMails().get(which).getAccount());
-            dateTextfield.setText(client.getAccount().getListOfMails().get(which).getDate());
-            TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
-        }
+        int which = ListView.getSelectionModel().getSelectedIndex();
+        titleTextfield.setText(client.getAccount().getListOfMails().get(which).getTitle());
+        fromTextfield.setText(client.getAccount().getListOfMails().get(which).getReciver());
+        toTextfield.setText(client.getAccount().getListOfMails().get(which).getAccount());
+        dateTextfield.setText(client.getAccount().getListOfMails().get(which).getDate());
+        TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
     }
 
     public void loadListview() {

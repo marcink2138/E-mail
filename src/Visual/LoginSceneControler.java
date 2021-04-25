@@ -39,7 +39,7 @@ public class LoginSceneControler {
     }
 
     public void LoginClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        if (LoginTextField.getText()!=null&&PasswordTextField.getText()!=null) {
+        if (!LoginTextField.getText().equals("")&&!PasswordTextField.getText().equals("")) {
             client = new Client(6666, "192.168.178.69");
             Message message = new Message("LogIn", LoginTextField.getText(), PasswordTextField.getText(), true);
             client.openConection();
@@ -55,6 +55,7 @@ public class LoginSceneControler {
                 MainPageControler mainPageControler = fxmlLoader.getController();
                 mainPageControler.setClient(client);
                 mainPageControler.refreshLabels();
+                mainPageControler.loadListview();
                 //bierzemy scene głowna
                 Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 window.setScene(new Scene(root, 800, 500));
@@ -74,10 +75,7 @@ public class LoginSceneControler {
     }
 
     public void TempClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
-        //bierzemy scene głowna
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 500));
-        window.show();
+        if(LoginTextField.getText().equals(""))
+            LoginTextField.setText("dsasda");
     }
 }

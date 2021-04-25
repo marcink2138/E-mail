@@ -3,6 +3,7 @@ package Comunication;
 import Server.StreamProcessing;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class Client {
@@ -23,9 +24,14 @@ public class Client {
     }
 
     public void openConection() throws IOException {
-        this.socket = new Socket(address, port);
-        streamProcessing = new StreamProcessing(this.socket);
-        this.isWorking = true;
+        try {
+            this.socket = new Socket(address, port);
+            streamProcessing = new StreamProcessing(this.socket);
+            this.isWorking = true;
+        }catch (NullPointerException | ConnectException e){
+            System.out.println("Serwer jest wylaczony");
+        }
+
     }
 
     public void closeClient() throws IOException {
@@ -34,13 +40,17 @@ public class Client {
     }
 
     public void send(Message messageTosend) throws IOException {
-        this.messageTosend = messageTosend;
-        streamProcessing.sendData(messageTosend);
+        if (isWorking) {
+            this.messageTosend = messageTosend;
+            streamProcessing.sendData(messageTosend);
+        }
     }
 
     public boolean read() throws IOException, ClassNotFoundException {
-        Message recivedMessage = streamProcessing.readData();
-        return interpretterClient.Do(recivedMessage, account, messageTosend);
+        if (isWorking) {
+            Message recivedMessage = streamProcessing.readData();
+            return interpretterClient.Do(recivedMessage, account, messageTosend);
+        }return false;
     }
 
     public boolean isWorking() {

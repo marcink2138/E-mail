@@ -37,8 +37,8 @@ public class RegisterSceneControler {
     }
 
     public void RegisterClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        if (LoginTextField.getText() != null && PasswordTextField.getText() != null &&
-                ConfirmPasswordTextField.getText() != null && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
+        if (LoginTextField.getText().equals("") && PasswordTextField.getText().equals("") &&
+                ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
             client = new Client(6666, "192.168.178.69");
             client.openConection();
             Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
