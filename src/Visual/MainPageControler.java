@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,6 +21,10 @@ import java.util.Objects;
 public class MainPageControler {
     public javafx.scene.layout.BorderPane BorderPane;
     public ListView xd;
+    public TextField fromTextfield;
+    public TextField dateTextfield;
+    public TextField toTextfield;
+    public TextField titleTextfield;
     private Client client;
     public Button RefreshButton;
     public Button NewMailButton;
@@ -46,10 +47,10 @@ public class MainPageControler {
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
         Account account = new Account("xd", "xd");
-        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "1", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "2", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "3", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", true, "dis", 1, "4", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "1", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "2", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "3", "2", "xd"));
+        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "4", "2", "xd"));
 
         xd.getItems().addAll(account.getListOfMails().get(0).getTitle());
         xd.getItems().addAll(account.getListOfMails().get(1).getTitle());
@@ -74,7 +75,20 @@ public class MainPageControler {
         window.setScene(new Scene(root, 800, 500));
         window.show();
     }
-
+    public void refreshLabels(){
+        int i = client.getAccount().getListOfMails().size();
+        if (i != 0) {
+            titleTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getTitle());
+            fromTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getReciver());
+            dateTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getDate());
+            toTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getAccount());
+        }else {
+            titleTextfield.setText("");
+            fromTextfield.setText("");
+            dateTextfield.setText("");
+            toTextfield.setText("");
+        }
+    }
     public void DeleteAccountButtonClick(ActionEvent actionEvent) {
     }
 
