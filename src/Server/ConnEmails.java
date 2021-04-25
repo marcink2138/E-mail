@@ -1,7 +1,6 @@
 package Server;
 
 
-
 import Comunication.Mail;
 import Comunication.Message;
 import Comunication.SendMaills;
@@ -61,20 +60,22 @@ public class ConnEmails {
         try {
             ConnAcc connAcc = new ConnAcc();
             if (connAcc.isAcc(account, password)) {
+                connAcc.closeConn();
                 ArrayList<Message> messages = new ArrayList<>();
                 String sql = "SELECT * FROM {0}";
                 preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    messages.add(new Mail("SendMails", account, null,true, resultSet.getString("sender"),
+                    messages.add(new Mail("SendMails", account, null, true, resultSet.getString("sender"),
                             resultSet.getInt("messId"), resultSet.getString("title"),
                             resultSet.getString("date_"), resultSet.getString("message")));
                 }
                 if (messages.size() != 0)
-                    return new SendMaills("SendMails", account, null, true,messages);
+                    return new SendMaills("SendMails", account, null, true, messages);
                 else
                     return new SendMaills("SendMails", account, null, true, null);
-            }else
+            } else
+                connAcc.closeConn();
                 return new SendMaills("Fail", account, null, false, null);
         } catch (Exception e) {
             System.out.println("Fatal error");
@@ -83,10 +84,11 @@ public class ConnEmails {
     }
 
 
-    public boolean deleteMess(String account, String password,int id) throws SQLException {
+    public boolean deleteMess(String account, String password, int id) throws SQLException {
         try {
             ConnAcc connAcc = new ConnAcc();
             if (connAcc.isAcc(account, password)) {
+                connAcc.closeConn();
                 String sql = "DELETE FROM {0} WHERE messId = ?";
                 preparedStatement = connection.prepareStatement(MessageFormat.format(sql, string_converter(account)));
                 preparedStatement.setInt(1, id);
@@ -97,7 +99,8 @@ public class ConnEmails {
                     System.out.println("Brak rekordu lub tabeli");
                     return false;
                 }
-            }else {
+            } else {
+                connAcc.closeConn();
                 return false;
             }
         } catch (Exception e) {
@@ -131,12 +134,5 @@ public class ConnEmails {
 
     public void closeConn() throws SQLException {
         connection.close();
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ConnEmails a = new ConnEmails();
-        a.insertMess("lpsad", "dsa", "dsa", "cafsasf", "asdasdasd");
-
-
     }
 }
