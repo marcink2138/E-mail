@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee5ba754-1d0c-4a69-8033-2961183603b6" name="Default Changelist" comment="dasda">
-      <change beforePath="$PROJECT_DIR$/src/Visual/MainPageControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPageControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email.iml" beforeDir="false" afterPath="$PROJECT_DIR$/email.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/ConnEmails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ConnEmails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/InterpretterServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/InterpretterServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1q80vQLkTxR7chD4wtYr9McURM6" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -112,19 +114,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="clienttest (2)" type="Application" />
       <method v="2" />
@@ -140,7 +129,6 @@
       <item itemvalue="Application.Visual" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Client" />
-      <item itemvalue="Multirun.Unnamed" />
     </list>
     <recent_temporary>
       <list>
@@ -171,7 +159,7 @@
       <workItem from="1618959296432" duration="212000" />
       <workItem from="1619117927584" duration="7739000" />
       <workItem from="1619291039960" duration="12560000" />
-      <workItem from="1619376296556" duration="5707000" />
+      <workItem from="1619376296556" duration="5079000" />
     </task>
     <task id="LOCAL-00001" summary="Test1">
       <created>1616446515657</created>
@@ -257,14 +245,7 @@
       <option name="project" value="LOCAL" />
       <updated>1619379607865</updated>
     </task>
-    <task id="LOCAL-00013" summary="dasda">
-      <created>1619381419443</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1619381419443</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
