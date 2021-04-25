@@ -91,6 +91,8 @@ public class MainPageControler {
     }
 
     public void ListViewClicked(MouseEvent mouseEvent) {
+        if (ListView.getSelectionModel().getSelectedItem() == null || ListView.getSelectionModel().isEmpty() )
+            return;
         if (client.getAccount().getListOfMails().size()!=0) {
             int which = ListView.getSelectionModel().getSelectedIndex();
             titleTextfield.setText(client.getAccount().getListOfMails().get(which).getTitle());
