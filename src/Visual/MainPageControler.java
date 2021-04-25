@@ -41,13 +41,12 @@ public class MainPageControler {
     public VBox ListOfMailsView;
 
 
-
-    public void setClient(Client client){
+    public void setClient(Client client) {
         this.client = client;
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
-        clearListView();
+        //clearListView();
         loadListview();
     }
 
@@ -68,20 +67,22 @@ public class MainPageControler {
         window.setScene(new Scene(root, 800, 500));
         window.show();
     }
-    public void refreshLabels(){
+
+    public void refreshLabels() {
         int i = client.getAccount().getListOfMails().size();
         if (i != 0) {
             titleTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getTitle());
             fromTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getReciver());
             dateTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getDate());
             toTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getAccount());
-        }else {
+        } else {
             titleTextfield.setText("");
             fromTextfield.setText("");
             dateTextfield.setText("");
             toTextfield.setText("");
         }
     }
+
     public void DeleteAccountButtonClick(ActionEvent actionEvent) {
     }
 
@@ -90,23 +91,24 @@ public class MainPageControler {
     }
 
     public void ListViewClicked(MouseEvent mouseEvent) {
-        int which = ListView.getSelectionModel().getSelectedIndex();
-        TitleLabel.setText("Title: " +  client.getAccount().getListOfMails().get(which).getTitle());
-        FromLabel.setText("From: " +  client.getAccount().getListOfMails().get(which).getReciver());
-        ToLabel.setText("To: " +  client.getAccount().getListOfMails().get(which).getAccount());
-        DateLabel.setText("Date: " +  client.getAccount().getListOfMails().get(which).getDate());
-        TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
-
+        if (client.getAccount().getListOfMails().size()!=0) {
+            int which = ListView.getSelectionModel().getSelectedIndex();
+            titleTextfield.setText(client.getAccount().getListOfMails().get(which).getTitle());
+            fromTextfield.setText(client.getAccount().getListOfMails().get(which).getReciver());
+            toTextfield.setText(client.getAccount().getListOfMails().get(which).getAccount());
+            dateTextfield.setText(client.getAccount().getListOfMails().get(which).getDate());
+            TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
+        }
     }
 
-    public void loadListview(){
-        for (int i = 0 ; i < client.getAccount().getListOfMails().size() ; i++){
-            ListView.getItems().add(client.getAccount().getListOfMails().get(i));
+    public void loadListview() {
+        for (int i = 0; i < client.getAccount().getListOfMails().size(); i++) {
+            ListView.getItems().add(client.getAccount().getListOfMails().get(i).getTitle());
         }
 
     }
 
-    public void clearListView(){
+    public void clearListView() {
         ListView.getItems().clear();
     }
 }

@@ -3,7 +3,6 @@ package Visual;
 import Comunication.Client;
 import Comunication.LoginRegisterDeleteAccount;
 import Comunication.Message;
-import Comunication.SendMaills;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -42,7 +41,7 @@ public class LoginSceneControler {
     public void LoginClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         if (LoginTextField.getText()!=null&&PasswordTextField.getText()!=null) {
             client = new Client(6666, "192.168.178.69");
-            Message message = new LoginRegisterDeleteAccount("LogIn", LoginTextField.getText(), PasswordTextField.getText(), true);
+            Message message = new Message("LogIn", LoginTextField.getText(), PasswordTextField.getText(), true);
             client.openConection();
             client.send(message);
             if (client.read()) {

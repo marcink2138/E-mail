@@ -34,25 +34,25 @@
             <HBox prefHeight="11.0" prefWidth="400.0">
                <children>
                   <Label fx:id="TitleLabel" prefHeight="26.0" prefWidth="51.0" text="Title:" />
-                  <TextField fx:id="titleTextfield" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
+                  <TextField fx:id="titleTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="10.0" prefWidth="400.0">
                <children>
                   <Label fx:id="FromLabel" prefHeight="26.0" prefWidth="51.0" text="From:" />
-                  <TextField fx:id="fromTextfield" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
+                  <TextField fx:id="fromTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="6.0" prefWidth="400.0">
                <children>
                   <Label fx:id="ToLabel" prefHeight="26.0" prefWidth="51.0" text="To:" />
-                  <TextField fx:id="toTextfield" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
+                  <TextField fx:id="toTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="400.0">
                <children>
                   <Label fx:id="DateLabel" prefHeight="26.0" prefWidth="51.0" text="Date:" />
-                  <TextField fx:id="dateTextfield" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
+                  <TextField fx:id="dateTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <TextArea fx:id="TextAreaField" prefHeight="365.0" prefWidth="400.0" />
