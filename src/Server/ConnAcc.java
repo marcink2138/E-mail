@@ -90,9 +90,4 @@ public class ConnAcc {
             return false;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ConnAcc a = new ConnAcc();
-
-        a.createAccount("Abc", "jfjfjfj");
-    }
 }

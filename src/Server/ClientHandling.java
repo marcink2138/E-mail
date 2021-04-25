@@ -4,7 +4,6 @@ import Comunication.Message;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketException;
 import java.sql.SQLException;
 
 public class ClientHandling extends Thread{
@@ -32,7 +31,7 @@ public class ClientHandling extends Thread{
                 try {
                     socket.close();
                 } catch (IOException ioException) {
-                    System.out.println("Zakonczono polaczenie z " + socket.getRemoteSocketAddress());
+                    System.out.println("Client " + socket.getRemoteSocketAddress() + "Zerwal polaczenie");
                 }
                 System.out.println("Zakonczono polaczenie z " + socket.getRemoteSocketAddress());
                 return;
