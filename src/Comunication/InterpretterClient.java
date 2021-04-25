@@ -69,6 +69,9 @@ public class InterpretterClient {
                     System.out.println("Nie udalo sie zmienic hasla");
                     return false;
                 }
+            case "Fail":
+                System.out.println("Server fatal error");
+                return false;
             default:
                 System.out.println("Bład");
                 return false;

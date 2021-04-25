@@ -6,12 +6,14 @@ import java.util.ArrayList;
 public class Message implements Serializable {
     private String command;
     private String account;
+    private String password;
     private boolean status;
 
 
-    public Message(String alert, String account, boolean status) {
+    public Message(String alert, String account, String password, boolean status) {
         this.command = alert;
         this.account = account;
+        this.password = password;
         this.status = status;
     }
 
@@ -52,7 +54,7 @@ public class Message implements Serializable {
     }
 
     public String getPassword() {
-        return null;
+        return password;
     }
 
     public String getNewPassword() {

@@ -54,7 +54,7 @@ public class Client {
     public Account getAccount() {
         return account;
     }
-
+/*
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Client client = new Client(6666, "192.168.178.69");
         Message m = new LoginRegisterDeleteAccount("LogIn", "koszkakoszka", true, "marcin1");
@@ -81,5 +81,5 @@ public class Client {
 
     }
 
-
+*/
 }

@@ -7,8 +7,8 @@ public class Mail extends Message {
     private String text;
     private int messageId;
 
-    public Mail(String alert, String account, boolean status, String sender, int messageId, String title, String date, String text) {
-        super(alert, account, status);
+    public Mail(String alert, String account, String password, boolean status, String sender, int messageId, String title, String date, String text) {
+        super(alert, account, password,status);
         this.reciver = sender;
         this.messageId = messageId;
         this.title = title;

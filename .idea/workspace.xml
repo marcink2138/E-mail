@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee5ba754-1d0c-4a69-8033-2961183603b6" name="Default Changelist" comment="dasda" />
+    <list default="true" id="ee5ba754-1d0c-4a69-8033-2961183603b6" name="Default Changelist" comment="dasda">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/ChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/ChangePassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/DeleteMail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/DeleteMail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/InterpretterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/InterpretterClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/LoginRegisterDeleteAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/LoginRegisterDeleteAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/Mail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comunication/SendMaills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comunication/SendMaills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/clienttest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/tescisko.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Visual/MainPageControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPageControler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,7 +182,7 @@
       <workItem from="1618959296432" duration="212000" />
       <workItem from="1619117927584" duration="7739000" />
       <workItem from="1619291039960" duration="12560000" />
-      <workItem from="1619376296556" duration="3174000" />
+      <workItem from="1619376296556" duration="5079000" />
     </task>
     <task id="LOCAL-00001" summary="Test1">
       <created>1616446515657</created>
@@ -248,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619304174691</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="dasda">
+      <created>1619379607865</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1619379607865</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

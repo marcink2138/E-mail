@@ -1,17 +1,12 @@
 package Comunication;
 
-public class ChangePassword extends Message{
+public class ChangePassword extends Message {
     private String password;
     private String newpassword;
 
-    public ChangePassword(String alert, String account, boolean status, String password, String newpassword) {
-        super(alert, account, status);
-        this.password = password;
+    public ChangePassword(String alert, String account, String password, boolean status, String newpassword) {
+        super(alert, account, password, status);
         this.newpassword = newpassword;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
