@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
    <top>
       <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,29 +23,36 @@
          </padding></HBox>
    </top>
    <left>
-      <VBox fx:id="ListOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <VBox fx:id="ListOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="ListView" editable="true" onMouseClicked="#ListViewClicked" prefHeight="389.0" prefWidth="200.0" />
+         </children></VBox>
    </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="11.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="TitleLabel" prefHeight="17.0" prefWidth="500.0" text="Title:" />
+                  <Label fx:id="TitleLabel" prefHeight="26.0" prefWidth="51.0" text="Title:" />
+                  <TextField fx:id="titleTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="10.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="FromLabel" prefHeight="17.0" prefWidth="527.0" text="From:" />
+                  <Label fx:id="FromLabel" prefHeight="26.0" prefWidth="51.0" text="From:" />
+                  <TextField fx:id="fromTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="6.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="ToLabel" prefHeight="0.0" prefWidth="400.0" text="To:" />
+                  <Label fx:id="ToLabel" prefHeight="26.0" prefWidth="51.0" text="To:" />
+                  <TextField fx:id="toTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="DateLabel" prefHeight="17.0" prefWidth="666.0" text="Date:" />
+                  <Label fx:id="DateLabel" prefHeight="26.0" prefWidth="51.0" text="Date:" />
+                  <TextField fx:id="dateTextfield" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="348.0" />
                </children>
             </HBox>
             <TextArea fx:id="TextAreaField" prefHeight="365.0" prefWidth="400.0" />

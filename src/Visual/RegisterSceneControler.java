@@ -1,5 +1,7 @@
 package Visual;
 
+import Comunication.Client;
+import Comunication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,7 +27,7 @@ public class RegisterSceneControler {
     public TextField LoginTextField;
     public Label LoginLabel;
     public Label AlertLabel;
-
+    private Client client;
     public void LoginClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
         //bierzemy scene głowna
@@ -34,8 +36,36 @@ public class RegisterSceneControler {
         window.show();
     }
 
-    public void RegisterClick(ActionEvent actionEvent) {
-        AlertLabel.setText("Couldnt Register");
-        AlertLabel.setTextFill(Color.web("Red"));
+    public void RegisterClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        if (LoginTextField.getText().equals("") && PasswordTextField.getText().equals("") &&
+                ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
+            client = new Client(6666, "192.168.178.69");
+            client.openConection();
+            Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
+            client.send(message);
+            if(client.read()){
+                client.getAccount().setEmailAdress(LoginTextField.getText());
+                client.getAccount().setPassword(LoginTextField.getText());
+                message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+                client.send(message);
+                client.read();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                MainPageControler mainPageControler = fxmlLoader.getController();
+                mainPageControler.setClient(client);
+                mainPageControler.refreshLabels();
+                //bierzemy scene głowna
+                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                window.setScene(new Scene(root, 800, 500));
+                window.show();
+            }else{
+                AlertLabel.setText("Takie konto znajduje sie w naszej bazie");
+                AlertLabel.setTextFill(Color.web("Red"));
+            }
+        }else {
+            AlertLabel.setText("Wprowadz poprawne wartosci");
+            AlertLabel.setTextFill(Color.web("Red"));
+        }
+
     }
 }
