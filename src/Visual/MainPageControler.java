@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 public class MainPageControler {
     public javafx.scene.layout.BorderPane BorderPane;
-    public ListView xd;
+    public ListView ListView;
     public TextField fromTextfield;
     public TextField dateTextfield;
     public TextField toTextfield;
@@ -46,16 +47,8 @@ public class MainPageControler {
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) {
-        Account account = new Account("xd", "xd");
-        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "1", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "2", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "3", "2", "xd"));
-        account.addMail(new Mail("Mail", "xd", "xd",true, "dis", 1, "4", "2", "xd"));
-
-        xd.getItems().addAll(account.getListOfMails().get(0).getTitle());
-        xd.getItems().addAll(account.getListOfMails().get(1).getTitle());
-
-
+        clearListView();
+        loadListview();
     }
 
     public void NewMailButtonClick(ActionEvent actionEvent) {
@@ -94,5 +87,26 @@ public class MainPageControler {
 
     public void ShowMailClick(ActionEvent actionEvent) {
 
+    }
+
+    public void ListViewClicked(MouseEvent mouseEvent) {
+        int which = ListView.getSelectionModel().getSelectedIndex();
+        TitleLabel.setText("Title: " +  client.getAccount().getListOfMails().get(which).getTitle());
+        FromLabel.setText("From: " +  client.getAccount().getListOfMails().get(which).getReciver());
+        ToLabel.setText("To: " +  client.getAccount().getListOfMails().get(which).getAccount());
+        DateLabel.setText("Date: " +  client.getAccount().getListOfMails().get(which).getDate());
+        TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
+
+    }
+
+    public void loadListview(){
+        for (int i = 0 ; i < client.getAccount().getListOfMails().size() ; i++){
+            ListView.getItems().add(client.getAccount().getListOfMails().get(i));
+        }
+
+    }
+
+    public void clearListView(){
+        ListView.getItems().clear();
     }
 }

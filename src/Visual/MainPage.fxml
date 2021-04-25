@@ -25,7 +25,7 @@
    <left>
       <VBox fx:id="ListOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView editable="true" prefHeight="389.0" prefWidth="200.0" fx:id="xd" />
+            <ListView fx:id="ListView" editable="true" onMouseClicked="#ListViewClicked" prefHeight="389.0" prefWidth="200.0" />
          </children></VBox>
    </left>
    <center>
