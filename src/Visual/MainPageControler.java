@@ -1,9 +1,6 @@
 package Visual;
 
-import Comunication.Account;
-import Comunication.Client;
-import Comunication.Mail;
-import Comunication.Message;
+import Comunication.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,12 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainPageControler {
@@ -62,6 +57,22 @@ public class MainPageControler {
     }
 
     public void DeleteMailButtonClick(ActionEvent actionEvent) {
+        if (ListView.getSelectionModel().getSelectedItem() != null || !ListView.getSelectionModel().isEmpty()) {
+            int index = ListView.getSelectionModel().getSelectedIndex();
+            int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
+            try {
+                client.openConection();
+                Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAdress(),
+                        client.getAccount().getPassword(), true, messageId);
+                client.send(message);
+                client.closeConection();
+                client.getAccount().getListOfMails().remove(index);
+                clearListView();
+                loadListview();
+            } catch (IOException e) {
+                System.out.println("Cannot connect to the server");
+            }
+        }
     }
 
     public void ChangePasswordButtonClick(ActionEvent actionEvent) {

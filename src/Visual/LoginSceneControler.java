@@ -58,7 +58,7 @@ public class LoginSceneControler {
                 mainPageControler.loadListview();
                 //bierzemy scene głowna
                 Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                window.setScene(new Scene(root, 800, 500));
+                window.setScene(new Scene(root, 600, 500));
                 window.show();
             } else {
                 AlertLabel.setText("This account does not exists.");
@@ -78,7 +78,7 @@ public class LoginSceneControler {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 500));
+        window.setScene(new Scene(root, 600, 500));
         window.show();
     }
 }

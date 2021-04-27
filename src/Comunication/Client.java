@@ -34,7 +34,7 @@ public class Client {
 
     }
 
-    public void closeClient() throws IOException {
+    public void closeConection() throws IOException {
         this.socket.close();
         this.isWorking = false;
     }

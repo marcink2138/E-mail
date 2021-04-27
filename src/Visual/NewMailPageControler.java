@@ -1,6 +1,8 @@
 package Visual;
 
 import Comunication.Client;
+import Comunication.Mail;
+import Comunication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class NewMailPageControler {
@@ -26,6 +30,12 @@ public class NewMailPageControler {
 
     public void setClient(Client client) {
         this.client = client;
+        try {
+            client.openConection();
+        } catch (IOException e) {
+            System.out.println("Cannot connect to the server");
+        }
+
     }
 
     public void GoBackButtonClicked(ActionEvent actionEvent) throws IOException {
@@ -40,7 +50,18 @@ public class NewMailPageControler {
         window.show();
     }
 
-    public void SendButtonClicked(ActionEvent actionEvent) {
+    public void SendButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        if (!ToTextField.getText().isEmpty() && !FromTextField.getText().equals(ToTextField.getText())) {
+            String reciver = ToTextField.getText();
+            String title = TitleTextField.getText();
+            String date = getData();
+            String text = TextAreaField.getText();
+            Message message = new Mail("Mail", client.getAccount().getEmailAdress(), null, true,
+                    reciver, -1, title, date, text);
+            client.send(message);
+            if (client.read())
+                System.out.println("XD");
+        }
 
     }
 
@@ -48,9 +69,15 @@ public class NewMailPageControler {
 
     }
 
-    public void setFromTextField(){
-        FromTextField.setText("Dis");
+    public void setFromTextField() {
+        FromTextField.setText(client.getAccount().getEmailAdress());
         FromTextField.setEditable(false);
         FromTextField.setDisable(true);
+    }
+
+    public String getData() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return localDateTime.format(dateTimeFormatter);
     }
 }
