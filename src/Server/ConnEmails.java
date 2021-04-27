@@ -73,13 +73,13 @@ public class ConnEmails {
                 if (messages.size() != 0)
                     return new SendMaills("SendMails", account, null, true, messages);
                 else
-                    return new SendMaills("SendMails", account, null, true, null);
+                    return new SendMaills("SendMails", account, null, true, new ArrayList<>());
             } else
                 connAcc.closeConn();
-                return new SendMaills("Fail", account, null, false, null);
+                return new SendMaills("Fail", account, null, false, new ArrayList<>());
         } catch (Exception e) {
             System.out.println("Fatal error");
-            return new SendMaills("Fail", account, null, false, null);
+            return new SendMaills("Fail", account, null, false, new ArrayList<>());
         }
     }
 
