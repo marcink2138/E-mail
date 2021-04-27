@@ -54,9 +54,8 @@ public class MainPageControler {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewMailPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         NewMailPageControler newMailPageControler = fxmlLoader.getController();
-        //newMailPageControler.setClient(client);
+        newMailPageControler.setClient(client);
         newMailPageControler.setFromTextField();
-        //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));
         window.show();
