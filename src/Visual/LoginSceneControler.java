@@ -75,7 +75,10 @@ public class LoginSceneControler {
     }
 
     public void TempClick(ActionEvent actionEvent) throws IOException {
-        if(LoginTextField.getText().equals(""))
-            LoginTextField.setText("dsasda");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        //bierzemy scene głowna
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root, 800, 500));
+        window.show();
     }
 }
