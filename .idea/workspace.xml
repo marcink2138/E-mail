@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ee5ba754-1d0c-4a69-8033-2961183603b6" name="Default Changelist" comment="Gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visual/LoginScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/LoginScene.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Visual/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Visual/MainPageControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPageControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Visual/NewMailPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/NewMailPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visual/RegisterScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/RegisterScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

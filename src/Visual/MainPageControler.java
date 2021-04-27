@@ -75,7 +75,14 @@ public class MainPageControler {
         }
     }
 
-    public void ChangePasswordButtonClick(ActionEvent actionEvent) {
+    public void ChangePasswordButtonClick(ActionEvent actionEvent) throws IOException {
+        ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
+        String password = changePasswordAlert.dispplay(client.getAccount().getPassword());
+        if(password == null) {
+        }
+        else {
+            //wysylasz mesege i nowe haslo to password
+        }
     }
 
     public void LogOotButtonClick(ActionEvent actionEvent) throws IOException {

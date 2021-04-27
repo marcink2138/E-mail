@@ -33,7 +33,7 @@
                   <Label prefHeight="40.0" prefWidth="100.0" text="Title:" />
                   <TextField fx:id="TitleTextField" maxWidth="1000.0" prefWidth="452.0" HBox.hgrow="ALWAYS" />
                </children></HBox>
-            <TextArea fx:id="TextAreaField" prefHeight="325.0" prefWidth="723.0" VBox.vgrow="ALWAYS" />
+            <TextArea fx:id="TextAreaField" prefHeight="325.0" prefWidth="723.0" wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </children>
