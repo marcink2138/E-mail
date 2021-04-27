@@ -61,13 +61,13 @@ public class LoginSceneControler {
                 window.setScene(new Scene(root, 800, 500));
                 window.show();
             } else {
-                AlertLabel.setText("Brak konta o danych parametrach");
+                AlertLabel.setText("This account does not exists.");
                 AlertLabel.setTextFill(Color.web("Red"));
                 LoginTextField.clear();
                 PasswordTextField.clear();
             }
         }else {
-            AlertLabel.setText("Nie podano adresu, badz hasla");
+            AlertLabel.setText("Please complete empty boxes.");
             AlertLabel.setTextFill(Color.web("Red"));
             LoginTextField.clear();
             PasswordTextField.clear();

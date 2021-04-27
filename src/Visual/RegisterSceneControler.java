@@ -37,8 +37,8 @@ public class RegisterSceneControler {
     }
 
     public void RegisterClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        if (LoginTextField.getText().equals("") && PasswordTextField.getText().equals("") &&
-                ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
+        if (!LoginTextField.getText().equals("") && !PasswordTextField.getText().equals("") &&
+                !ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
             client = new Client(6666, "192.168.178.69");
             client.openConection();
             Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
@@ -59,11 +59,11 @@ public class RegisterSceneControler {
                 window.setScene(new Scene(root, 800, 500));
                 window.show();
             }else{
-                AlertLabel.setText("Takie konto znajduje sie w naszej bazie");
+                AlertLabel.setText("This account already exists.");
                 AlertLabel.setTextFill(Color.web("Red"));
             }
         }else {
-            AlertLabel.setText("Wprowadz poprawne wartosci");
+            AlertLabel.setText("Please complete empty boxes.");
             AlertLabel.setTextFill(Color.web("Red"));
         }
 
