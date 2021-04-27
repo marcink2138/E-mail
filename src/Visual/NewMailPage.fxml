@@ -6,12 +6,11 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.NewMailPageControler">
    <children>
-      <VBox prefHeight="400.0" prefWidth="78.0" spacing="5.0">
+      <VBox prefHeight="400.0" prefWidth="74.0" spacing="5.0">
          <children>
-            <Button fx:id="GoBackButton" mnemonicParsing="false" onAction="#GoBackButtonClicked" prefHeight="45.0" prefWidth="45.0" text="Go Back" />
-            <Button fx:id="SendButton" mnemonicParsing="false" onAction="#SendButtonClicked" prefHeight="45.0" prefWidth="45.0" text="Send" />
-            <Button fx:id="LogOutButton" mnemonicParsing="false" onAction="#LogOutButtonClicked" prefHeight="45.0" prefWidth="45.0" text="Log Out" />
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="Button" />
+            <Button fx:id="GoBackButton" mnemonicParsing="false" onAction="#GoBackButtonClicked" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/goBack_icon.png');" />
+            <Button fx:id="SendButton" mnemonicParsing="false" onAction="#SendButtonClicked" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/sendMail_icon.png');" />
+            <Button fx:id="LogOutButton" mnemonicParsing="false" onAction="#LogOutButtonClicked" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/signOut_icon.png');" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

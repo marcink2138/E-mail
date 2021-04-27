@@ -6,14 +6,14 @@
 
 <BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
    <top>
-      <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="74.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButtonClick" text="Refresh" />
-            <Button fx:id="NewMailButton" mnemonicParsing="false" onAction="#NewMailButtonClick" text="New Mail" />
-            <Button fx:id="DeleteMailButton" mnemonicParsing="false" onAction="#DeleteMailButtonClick" text="Delete Mail" />
-            <Button fx:id="ChangePasswordButton" mnemonicParsing="false" onAction="#ChangePasswordButtonClick" text="Change Password" />
-            <Button fx:id="LogOotButton" mnemonicParsing="false" onAction="#LogOotButtonClick" text="Log Out" />
-            <Button fx:id="DeleteAccountButton" mnemonicParsing="false" onAction="#DeleteAccountButtonClick" text="Delete Account" />
+            <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/refresh_icon.png');" />
+            <Button fx:id="NewMailButton" mnemonicParsing="false" onAction="#NewMailButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/sendMail_icon.png');" />
+            <Button fx:id="DeleteMailButton" mnemonicParsing="false" onAction="#DeleteMailButtonClick" prefHeight="64.0" prefWidth="57.0" style="-fx-background-image: url('/Visual/img/deleteMail_icon.png');" />
+            <Button fx:id="ChangePasswordButton" mnemonicParsing="false" onAction="#ChangePasswordButtonClick" prefHeight="64.0" prefWidth="63.0" style="-fx-background-image: url('/Visual/img/changePass_icon.png');" />
+            <Button fx:id="LogOotButton" mnemonicParsing="false" onAction="#LogOotButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/signOut_icon.png');" />
+            <Button fx:id="DeleteAccountButton" mnemonicParsing="false" onAction="#DeleteAccountButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/deleteAcc_icon.png');" />
          </children>
          <BorderPane.margin>
             <Insets />

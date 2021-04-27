@@ -35,6 +35,9 @@ public class NewMailPageControler {
         //mainPageControler.setClient(client);
         //mainPageControler.refreshLabels();
         //mainPageControler.loadListview();
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root, 800, 500));
+        window.show();
     }
 
     public void SendButtonClicked(ActionEvent actionEvent) {
