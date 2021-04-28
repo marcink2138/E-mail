@@ -40,7 +40,10 @@ public class MainPageControler {
         this.client = client;
     }
 
-    public void RefreshButtonClick(ActionEvent actionEvent) {
+    public void RefreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        Message message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+        client.send(message);
+        client.read();
         clearListView();
         loadListview();
     }
@@ -61,7 +64,7 @@ public class MainPageControler {
             int index = ListView.getSelectionModel().getSelectedIndex();
             int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
             try {
-                client.openConection();
+                //client.openConection();
                 Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAdress(),
                         client.getAccount().getPassword(), true, messageId);
                 client.send(message);
