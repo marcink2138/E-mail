@@ -108,11 +108,9 @@ public class MainPageControler {
         }
     }
 
-    public void DeleteAccountButtonClick(ActionEvent actionEvent) {
-    }
-
-    public void ShowMailClick(ActionEvent actionEvent) {
-
+    public void DeleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert();
+        alert.dispplay("Jebac Disa");
     }
 
     public void ListViewClicked(MouseEvent mouseEvent) {
