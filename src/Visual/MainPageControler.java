@@ -21,6 +21,8 @@ public class MainPageControler {
     public TextField dateTextfield;
     public TextField toTextfield;
     public TextField titleTextfield;
+    public Label showingAccountLabel;
+    public Label showingTimeLabel;
     private Client client;
     public Button RefreshButton;
     public Button NewMailButton;
@@ -125,12 +127,14 @@ public class MainPageControler {
             dateTextfield.setText(client.getAccount().getListOfMails().get(0).getDate());
             toTextfield.setText(client.getAccount().getListOfMails().get(0).getAccount());
             TextAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
+            showingAccountLabel.setText(client.getAccount().getEmailAdress());
 
         } else {
             titleTextfield.clear();
             fromTextfield.clear();
             dateTextfield.clear();
             toTextfield.clear();
+            showingAccountLabel.setText(client.getAccount().getEmailAdress());
         }
     }
 
@@ -155,18 +159,6 @@ public class MainPageControler {
         }
         else {
             new Alert().dispplay("Enter the correct password!");
-            Tooltip tooltip = new Tooltip("Refresh");
-            RefreshButton.setTooltip(tooltip);
-            tooltip = new Tooltip("New Mail");
-            NewMailButton.setTooltip(tooltip);
-            tooltip = new Tooltip("Delete Mail");
-            DeleteMailButton.setTooltip(tooltip);
-            tooltip = new Tooltip("Change Password");
-            ChangePasswordButton.setTooltip(tooltip);
-            tooltip = new Tooltip("Log Out");
-            LogOotButton.setTooltip(tooltip);
-            tooltip = new Tooltip("DeleteAccount");
-            DeleteAccountButton.setTooltip(tooltip);
         }
     }
 
