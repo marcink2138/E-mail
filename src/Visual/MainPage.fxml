@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
    <top>
@@ -16,8 +17,11 @@
             <Button fx:id="DeleteAccountButton" mnemonicParsing="false" onAction="#DeleteAccountButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/deleteAcc_icon.png');" />
             <VBox prefHeight="64.0" prefWidth="175.0" spacing="10.0">
                <children>
-                  <Label fx:id="showingAccountLabel" prefHeight="17.0" prefWidth="226.0" />
-                  <Label fx:id="showingTimeLabel" prefHeight="17.0" prefWidth="194.0" />
+                  <Label fx:id="showingAccountLabel" alignment="CENTER" prefHeight="17.0" prefWidth="226.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
+                  <Label fx:id="showingTimeLabel" alignment="CENTER" prefHeight="17.0" prefWidth="194.0" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

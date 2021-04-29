@@ -1,6 +1,10 @@
 package Visual;
 
 import Comunication.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,11 +14,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class MainPageControler {
+public class MainPageControler extends Thread {
     public javafx.scene.layout.BorderPane BorderPane;
     public ListView ListView;
     public TextField fromTextfield;
@@ -38,6 +46,7 @@ public class MainPageControler {
     public VBox ListOfMailsView;
 
 
+
     public void setClient(Client client) {
         this.client = client;
         Tooltip tooltip = new Tooltip("Refresh");
@@ -52,6 +61,7 @@ public class MainPageControler {
         LogOotButton.setTooltip(tooltip);
         tooltip = new Tooltip("DeleteAccount");
         DeleteAccountButton.setTooltip(tooltip);
+        initClock();
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
@@ -94,7 +104,7 @@ public class MainPageControler {
     public void ChangePasswordButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
         ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
         String newPassword = changePasswordAlert.dispplay(client.getAccount().getPassword());
-        if(newPassword != null) {
+        if (newPassword != null) {
             Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAdress(),
                     client.getAccount().getPassword(), true, newPassword);
             try {
@@ -105,7 +115,7 @@ public class MainPageControler {
                 } else {
                     new Alert().dispplay("Fatal Error! Try logOut and logIn!");
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 new Alert().dispplay("Connection with server has been lost");
             }
         }
@@ -141,12 +151,12 @@ public class MainPageControler {
     public void DeleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
         DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
         boolean yesOrNo = deleteAccountAlert.dispplay(client.getAccount().getPassword());
-        if(yesOrNo) {
+        if (yesOrNo) {
             Message message = new Message("DeleteAccount", client.getAccount().getEmailAdress(),
                     client.getAccount().getPassword(), true);
             try {
                 client.send(message);
-                if (client.read()){
+                if (client.read()) {
                     client.closeConection();
                     new Alert().dispplay("Account successfully deleted!");
                     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
@@ -157,8 +167,7 @@ public class MainPageControler {
             } catch (ClassNotFoundException | IOException e) {
                 new Alert().dispplay("Connection with the server has been lost!");
             }
-        }
-        else {
+        } else {
             new Alert().dispplay("Enter the correct password!");
         }
     }
@@ -183,5 +192,20 @@ public class MainPageControler {
 
     public void clearListView() {
         ListView.getItems().clear();
+    }
+
+    private String getTime() {
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return time.format(dateTimeFormatter);
+    }
+    private void initClock() {
+
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            showingTimeLabel.setText(LocalDateTime.now().format(formatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
     }
 }
