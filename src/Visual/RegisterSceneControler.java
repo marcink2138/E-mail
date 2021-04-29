@@ -66,6 +66,7 @@ public class RegisterSceneControler {
                 }
             }catch (IOException e){
                 new Alert().dispplay("Cannot connect to the server!");
+                refreshLabels();
             }
         }else {
             new Alert().dispplay("Please complete empty boxes!");

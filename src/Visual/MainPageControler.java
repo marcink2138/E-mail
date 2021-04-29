@@ -76,7 +76,6 @@ public class MainPageControler {
             int index = ListView.getSelectionModel().getSelectedIndex();
             int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
             try {
-                //client.openConection();
                 Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAdress(),
                         client.getAccount().getPassword(), true, messageId);
                 client.send(message);
@@ -128,22 +127,34 @@ public class MainPageControler {
             TextAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
 
         } else {
-            titleTextfield.setText("");
-            fromTextfield.setText("");
-            dateTextfield.setText("");
-            toTextfield.setText("");
+            titleTextfield.clear();
+            fromTextfield.clear();
+            dateTextfield.clear();
+            toTextfield.clear();
         }
     }
 
     public void DeleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
         DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
-        boolean yesOrNo = deleteAccountAlert.dispplay("dis");
+        boolean yesOrNo = deleteAccountAlert.dispplay(client.getAccount().getPassword());
         if(yesOrNo) {
-            System.out.println("ork");
-            //wysylasz mesege i nowe haslo to password
+            Message message = new Message("DeleteAccount", client.getAccount().getEmailAdress(),
+                    client.getAccount().getPassword(), true);
+            try {
+                client.send(message);
+                if (client.read()){
+                    new Alert().dispplay("Account successfully deleted!");
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
+                    Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    window.setScene(new Scene(root, 800, 500));
+                    window.show();
+                }
+            } catch (ClassNotFoundException | IOException e) {
+                new Alert().dispplay("Connection with the server has been lost!");
+            }
         }
         else {
-            System.out.println("zwierz");
+            new Alert().dispplay("Enter the correct password!");
             Tooltip tooltip = new Tooltip("Refresh");
             RefreshButton.setTooltip(tooltip);
             tooltip = new Tooltip("New Mail");

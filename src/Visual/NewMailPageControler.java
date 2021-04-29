@@ -48,7 +48,7 @@ public class NewMailPageControler {
         mainPageControler.loadListview();
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 600, 500));
+        window.setScene(new Scene(root, 800, 500));
         window.show();
     }
 
@@ -60,12 +60,16 @@ public class NewMailPageControler {
             String text = TextAreaField.getText();
             Message message = new Mail("Mail", client.getAccount().getEmailAdress(), null, true,
                     reciver, -1, title, date, text);
-            client.send(message);
-            if (client.read()) {
-                new Alert().dispplay("Email successfully sent!");
-                refreshLabels();
-            } else
-                new Alert().dispplay("No account found!");
+            try {
+                client.send(message);
+                if (client.read()) {
+                    new Alert().dispplay("Email successfully sent!");
+                    refreshLabels();
+                } else
+                    new Alert().dispplay("No account found!");
+            } catch (IOException e) {
+                new Alert().dispplay("Connection with the server has been lost!");
+            }
         } else {
             new Alert().dispplay("Incorrect sender!");
         }
