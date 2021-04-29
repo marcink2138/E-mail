@@ -24,13 +24,11 @@ public class Client {
     }
 
     public void openConection() throws IOException {
-        try {
-            this.socket = new Socket(address, port);
-            streamProcessing = new StreamProcessing(this.socket);
-            this.isWorking = true;
-        }catch (NullPointerException | ConnectException e){
-            System.out.println("Serwer jest wylaczony");
-        }
+
+        this.socket = new Socket(address, port);
+        streamProcessing = new StreamProcessing(this.socket);
+        this.isWorking = true;
+
 
     }
 
@@ -50,7 +48,8 @@ public class Client {
         if (isWorking) {
             Message recivedMessage = streamProcessing.readData();
             return interpretterClient.Do(recivedMessage, account, messageTosend);
-        }return false;
+        }
+        return false;
     }
 
     public boolean isWorking() {

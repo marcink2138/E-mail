@@ -39,33 +39,43 @@ public class RegisterSceneControler {
     public void RegisterClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         if (!LoginTextField.getText().equals("") && !PasswordTextField.getText().equals("") &&
                 !ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
-            client = new Client(6666, "192.168.178.69");
-            client.openConection();
-            Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
-            client.send(message);
-            if(client.read()){
-                client.getAccount().setEmailAdress(LoginTextField.getText());
-                client.getAccount().setPassword(LoginTextField.getText());
-                message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+            try {
+                client = new Client(6666, "192.168.178.69");
+                client.openConection();
+                Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
                 client.send(message);
-                client.read();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                MainPageControler mainPageControler = fxmlLoader.getController();
-                mainPageControler.setClient(client);
-                mainPageControler.refreshLabels();
-                //bierzemy scene głowna
-                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                window.setScene(new Scene(root, 800, 500));
-                window.show();
-            }else{
-                AlertLabel.setText("This account already exists.");
-                AlertLabel.setTextFill(Color.web("Red"));
+                if (client.read()) {
+                    client.getAccount().setEmailAdress(LoginTextField.getText());
+                    client.getAccount().setPassword(LoginTextField.getText());
+                    message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+                    client.send(message);
+                    client.read();
+                    new Alert().dispplay("Account successfully registered!");
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    LoginSceneControler loginSceneControler = fxmlLoader.getController();
+                    loginSceneControler.setClient(client);
+                    loginSceneControler.refreshLabels();
+                    //bierzemy scene głowna
+                    Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    window.setScene(new Scene(root, 800, 500));
+                    window.show();
+                } else {
+                    new Alert().dispplay("This account already exists!");
+                    refreshLabels();
+                }
+            }catch (IOException e){
+                new Alert().dispplay("Cannot connect to the server!");
             }
         }else {
-            AlertLabel.setText("Please complete empty boxes.");
-            AlertLabel.setTextFill(Color.web("Red"));
+            new Alert().dispplay("Please complete empty boxes!");
+            refreshLabels();
         }
 
+    }
+    public void refreshLabels(){
+        LoginTextField.clear();
+        PasswordTextField.clear();
+        ConfirmPasswordTextField.clear();
     }
 }

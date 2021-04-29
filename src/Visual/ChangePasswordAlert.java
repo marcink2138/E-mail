@@ -1,6 +1,8 @@
 package Visual;
 
 
+import Comunication.ChangePassword;
+import Comunication.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,8 @@ import java.io.IOException;
 
 public class ChangePasswordAlert {
     String password = null;
+
+
 
 
     public String dispplay(String oldPassword) throws IOException {

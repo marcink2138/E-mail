@@ -30,23 +30,18 @@ public class NewMailPageControler {
 
     public void setClient(Client client) {
         this.client = client;
-        try {
-            client.openConection();
-        } catch (IOException e) {
-            System.out.println("Cannot connect to the server");
-        }
-
     }
 
     public void GoBackButtonClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         MainPageControler mainPageControler = fxmlLoader.getController();
-        //mainPageControler.setClient(client);
-        //mainPageControler.refreshLabels();
-        //mainPageControler.loadListview();
+        mainPageControler.setClient(client);
+        mainPageControler.refreshLabels();
+        mainPageControler.loadListview();
+        //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 500));
+        window.setScene(new Scene(root, 600, 500));
         window.show();
     }
 
@@ -59,13 +54,28 @@ public class NewMailPageControler {
             Message message = new Mail("Mail", client.getAccount().getEmailAdress(), null, true,
                     reciver, -1, title, date, text);
             client.send(message);
-            if (client.read())
-                System.out.println("XD");
+            if (client.read()) {
+                new Alert().dispplay("Email successfully sent!");
+                refreshLabels();
+            } else
+                new Alert().dispplay("No account found!");
+        } else {
+            new Alert().dispplay("Incorrect sender!");
         }
 
     }
 
     public void LogOutButtonClicked(ActionEvent actionEvent) {
+        try {
+            client.closeConection();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
+            //bierzemy scene głowna
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(new Scene(root, 800, 500));
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -79,5 +89,11 @@ public class NewMailPageControler {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return localDateTime.format(dateTimeFormatter);
+    }
+
+    public void refreshLabels() {
+        ToTextField.setText("");
+        TitleTextField.setText("");
+        TextAreaField.setText("");
     }
 }

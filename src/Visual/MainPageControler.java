@@ -59,7 +59,7 @@ public class MainPageControler {
         window.show();
     }
 
-    public void DeleteMailButtonClick(ActionEvent actionEvent) {
+    public void DeleteMailButtonClick(ActionEvent actionEvent) throws IOException {
         if (ListView.getSelectionModel().getSelectedItem() != null || !ListView.getSelectionModel().isEmpty()) {
             int index = ListView.getSelectionModel().getSelectedIndex();
             int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
@@ -73,18 +73,28 @@ public class MainPageControler {
                 clearListView();
                 loadListview();
             } catch (IOException e) {
-                System.out.println("Cannot connect to the server");
+                new Alert().dispplay("Connection with server has been lost");
             }
         }
     }
 
-    public void ChangePasswordButtonClick(ActionEvent actionEvent) throws IOException {
+    public void ChangePasswordButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
         ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
-        String password = changePasswordAlert.dispplay(client.getAccount().getPassword());
-        if(password == null) {
-        }
-        else {
-            //wysylasz mesege i nowe haslo to password
+        String newPassword = changePasswordAlert.dispplay(client.getAccount().getPassword());
+        if(newPassword != null) {
+            Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAdress(),
+                    client.getAccount().getPassword(), true, newPassword);
+            try {
+                client.send(m);
+                if (client.read()) {
+                    client.getAccount().setPassword(newPassword);
+                    new Alert().dispplay("Password successfully changed!");
+                } else {
+                    new Alert().dispplay("Fatal Error! Try logOut and logIn!");
+                }
+            }catch (IOException e){
+                new Alert().dispplay("Connection with server has been lost");
+            }
         }
     }
 
@@ -104,6 +114,7 @@ public class MainPageControler {
             dateTextfield.setText(client.getAccount().getListOfMails().get(0).getDate());
             toTextfield.setText(client.getAccount().getListOfMails().get(0).getAccount());
             TextAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
+
         } else {
             titleTextfield.setText("");
             fromTextfield.setText("");
