@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class LoginSceneControler {
     public Client client;
-    public Button LoginButton;
+    public Button loginButton;
     public Button RegisterButton;
     public Label LoginLabel;
     public Label PasswordLabel;
@@ -79,11 +79,7 @@ public class LoginSceneControler {
     public void setClient(Client client){
         this.client = client;
     }
-    public void TempClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
-        //bierzemy scene głowna
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 500));
-        window.show();
+
+    public void TempClick(ActionEvent actionEvent) {
     }
 }
