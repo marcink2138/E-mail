@@ -124,8 +124,15 @@ public class MainPageControler {
     }
 
     public void DeleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
-        Alert alert = new Alert();
-        alert.dispplay("Jebac Disa");
+        DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
+        boolean yesOrNo = deleteAccountAlert.dispplay("dis");
+        if(yesOrNo) {
+            System.out.println("ork");
+            //wysylasz mesege i nowe haslo to password
+        }
+        else {
+            System.out.println("zwierz");
+        }
     }
 
     public void ListViewClicked(MouseEvent mouseEvent) {

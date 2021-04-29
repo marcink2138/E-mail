@@ -32,9 +32,11 @@ public class ChangePasswordAlert {
                 if (changePasswordAlertControler.NewPasswordTextField.getText().equals(changePasswordAlertControler.ConfitmNewPasswordTextField.getText())) {
                     password = changePasswordAlertControler.NewPasswordTextField.getText();
                     window.close();
+                }else{
+                    changePasswordAlertControler.AlertLabel.setText("Passwords are no identical.");
                 }
             }else {
-
+                changePasswordAlertControler.AlertLabel.setText("Please complete all text boxes.");
             }
         });
         Scene scene = new Scene(root, 300,325);
