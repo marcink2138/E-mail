@@ -147,6 +147,7 @@ public class MainPageControler {
             try {
                 client.send(message);
                 if (client.read()){
+                    client.closeConection();
                     new Alert().dispplay("Account successfully deleted!");
                     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
                     Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
