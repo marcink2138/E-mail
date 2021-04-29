@@ -55,7 +55,7 @@
                   <TextField fx:id="dateTextfield" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="550.0" />
                </children>
             </HBox>
-            <TextArea fx:id="TextAreaField" prefHeight="365.0" prefWidth="400.0" wrapText="true" />
+            <TextArea fx:id="TextAreaField" editable="false" prefHeight="365.0" prefWidth="400.0" wrapText="true" />
          </children></VBox>
    </center>
 </BorderPane>
