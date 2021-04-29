@@ -99,10 +99,11 @@ public class MainPageControler {
     public void refreshLabels() {
         int i = client.getAccount().getListOfMails().size();
         if (i != 0) {
-            titleTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getTitle());
-            fromTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getReciver());
-            dateTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getDate());
-            toTextfield.setText(client.getAccount().getListOfMails().get(i - 1).getAccount());
+            titleTextfield.setText(client.getAccount().getListOfMails().get(0).getTitle());
+            fromTextfield.setText(client.getAccount().getListOfMails().get(0).getReciver());
+            dateTextfield.setText(client.getAccount().getListOfMails().get(0).getDate());
+            toTextfield.setText(client.getAccount().getListOfMails().get(0).getAccount());
+            TextAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
         } else {
             titleTextfield.setText("");
             fromTextfield.setText("");
