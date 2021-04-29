@@ -38,6 +38,18 @@ public class MainPageControler {
 
     public void setClient(Client client) {
         this.client = client;
+        Tooltip tooltip = new Tooltip("Refresh");
+        RefreshButton.setTooltip(tooltip);
+        tooltip = new Tooltip("New Mail");
+        NewMailButton.setTooltip(tooltip);
+        tooltip = new Tooltip("Delete Mail");
+        DeleteMailButton.setTooltip(tooltip);
+        tooltip = new Tooltip("Change Password");
+        ChangePasswordButton.setTooltip(tooltip);
+        tooltip = new Tooltip("Log Out");
+        LogOotButton.setTooltip(tooltip);
+        tooltip = new Tooltip("DeleteAccount");
+        DeleteAccountButton.setTooltip(tooltip);
     }
 
     public void RefreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
@@ -132,6 +144,18 @@ public class MainPageControler {
         }
         else {
             System.out.println("zwierz");
+            Tooltip tooltip = new Tooltip("Refresh");
+            RefreshButton.setTooltip(tooltip);
+            tooltip = new Tooltip("New Mail");
+            NewMailButton.setTooltip(tooltip);
+            tooltip = new Tooltip("Delete Mail");
+            DeleteMailButton.setTooltip(tooltip);
+            tooltip = new Tooltip("Change Password");
+            ChangePasswordButton.setTooltip(tooltip);
+            tooltip = new Tooltip("Log Out");
+            LogOotButton.setTooltip(tooltip);
+            tooltip = new Tooltip("DeleteAccount");
+            DeleteAccountButton.setTooltip(tooltip);
         }
     }
 

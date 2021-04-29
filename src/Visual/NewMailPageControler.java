@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +31,12 @@ public class NewMailPageControler {
 
     public void setClient(Client client) {
         this.client = client;
+        Tooltip tooltip = new Tooltip("Go Back");
+        GoBackButton.setTooltip(tooltip);
+        tooltip = new Tooltip("Send");
+        SendButton.setTooltip(tooltip);
+        tooltip = new Tooltip("Log Out");
+        LogOutButton.setTooltip(tooltip);
     }
 
     public void GoBackButtonClicked(ActionEvent actionEvent) throws IOException {

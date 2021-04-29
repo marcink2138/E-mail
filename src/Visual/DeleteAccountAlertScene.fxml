@@ -6,7 +6,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.DeleteAccountAlertControler">
    <children>
-      <Label fx:id="warningLabel" prefHeight="17.0" prefWidth="393.0" text="Are you sure you want to delete you're account?" />
+      <Label fx:id="warningLabel" prefHeight="17.0" prefWidth="393.0" text="Are you sure you want to delete your account?" />
       <Label fx:id="passwordLabel" prefHeight="17.0" prefWidth="435.0" text="Password:" />
       <PasswordField fx:id="passwordTextField" promptText="Password" />
       <HBox prefHeight="35.0" prefWidth="290.0" spacing="10.0">
