@@ -148,7 +148,7 @@ public class MainPageController extends Thread {
         boolean yesOrNo = deleteAccountAlert.display(client.getAccount().getPassword());
         if (yesOrNo) {
             Message message = new Message("DeleteAccount", client.getAccount().getEmailAddress(),
-                    Security.hashPassword(client.getAccount().getPassword()), true);
+                    client.getAccount().getPassword(), true);
             try {
                 client.send(message);
                 if (client.read()) {
