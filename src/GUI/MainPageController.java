@@ -196,11 +196,6 @@ public class MainPageController extends Thread {
         listView.getItems().clear();
     }
 
-    private String getTime() {
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        return time.format(dateTimeFormatter);
-    }
     private void initClock() {
 
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {

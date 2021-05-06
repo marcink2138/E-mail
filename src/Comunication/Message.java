@@ -17,10 +17,6 @@ public class Message implements Serializable {
         this.status = status;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public String getCommand() {
         return command;
     }

@@ -52,14 +52,6 @@ public class Client {
         return false;
     }
 
-    public boolean isWorking() {
-        return isWorking;
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
     public Account getAccount() {
         return account;
     }
