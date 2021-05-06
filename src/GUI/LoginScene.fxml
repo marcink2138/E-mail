@@ -10,7 +10,7 @@
       <VBox fx:id="VboxId" prefHeight="400.0" prefWidth="220.0" spacing="20.0">
          <children>
             <Label fx:id="loginLabel" prefHeight="17.0" prefWidth="245.0" text="Login:" />
-            <TextField fx:id="loginTextField" promptText="Login" />
+            <TextField fx:id="loginTextField" onKeyTyped="#loginKeyPressed" promptText="Login" />
             <Label fx:id="passwordLabel" prefHeight="17.0" prefWidth="217.0" text="Password:" />
             <PasswordField fx:id="passwordTextField" promptText="Password" />
             <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginClick" prefHeight="25.0" prefWidth="233.0" text="Login" textAlignment="CENTER" />

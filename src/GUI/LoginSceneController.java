@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +26,26 @@ public class LoginSceneController {
     public TextField loginTextField;
     public TextField passwordTextField;
     public Label alertLabel;
+    private final String backOfTheAddress = "@poczta.pl";
 
+    public void initialize() {
+        loginTextField.textProperty().addListener((obs, oldText, newText) -> {
+            // do what you need with newText here
+            if(newText.equals(""))
+                return;
+            if (newText.endsWith(backOfTheAddress)) {
+                return;
+            }
+            if ((newText.contains(backOfTheAddress) && !newText.endsWith(backOfTheAddress)) || (!newText.contains(backOfTheAddress) && oldText.endsWith(backOfTheAddress))) {
+                loginTextField.setText(oldText);
+                return;
+            }
+            if (!newText.contains(backOfTheAddress)) {
+                loginTextField.setText(newText + backOfTheAddress);
+                return;
+            }
+        });
+    }
 
     public void registerClick(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RegisterScene.fxml")));
@@ -82,4 +102,9 @@ public class LoginSceneController {
         this.client = client;
     }
 
+    public void loginKeyPressed(KeyEvent keyEvent) {
+        if (loginTextField.getCaretPosition() == loginTextField.getText().length()){
+            loginTextField.positionCaret(loginTextField.getText().length() - backOfTheAddress.length());
+        }
+    }
 }
