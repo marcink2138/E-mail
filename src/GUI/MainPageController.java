@@ -23,7 +23,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class MainPageControler extends Thread {
+public class MainPageController extends Thread {
     public javafx.scene.layout.BorderPane borderPane;
     public ListView listView;
     public TextField fromTextfield;
@@ -66,7 +66,7 @@ public class MainPageControler extends Thread {
     }
 
     public void refreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        Message message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+        Message message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
         client.send(message);
         client.read();
         refreshLabels();
@@ -77,9 +77,9 @@ public class MainPageControler extends Thread {
     public void newMailButtonClick(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewMailPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        NewMailPageControler newMailPageControler = fxmlLoader.getController();
-        newMailPageControler.setClient(client);
-        newMailPageControler.setFromTextField();
+        NewMailPageController newMailPageController = fxmlLoader.getController();
+        newMailPageController.setClient(client);
+        newMailPageController.setFromTextField();
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));
         window.show();
@@ -90,14 +90,14 @@ public class MainPageControler extends Thread {
             int index = listView.getSelectionModel().getSelectedIndex();
             int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
             try {
-                Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAdress(),
+                Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAddress(),
                         client.getAccount().getPassword(), true, messageId);
                 client.send(message);
                 client.getAccount().getListOfMails().remove(index);
                 clearListView();
                 loadListview();
             } catch (IOException e) {
-                new Alert().dispplay("Connection with server has been lost");
+                new Alert().display("Connection with server has been lost");
             }
         }
     }
@@ -106,18 +106,18 @@ public class MainPageControler extends Thread {
         ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
         String newPassword = changePasswordAlert.display(client.getAccount().getPassword());
         if (newPassword != null) {
-            Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAdress(),
+            Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAddress(),
                     client.getAccount().getPassword(), true, newPassword);
             try {
                 client.send(m);
                 if (client.read()) {
                     client.getAccount().setPassword(newPassword);
-                    new Alert().dispplay("Password successfully changed!");
+                    new Alert().display("Password successfully changed!");
                 } else {
-                    new Alert().dispplay("Fatal Error! Try logOut and logIn!");
+                    new Alert().display("Fatal Error! Try logOut and logIn!");
                 }
             } catch (IOException e) {
-                new Alert().dispplay("Connection with server has been lost");
+                new Alert().display("Connection with server has been lost");
             }
         }
     }
@@ -128,7 +128,7 @@ public class MainPageControler extends Thread {
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));
         window.show();
-        client.closeConection();
+        client.closeConnection();
     }
 
     public void refreshLabels() {
@@ -148,28 +148,28 @@ public class MainPageControler extends Thread {
             dateTextfield.clear();
             toTextfield.clear();
             textAreaField.clear();
-            showingAccountLabel.setText(client.getAccount().getEmailAdress());
+            showingAccountLabel.setText(client.getAccount().getEmailAddress());
         //}
     }
 
     public void deleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
         DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
-        boolean yesOrNo = deleteAccountAlert.dispplay(client.getAccount().getPassword());
+        boolean yesOrNo = deleteAccountAlert.display(client.getAccount().getPassword());
         if (yesOrNo) {
-            Message message = new Message("DeleteAccount", client.getAccount().getEmailAdress(),
+            Message message = new Message("DeleteAccount", client.getAccount().getEmailAddress(),
                     client.getAccount().getPassword(), true);
             try {
                 client.send(message);
                 if (client.read()) {
-                    client.closeConection();
-                    new Alert().dispplay("Account successfully deleted!");
+                    client.closeConnection();
+                    new Alert().display("Account successfully deleted!");
                     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
                     Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     window.setScene(new Scene(root, 800, 500));
                     window.show();
                 }
             } catch (ClassNotFoundException | IOException e) {
-                new Alert().dispplay("Connection with the server has been lost!");
+                new Alert().display("Connection with the server has been lost!");
             }
         }
     }

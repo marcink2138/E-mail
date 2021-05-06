@@ -19,7 +19,7 @@ public class InterpreterClient {
                 }
             case "LogIn":
                 if (receivedMessage.isStatus()) {
-                    account.setEmailAdress(sendMessage.getAccount());
+                    account.setEmailAddress(sendMessage.getAccount());
                     account.setPassword(sendMessage.getPassword());
                     //wyslac by pobrac maile
                     System.out.println("Zalogowano");

@@ -16,14 +16,14 @@ public class Client {
     private StreamProcessing streamProcessing;
     private Message messageTosend;
 
-    public Client(int port, String addres) {
+    public Client(int port, String address) {
         this.port = port;
-        this.address = addres;
+        this.address = address;
         this.interpreterClient = new InterpreterClient();
         this.account = new Account(null, null);
     }
 
-    public void openConection() throws IOException {
+    public void openConnection() throws IOException {
 
         this.socket = new Socket(address, port);
         streamProcessing = new StreamProcessing(this.socket);
@@ -32,7 +32,7 @@ public class Client {
 
     }
 
-    public void closeConection() throws IOException {
+    public void closeConnection() throws IOException {
         this.socket.close();
         this.isWorking = false;
     }
@@ -46,8 +46,8 @@ public class Client {
 
     public boolean read() throws IOException, ClassNotFoundException {
         if (isWorking) {
-            Message recivedMessage = streamProcessing.readData();
-            return interpreterClient.Do(recivedMessage, account, messageTosend);
+            Message receivedMessage = streamProcessing.readData();
+            return interpreterClient.Do(receivedMessage, account, messageTosend);
         }
         return false;
     }
@@ -63,32 +63,5 @@ public class Client {
     public Account getAccount() {
         return account;
     }
-/*
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Client client = new Client(6666, "192.168.178.69");
-        Message m = new LoginRegisterDeleteAccount("LogIn", "koszkakoszka", true, "marcin1");
-        client.openConection();
 
-        client.send(m);
-        System.out.println(client.read());
-        System.out.println(client.getAccount().getPassword());
-        Message c = new Message("SendMails", "koszkakoszka", true);
-
-        client.send(m);
-        System.out.println(client.read());
-        for (int i = 0; i < client.getAccount().getListOfMails().size(); i++)
-            System.out.println(client.getAccount().getListOfMails().get(i).getText());
-        client.closeClient();
-
-        client.openConection();
-        client.send(m);
-        System.out.println(client.read());
-        System.out.println(client.getAccount().getPassword());
-        m = new LoginRegisterDeleteAccount("Register", "marianczello", true, "kocham psy");
-
-        client.send(m);
-
-    }
-
-*/
 }

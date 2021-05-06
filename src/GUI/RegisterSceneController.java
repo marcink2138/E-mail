@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class RegisterSceneControler {
+public class RegisterSceneController {
     public Button loginButton;
     public Button registerButton;
     public TextField confirmPasswordTextField;
@@ -39,35 +39,35 @@ public class RegisterSceneControler {
                 !confirmPasswordTextField.getText().equals("") && passwordTextField.getText().equals(confirmPasswordTextField.getText())){
             try {
                 client = new Client(6666, "192.168.178.69");
-                client.openConection();
+                client.openConnection();
                 Message message = new Message("Register", loginTextField.getText(), passwordTextField.getText(), true);
                 client.send(message);
                 if (client.read()) {
-                    client.getAccount().setEmailAdress(loginTextField.getText());
+                    client.getAccount().setEmailAddress(loginTextField.getText());
                     client.getAccount().setPassword(loginTextField.getText());
-                    message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+                    message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
                     client.send(message);
                     client.read();
-                    new Alert().dispplay("Account successfully registered!");
+                    new Alert().display("Account successfully registered!");
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
-                    LoginSceneControler loginSceneControler = fxmlLoader.getController();
-                    loginSceneControler.setClient(client);
-                    loginSceneControler.refreshLabels();
+                    LoginSceneController loginSceneController = fxmlLoader.getController();
+                    loginSceneController.setClient(client);
+                    loginSceneController.refreshLabels();
                     //bierzemy scene głowna
                     Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     window.setScene(new Scene(root, 800, 500));
                     window.show();
                 } else {
-                    new Alert().dispplay("This account already exists!");
+                    new Alert().display("This account already exists!");
                     refreshLabels();
                 }
             }catch (IOException e){
-                new Alert().dispplay("Cannot connect to the server!");
+                new Alert().display("Cannot connect to the server!");
                 refreshLabels();
             }
         }else {
-            new Alert().dispplay("Please complete empty boxes!");
+            new Alert().display("Please complete empty boxes!");
             refreshLabels();
         }
 

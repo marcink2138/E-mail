@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class LoginSceneControler {
+public class LoginSceneController {
     public Client client;
     public Button loginButton;
     public Button registerButton;
@@ -40,33 +40,33 @@ public class LoginSceneControler {
             try {
                 client = new Client(6666, "192.168.178.69");
                 Message message = new Message("LogIn", loginTextField.getText(), passwordTextField.getText(), true);
-                client.openConection();
+                client.openConnection();
                 client.send(message);
                 if (client.read()) {
-                    client.getAccount().setEmailAdress(loginTextField.getText());
+                    client.getAccount().setEmailAddress(loginTextField.getText());
                     client.getAccount().setPassword(passwordTextField.getText());
-                    message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
+                    message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
                     client.send(message);
                     client.read();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
-                    MainPageControler mainPageControler = fxmlLoader.getController();
-                    mainPageControler.setClient(client);
-                    mainPageControler.refreshLabels();
-                    mainPageControler.loadListview();
+                    MainPageController mainPageController = fxmlLoader.getController();
+                    mainPageController.setClient(client);
+                    mainPageController.refreshLabels();
+                    mainPageController.loadListview();
                     //bierzemy scene głowna
                     Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     window.setScene(new Scene(root, 800, 500));
                     window.show();
                 } else {
-                    new Alert().dispplay("Wrong account or password!");
+                    new Alert().display("Wrong account or password!");
                     refreshLabels();
                 }
             } catch (IOException e) {
-                new Alert().dispplay("Cannot connect to the server!");
+                new Alert().display("Cannot connect to the server!");
             }
         } else {
-            new Alert().dispplay("Please complete empty boxes!");
+            new Alert().display("Please complete empty boxes!");
             refreshLabels();
         }
     }

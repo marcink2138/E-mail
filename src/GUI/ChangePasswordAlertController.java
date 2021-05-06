@@ -5,10 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class ChangePasswordAlertControler {
+public class ChangePasswordAlertController {
     public TextField oldPasswordTextField;
     public TextField newPasswordTextField;
-    public TextField confitmNewPasswordTextField;
+    public TextField confirmNewPasswordTextField;
     public Button applyButton;
     public Button closeButton;
     public Label alertLabel;

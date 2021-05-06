@@ -22,19 +22,19 @@ public class ChangePasswordAlert {
         window.setTitle("ChangePassword");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChangePasswordAlertScene.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        ChangePasswordAlertControler changePasswordAlertControler = fxmlLoader.getController();
-        changePasswordAlertControler.closeButton.setOnAction(e -> window.close());
-        changePasswordAlertControler.applyButton.setOnAction(e -> {
-            if (!changePasswordAlertControler.newPasswordTextField.getText().equals("") && !changePasswordAlertControler.confitmNewPasswordTextField.getText().equals("")
-            && !changePasswordAlertControler.oldPasswordTextField.getText().equals("") && changePasswordAlertControler.oldPasswordTextField.getText().equals(oldPassword)) {
-                if (changePasswordAlertControler.newPasswordTextField.getText().equals(changePasswordAlertControler.confitmNewPasswordTextField.getText())) {
-                    password = changePasswordAlertControler.newPasswordTextField.getText();
+        ChangePasswordAlertController changePasswordAlertController = fxmlLoader.getController();
+        changePasswordAlertController.closeButton.setOnAction(e -> window.close());
+        changePasswordAlertController.applyButton.setOnAction(e -> {
+            if (!changePasswordAlertController.newPasswordTextField.getText().equals("") && !changePasswordAlertController.confirmNewPasswordTextField.getText().equals("")
+            && !changePasswordAlertController.oldPasswordTextField.getText().equals("") && changePasswordAlertController.oldPasswordTextField.getText().equals(oldPassword)) {
+                if (changePasswordAlertController.newPasswordTextField.getText().equals(changePasswordAlertController.confirmNewPasswordTextField.getText())) {
+                    password = changePasswordAlertController.newPasswordTextField.getText();
                     window.close();
                 }else{
-                    changePasswordAlertControler.alertLabel.setText("Passwords are no identical.");
+                    changePasswordAlertController.alertLabel.setText("Passwords are no identical.");
                 }
             }else {
-                changePasswordAlertControler.alertLabel.setText("Please complete all text boxes.");
+                changePasswordAlertController.alertLabel.setText("Please complete all text boxes.");
             }
         });
         Scene scene = new Scene(root, 300,325);

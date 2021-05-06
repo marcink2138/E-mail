@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
-public class DeleteAccountAlertControler {
+public class DeleteAccountAlertController {
     public Label warningLabel;
     public Label passwordLabel;
     public PasswordField passwordTextField;

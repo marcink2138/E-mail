@@ -12,20 +12,20 @@ public class DeleteAccountAlert {
     boolean decision = false;
 
 
-    public boolean dispplay(String oldPassword) throws IOException {
+    public boolean display(String oldPassword) throws IOException {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Delete account");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeleteAccountAlertScene.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        DeleteAccountAlertControler deleteAccountAlertControler = fxmlLoader.getController();
-        deleteAccountAlertControler.closeButton.setOnAction(e -> window.close());
-        deleteAccountAlertControler.applyButton.setOnAction(e -> {
-            if(!deleteAccountAlertControler.passwordTextField.getText().equals("") && deleteAccountAlertControler.passwordTextField.getText().equals(oldPassword)){
+        DeleteAccountAlertController deleteAccountAlertController = fxmlLoader.getController();
+        deleteAccountAlertController.closeButton.setOnAction(e -> window.close());
+        deleteAccountAlertController.applyButton.setOnAction(e -> {
+            if(!deleteAccountAlertController.passwordTextField.getText().equals("") && deleteAccountAlertController.passwordTextField.getText().equals(oldPassword)){
                 decision = true;
                 window.close();
             }else {
-                deleteAccountAlertControler.alertLabel.setText("Password is not correct.");
+                deleteAccountAlertController.alertLabel.setText("Password is not correct.");
             }
 
         });

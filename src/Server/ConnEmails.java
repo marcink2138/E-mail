@@ -3,7 +3,7 @@ package Server;
 
 import Comunication.Mail;
 import Comunication.Message;
-import Comunication.SendMaills;
+import Comunication.SendMails;
 
 import java.sql.*;
 import java.text.MessageFormat;
@@ -71,15 +71,15 @@ public class ConnEmails {
                             resultSet.getString("date_"), resultSet.getString("message")));
                 }
                 if (messages.size() != 0)
-                    return new SendMaills("SendMails", account, null, true, messages);
+                    return new SendMails("SendMails", account, null, true, messages);
                 else
-                    return new SendMaills("SendMails", account, null, true, new ArrayList<>());
+                    return new SendMails("SendMails", account, null, true, new ArrayList<>());
             } else
                 connAcc.closeConn();
-                return new SendMaills("Fail", account, null, false, new ArrayList<>());
+                return new SendMails("Fail", account, null, false, new ArrayList<>());
         } catch (Exception e) {
             System.out.println("Fatal error");
-            return new SendMaills("Fail", account, null, false, new ArrayList<>());
+            return new SendMails("Fail", account, null, false, new ArrayList<>());
         }
     }
 

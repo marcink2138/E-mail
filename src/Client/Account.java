@@ -5,12 +5,12 @@ import Comunication.Message;
 import java.util.ArrayList;
 
 public class Account {
-    private String emailAdress;
+    private String emailAddress;
     private String password;
     private ArrayList<Message> listOfMails = new ArrayList<>();
 
-    public Account(String emailAdress, String password){
-        this.emailAdress = emailAdress;
+    public Account(String emailAddress, String password){
+        this.emailAddress = emailAddress;
         this.password = password;
     }
 
@@ -27,8 +27,8 @@ public class Account {
         }
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public String getPassword() {
@@ -43,8 +43,8 @@ public class Account {
         this.listOfMails.clear();
     }
 
-    public void setEmailAdress(String emailAdress) {
-        this.emailAdress = emailAdress;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public void setPassword(String password) {

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class NewMailPageControler {
+public class NewMailPageController {
     public Client client;
     public Button goBackButton;
     public Button sendButton;
@@ -42,10 +42,10 @@ public class NewMailPageControler {
     public void goBackButtonClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        MainPageControler mainPageControler = fxmlLoader.getController();
-        mainPageControler.setClient(client);
-        mainPageControler.refreshLabels();
-        mainPageControler.loadListview();
+        MainPageController mainPageController = fxmlLoader.getController();
+        mainPageController.setClient(client);
+        mainPageController.refreshLabels();
+        mainPageController.loadListview();
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));
@@ -59,26 +59,26 @@ public class NewMailPageControler {
             String date = getData();
             String text = textAreaField.getText();
             Message message = new Mail("Mail", reciver, null, true,
-                    client.getAccount().getEmailAdress(), -1, title, date, text);
+                    client.getAccount().getEmailAddress(), -1, title, date, text);
             try {
                 client.send(message);
                 if (client.read()) {
-                    new Alert().dispplay("Email successfully sent!");
+                    new Alert().display("Email successfully sent!");
                     refreshLabels();
                 } else
-                    new Alert().dispplay("No account found!");
+                    new Alert().display("No account found!");
             } catch (IOException e) {
-                new Alert().dispplay("Connection with the server has been lost!");
+                new Alert().display("Connection with the server has been lost!");
             }
         } else {
-            new Alert().dispplay("Incorrect sender!");
+            new Alert().display("Incorrect sender!");
         }
 
     }
 
     public void logOutButtonClicked(ActionEvent actionEvent) {
         try {
-            client.closeConection();
+            client.closeConnection();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
             //bierzemy scene głowna
             Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -91,7 +91,7 @@ public class NewMailPageControler {
     }
 
     public void setFromTextField() {
-        fromTextField.setText(client.getAccount().getEmailAdress());
+        fromTextField.setText(client.getAccount().getEmailAddress());
         fromTextField.setEditable(false);
         fromTextField.setDisable(true);
     }
