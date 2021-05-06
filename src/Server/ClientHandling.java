@@ -8,13 +8,13 @@ import java.sql.SQLException;
 
 public class ClientHandling extends Thread{
     private Socket socket;
-    private InterpretterServer interpretterServer;
+    private InterpreterServer interpreterServer;
     private StreamProcessing streamProcessing;
     private Message incomingMessage;
     private Message outcomingMessage;
     public ClientHandling(Socket socket) throws SQLException {
         this.socket = socket;
-        interpretterServer = new InterpretterServer();
+        interpreterServer = new InterpreterServer();
     }
     public void run(){
         try {
@@ -25,7 +25,7 @@ public class ClientHandling extends Thread{
         while (true){
             try {
                 incomingMessage = streamProcessing.readData();
-                outcomingMessage = interpretterServer.Do(incomingMessage);
+                outcomingMessage = interpreterServer.Do(incomingMessage);
                 streamProcessing.sendData(outcomingMessage);
             } catch (IOException | ClassNotFoundException | SQLException e) {
                 try {

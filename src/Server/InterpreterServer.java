@@ -4,12 +4,12 @@ import Comunication.*;
 
 import java.sql.SQLException;
 
-public class InterpretterServer {
+public class InterpreterServer {
     private ConnEmails connEmails;
     private ConnAcc connAcc;
     private boolean status;
 
-    public InterpretterServer() throws SQLException {
+    public InterpreterServer() throws SQLException {
         connAcc = new ConnAcc();
         connEmails = new ConnEmails();
     }
@@ -60,8 +60,8 @@ public class InterpretterServer {
         String sender = message.getReciver();
         String title = message.getTitle();
         String date = message.getDate();
-        String messege = message.getText();
-        return connEmails.insertMess(account, sender, title, date, messege);
+        String text = message.getText();
+        return connEmails.insertMess(account, sender, title, date, text);
     }
 
     public boolean logIn(Message message) throws SQLException {
@@ -96,18 +96,4 @@ public class InterpretterServer {
         return connEmails.getListMess(account, password);
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        InterpretterServer a = new InterpretterServer();
-        //Message b = new LoginRegisterDeleteAccount("Register", "koszkakoszka", true, "polska");
-        //Message b = new Mail("Mail", "koszkakoszka", true, "koszkakoszka", -1, "asd", "dsa","sdaasdsad");
-        //Message b = new ChangePassword("ChangePassword", "koszkakoszka", true, "polska", "polska1");
-        //Message b = new LoginRegisterDeleteAccount("LogIn","koszkakoszka", true, "polska1");
-        //Message b = new DeleteMail("DeleteMail", "koszkakoszka",true, 3);
-        //Message b = new LoginRegisterDeleteAccount("LogIn","koszkakoszka", true, "apolska1");
-        // Message b = new Message("SendMails", "koszkakoszka1", true);
-
-        //Message c = a.Do(b);
-        //for (int i = 0; i < c.getListOfMails().size(); i++)
-        //   System.out.println(c.getListOfMails().get(i).getMessageId());
-    }
 }
