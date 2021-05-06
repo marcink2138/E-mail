@@ -60,4 +60,8 @@ public class Message implements Serializable {
     public ArrayList<Message> getListOfMails() {
         return null;
     }
+
+    public void setText(String text){
+
+    }
 }

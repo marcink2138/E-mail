@@ -16,6 +16,10 @@ public class Mail extends Message {
         this.text = text;
     }
 
+    public void setText(String text){
+        this.text = text;
+    }
+
     public String getReciver() {
         return reciver;
     }
