@@ -2,6 +2,7 @@ package GUI;
 
 import Client.Client;
 import Comunication.Message;
+import Comunication.Security;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,17 +36,18 @@ public class LoginSceneController {
 
     }
 
-    public void loginClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
+    public void loginClick(ActionEvent actionEvent) throws Exception {
         if (!loginTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
             try {
                 client = new Client(6666, "192.168.178.69");
-                Message message = new Message("LogIn", loginTextField.getText(), passwordTextField.getText(), true);
+                String encryptedPassword = Security.encrypt(passwordTextField.getText());
+                Message message = new Message("LogIn", loginTextField.getText(), encryptedPassword, true);
                 client.openConnection();
                 client.send(message);
                 if (client.read()) {
                     client.getAccount().setEmailAddress(loginTextField.getText());
-                    client.getAccount().setPassword(passwordTextField.getText());
-                    message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
+                    client.getAccount().setPassword(encryptedPassword);
+                    message = new Message("SendMails", client.getAccount().getEmailAddress(), encryptedPassword, true);
                     client.send(message);
                     client.read();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));

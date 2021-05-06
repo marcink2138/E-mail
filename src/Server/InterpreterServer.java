@@ -14,7 +14,7 @@ public class InterpreterServer {
         connEmails = new ConnEmails();
     }
 
-    public Message Do(Message message) throws SQLException {
+    public Message Do(Message message) throws Exception {
 
         switch (message.getCommand()) {
             case "Mail":
@@ -49,9 +49,9 @@ public class InterpreterServer {
         }
     }
 
-    public boolean deleteAccount(Message message) throws SQLException {
+    public boolean deleteAccount(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
+        String password = Security.decrypt(message.getPassword());
         return connAcc.deleteAccount(account, password);
     }
 
@@ -64,35 +64,35 @@ public class InterpreterServer {
         return connEmails.insertMess(account, sender, title, date, text);
     }
 
-    public boolean logIn(Message message) throws SQLException {
+    public boolean logIn(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
+        String password = Security.decrypt(message.getPassword());
         return connAcc.isAcc(account, password);
     }
 
-    public boolean changePassword(Message message) throws SQLException {
+    public boolean changePassword(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
-        String newPassword = message.getNewPassword();
+        String password = Security.decrypt(message.getPassword());
+        String newPassword = Security.decrypt(message.getNewPassword());
         return connAcc.changePassword(account, password, newPassword);
     }
 
-    public boolean register(Message message) throws SQLException {
+    public boolean register(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
+        String password = Security.decrypt(message.getPassword());
         return connAcc.createAccount(account, password);
     }
 
-    public boolean deleteMail(Message message) throws SQLException {
+    public boolean deleteMail(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
+        String password = Security.decrypt(message.getPassword());
         int id = message.getMessageId();
         return connEmails.deleteMess(account, password, id);
     }
 
-    public Message sendMails(Message message) throws SQLException {
+    public Message sendMails(Message message) throws Exception {
         String account = message.getAccount();
-        String password = message.getPassword();
+        String password = Security.decrypt(message.getPassword());
         return connEmails.getListMess(account, password);
     }
 

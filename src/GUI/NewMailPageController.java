@@ -3,6 +3,7 @@ package GUI;
 import Client.Client;
 import Comunication.Mail;
 import Comunication.Message;
+import Comunication.Security;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -52,12 +53,12 @@ public class NewMailPageController {
         window.show();
     }
 
-    public void sendButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void sendButtonClicked(ActionEvent actionEvent) throws Exception {
         if (!toTextField.getText().isEmpty() && !fromTextField.getText().equals(toTextField.getText())) {
             String reciver = toTextField.getText();
             String title = titleTextField.getText();
             String date = getData();
-            String text = textAreaField.getText();
+            String text = Security.encrypt(textAreaField.getText());
             Message message = new Mail("Mail", reciver, null, true,
                     client.getAccount().getEmailAddress(), -1, title, date, text);
             try {

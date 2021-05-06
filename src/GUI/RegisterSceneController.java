@@ -2,6 +2,7 @@ package GUI;
 
 import Client.Client;
 import Comunication.Message;
+import Comunication.Security;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,18 +35,19 @@ public class RegisterSceneController {
         window.show();
     }
 
-    public void registerClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void registerClick(ActionEvent actionEvent) throws Exception{
         if (!loginTextField.getText().equals("") && !passwordTextField.getText().equals("") &&
                 !confirmPasswordTextField.getText().equals("") && passwordTextField.getText().equals(confirmPasswordTextField.getText())){
             try {
                 client = new Client(6666, "192.168.178.69");
                 client.openConnection();
-                Message message = new Message("Register", loginTextField.getText(), passwordTextField.getText(), true);
+                String encryptedPassword = Security.encrypt(passwordTextField.getText());
+                Message message = new Message("Register", loginTextField.getText(), encryptedPassword, true);
                 client.send(message);
                 if (client.read()) {
                     client.getAccount().setEmailAddress(loginTextField.getText());
-                    client.getAccount().setPassword(loginTextField.getText());
-                    message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
+                    client.getAccount().setPassword(encryptedPassword);
+                    message = new Message("SendMails", client.getAccount().getEmailAddress(), encryptedPassword, true);
                     client.send(message);
                     client.read();
                     new Alert().display("Account successfully registered!");

@@ -27,7 +27,7 @@ public class ClientHandling extends Thread{
                 incomingMessage = streamProcessing.readData();
                 outcomingMessage = interpreterServer.Do(incomingMessage);
                 streamProcessing.sendData(outcomingMessage);
-            } catch (IOException | ClassNotFoundException | SQLException e) {
+            } catch (Exception e) {
                 try {
                     socket.close();
                 } catch (IOException ioException) {

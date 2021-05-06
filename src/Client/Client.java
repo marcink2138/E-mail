@@ -44,7 +44,7 @@ public class Client {
         }
     }
 
-    public boolean read() throws IOException, ClassNotFoundException {
+    public boolean read() throws Exception {
         if (isWorking) {
             Message receivedMessage = streamProcessing.readData();
             return interpreterClient.Do(receivedMessage, account, messageTosend);

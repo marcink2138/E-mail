@@ -1,5 +1,6 @@
 package GUI;
 
+import Comunication.Security;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,15 +22,21 @@ public class DeleteAccountAlert {
         DeleteAccountAlertController deleteAccountAlertController = fxmlLoader.getController();
         deleteAccountAlertController.closeButton.setOnAction(e -> window.close());
         deleteAccountAlertController.applyButton.setOnAction(e -> {
-            if(!deleteAccountAlertController.passwordTextField.getText().equals("") && deleteAccountAlertController.passwordTextField.getText().equals(oldPassword)){
-                decision = true;
-                window.close();
-            }else {
-                deleteAccountAlertController.alertLabel.setText("Password is not correct.");
+            String encryptedConfirmPassword;
+            try {
+                encryptedConfirmPassword = Security.encrypt(deleteAccountAlertController.passwordTextField.getText());
+                if (!deleteAccountAlertController.passwordTextField.getText().equals("") && encryptedConfirmPassword.equals(oldPassword)) {
+                    decision = true;
+                    window.close();
+                } else {
+                    deleteAccountAlertController.alertLabel.setText("Password is not correct.");
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
         });
-        Scene scene = new Scene(root, 300,200);
+        Scene scene = new Scene(root, 300, 200);
         window.setScene(scene);
         window.setResizable(false);
         window.showAndWait();

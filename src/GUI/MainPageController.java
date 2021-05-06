@@ -19,7 +19,6 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -47,7 +46,6 @@ public class MainPageController extends Thread {
     public VBox listOfMailsView;
 
 
-
     public void setClient(Client client) {
         this.client = client;
         Tooltip tooltip = new Tooltip("Refresh");
@@ -65,13 +63,17 @@ public class MainPageController extends Thread {
         initClock();
     }
 
-    public void refreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void refreshButtonClick(ActionEvent actionEvent) throws Exception {
         Message message = new Message("SendMails", client.getAccount().getEmailAddress(), client.getAccount().getPassword(), true);
-        client.send(message);
-        client.read();
-        refreshLabels();
-        clearListView();
-        loadListview();
+        try {
+            client.send(message);
+            client.read();
+            refreshLabels();
+            clearListView();
+            loadListview();
+        } catch (IOException e) {
+            new Alert().display("Connection with server has been lost");
+        }
     }
 
     public void newMailButtonClick(ActionEvent actionEvent) throws IOException {
@@ -102,16 +104,17 @@ public class MainPageController extends Thread {
         }
     }
 
-    public void changePasswordButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
+    public void changePasswordButtonClick(ActionEvent actionEvent) throws Exception {
         ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
         String newPassword = changePasswordAlert.display(client.getAccount().getPassword());
         if (newPassword != null) {
+            String encryptedNewPassword = Security.encrypt(newPassword);
             Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAddress(),
-                    client.getAccount().getPassword(), true, newPassword);
+                    client.getAccount().getPassword(), true, encryptedNewPassword);
             try {
                 client.send(m);
                 if (client.read()) {
-                    client.getAccount().setPassword(newPassword);
+                    client.getAccount().setPassword(encryptedNewPassword);
                     new Alert().display("Password successfully changed!");
                 } else {
                     new Alert().display("Fatal Error! Try logOut and logIn!");
@@ -132,32 +135,20 @@ public class MainPageController extends Thread {
     }
 
     public void refreshLabels() {
-
-      /*  int i = client.getAccount().getListOfMails().size();
-        if (i != 0) {
-            titleTextfield.setText(client.getAccount().getListOfMails().get(0).getTitle());
-            fromTextfield.setText(client.getAccount().getListOfMails().get(0).getReciver());
-            dateTextfield.setText(client.getAccount().getListOfMails().get(0).getDate());
-            toTextfield.setText(client.getAccount().getListOfMails().get(0).getAccount());
-            textAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
-            showingAccountLabel.setText(client.getAccount().getEmailAdress());
-
-        } else {*/
-            titleTextfield.clear();
-            fromTextfield.clear();
-            dateTextfield.clear();
-            toTextfield.clear();
-            textAreaField.clear();
-            showingAccountLabel.setText(client.getAccount().getEmailAddress());
-        //}
+        titleTextfield.clear();
+        fromTextfield.clear();
+        dateTextfield.clear();
+        toTextfield.clear();
+        textAreaField.clear();
+        showingAccountLabel.setText(client.getAccount().getEmailAddress());
     }
 
-    public void deleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
+    public void deleteAccountButtonClick(ActionEvent actionEvent) throws Exception {
         DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
         boolean yesOrNo = deleteAccountAlert.display(client.getAccount().getPassword());
         if (yesOrNo) {
             Message message = new Message("DeleteAccount", client.getAccount().getEmailAddress(),
-                    client.getAccount().getPassword(), true);
+                    Security.hashPassword(client.getAccount().getPassword()), true);
             try {
                 client.send(message);
                 if (client.read()) {
@@ -195,6 +186,7 @@ public class MainPageController extends Thread {
     public void clearListView() {
         listView.getItems().clear();
     }
+
 
     private void initClock() {
 

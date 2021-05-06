@@ -1,11 +1,12 @@
 package Client;
 
 import Comunication.Message;
+import Comunication.Security;
 
 public class InterpreterClient {
 
 
-    public boolean Do(Message receivedMessage, Account account, Message sendMessage) {
+    public boolean Do(Message receivedMessage, Account account, Message sendMessage) throws Exception {
 
         switch (receivedMessage.getCommand()) {
             case "Mail":
@@ -39,6 +40,12 @@ public class InterpreterClient {
             case "SendMails":
                 if (receivedMessage.isStatus()) {
                     account.clear();
+                    if (receivedMessage.getListOfMails().size()>0) {
+                        for (int i = 0; i < receivedMessage.getListOfMails().size(); i++) {
+                            String decrypted = Security.decrypt(receivedMessage.getListOfMails().get(i).getText());
+                            receivedMessage.getListOfMails().get(i).setText(decrypted);
+                        }
+                    }
                     account.setListOfMails(receivedMessage.getListOfMails());
                     return true;
                 } else {
