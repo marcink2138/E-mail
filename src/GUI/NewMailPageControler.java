@@ -1,6 +1,6 @@
 package GUI;
 
-import Comunication.Client;
+import Client.Client;
 import Comunication.Mail;
 import Comunication.Message;
 import javafx.event.ActionEvent;

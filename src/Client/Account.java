@@ -1,4 +1,6 @@
-package Comunication;
+package Client;
+
+import Comunication.Message;
 
 import java.util.ArrayList;
 

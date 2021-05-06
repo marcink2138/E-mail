@@ -1,5 +1,6 @@
-package Comunication;
+package Client;
 
+import Comunication.Message;
 import Server.StreamProcessing;
 
 import java.io.*;

@@ -1,6 +1,6 @@
 package GUI;
 
-import Comunication.Client;
+import Client.Client;
 import Comunication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,6 @@
-package Comunication;
+package Client;
+
+import Comunication.Message;
 
 public class InterpreterClient {
 
