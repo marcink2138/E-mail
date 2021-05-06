@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ee5ba754-1d0c-4a69-8033-2961183603b6" name="Default Changelist" comment="Gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visual/LoginSceneControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/LoginSceneControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Visual/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Visual/MainPageControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/MainPageControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Visual/NewMailPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visual/NewMailPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +15,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,8 +41,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../javafx/javafx-sdk-11.0.2/lib" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../javafx/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.excludes" />
@@ -77,7 +77,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Visual.Main" />
       <module name="email" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\marci\Desktop\projekt\javafx\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path E:\javafx\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Visual.*" />

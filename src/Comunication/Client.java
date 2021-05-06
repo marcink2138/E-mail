@@ -3,7 +3,6 @@ package Comunication;
 import Server.StreamProcessing;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.Socket;
 
 public class Client {
@@ -11,7 +10,7 @@ public class Client {
     private final int port;
     private final String address;
     private boolean isWorking = false;
-    private InterpretterClient interpretterClient;
+    private InterpreterClient interpreterClient;
     private Account account;
     private StreamProcessing streamProcessing;
     private Message messageTosend;
@@ -19,22 +18,20 @@ public class Client {
     public Client(int port, String addres) {
         this.port = port;
         this.address = addres;
-        this.interpretterClient = new InterpretterClient();
+        this.interpreterClient = new InterpreterClient();
         this.account = new Account(null, null);
     }
 
     public void openConection() throws IOException {
-        try {
-            this.socket = new Socket(address, port);
-            streamProcessing = new StreamProcessing(this.socket);
-            this.isWorking = true;
-        }catch (NullPointerException | ConnectException e){
-            System.out.println("Serwer jest wylaczony");
-        }
+
+        this.socket = new Socket(address, port);
+        streamProcessing = new StreamProcessing(this.socket);
+        this.isWorking = true;
+
 
     }
 
-    public void closeClient() throws IOException {
+    public void closeConection() throws IOException {
         this.socket.close();
         this.isWorking = false;
     }
@@ -49,8 +46,9 @@ public class Client {
     public boolean read() throws IOException, ClassNotFoundException {
         if (isWorking) {
             Message recivedMessage = streamProcessing.readData();
-            return interpretterClient.Do(recivedMessage, account, messageTosend);
-        }return false;
+            return interpreterClient.Do(recivedMessage, account, messageTosend);
+        }
+        return false;
     }
 
     public boolean isWorking() {
