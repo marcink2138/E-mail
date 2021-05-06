@@ -56,8 +56,8 @@ public class InterpretterServer {
     }
 
     public boolean insertMail(Message message) throws SQLException {
-        String account = message.getReciver();
-        String sender = message.getAccount();
+        String account = message.getAccount();
+        String sender = message.getReciver();
         String title = message.getTitle();
         String date = message.getDate();
         String messege = message.getText();
