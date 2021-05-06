@@ -1,5 +1,6 @@
 package GUI;
 
+import Client.Client;
 import Comunication.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
