@@ -1,10 +1,10 @@
-package Visual;
+package GUI;
 
 import Comunication.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,8 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class MainPageControler extends Thread {
-    public javafx.scene.layout.BorderPane BorderPane;
-    public ListView ListView;
+    public javafx.scene.layout.BorderPane borderPane;
+    public ListView listView;
     public TextField fromTextfield;
     public TextField dateTextfield;
     public TextField toTextfield;
@@ -32,47 +32,48 @@ public class MainPageControler extends Thread {
     public Label showingAccountLabel;
     public Label showingTimeLabel;
     private Client client;
-    public Button RefreshButton;
-    public Button NewMailButton;
-    public Button DeleteMailButton;
-    public Button ChangePasswordButton;
-    public Button LogOotButton;
-    public Button DeleteAccountButton;
-    public Label TitleLabel;
-    public Label FromLabel;
-    public Label ToLabel;
-    public Label DateLabel;
-    public TextArea TextAreaField;
-    public VBox ListOfMailsView;
+    public Button refreshButton;
+    public Button newMailButton;
+    public Button deleteMailButton;
+    public Button changePasswordButton;
+    public Button logOotButton;
+    public Button deleteAccountButton;
+    public Label titleLabel;
+    public Label fromLabel;
+    public Label toLabel;
+    public Label dateLabel;
+    public TextArea textAreaField;
+    public VBox listOfMailsView;
 
 
 
     public void setClient(Client client) {
         this.client = client;
         Tooltip tooltip = new Tooltip("Refresh");
-        RefreshButton.setTooltip(tooltip);
+        refreshButton.setTooltip(tooltip);
         tooltip = new Tooltip("New Mail");
-        NewMailButton.setTooltip(tooltip);
+        newMailButton.setTooltip(tooltip);
         tooltip = new Tooltip("Delete Mail");
-        DeleteMailButton.setTooltip(tooltip);
+        deleteMailButton.setTooltip(tooltip);
         tooltip = new Tooltip("Change Password");
-        ChangePasswordButton.setTooltip(tooltip);
+        changePasswordButton.setTooltip(tooltip);
         tooltip = new Tooltip("Log Out");
-        LogOotButton.setTooltip(tooltip);
+        logOotButton.setTooltip(tooltip);
         tooltip = new Tooltip("DeleteAccount");
-        DeleteAccountButton.setTooltip(tooltip);
+        deleteAccountButton.setTooltip(tooltip);
         initClock();
     }
 
-    public void RefreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void refreshButtonClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         Message message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
         client.send(message);
         client.read();
+        refreshLabels();
         clearListView();
         loadListview();
     }
 
-    public void NewMailButtonClick(ActionEvent actionEvent) throws IOException {
+    public void newMailButtonClick(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewMailPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         NewMailPageControler newMailPageControler = fxmlLoader.getController();
@@ -83,15 +84,14 @@ public class MainPageControler extends Thread {
         window.show();
     }
 
-    public void DeleteMailButtonClick(ActionEvent actionEvent) throws IOException {
-        if (ListView.getSelectionModel().getSelectedItem() != null || !ListView.getSelectionModel().isEmpty()) {
-            int index = ListView.getSelectionModel().getSelectedIndex();
+    public void deleteMailButtonClick(ActionEvent actionEvent) throws IOException {
+        if (listView.getSelectionModel().getSelectedItem() != null || !listView.getSelectionModel().isEmpty()) {
+            int index = listView.getSelectionModel().getSelectedIndex();
             int messageId = client.getAccount().getListOfMails().get(index).getMessageId();
             try {
                 Message message = new DeleteMail("DeleteMail", client.getAccount().getEmailAdress(),
                         client.getAccount().getPassword(), true, messageId);
                 client.send(message);
-                client.closeConection();
                 client.getAccount().getListOfMails().remove(index);
                 clearListView();
                 loadListview();
@@ -101,9 +101,9 @@ public class MainPageControler extends Thread {
         }
     }
 
-    public void ChangePasswordButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
+    public void changePasswordButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
         ChangePasswordAlert changePasswordAlert = new ChangePasswordAlert();
-        String newPassword = changePasswordAlert.dispplay(client.getAccount().getPassword());
+        String newPassword = changePasswordAlert.display(client.getAccount().getPassword());
         if (newPassword != null) {
             Message m = new ChangePassword("ChangePassword", client.getAccount().getEmailAdress(),
                     client.getAccount().getPassword(), true, newPassword);
@@ -121,34 +121,37 @@ public class MainPageControler extends Thread {
         }
     }
 
-    public void LogOotButtonClick(ActionEvent actionEvent) throws IOException {
+    public void logOotButtonClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 800, 500));
         window.show();
+        client.closeConection();
     }
 
     public void refreshLabels() {
-        int i = client.getAccount().getListOfMails().size();
+
+      /*  int i = client.getAccount().getListOfMails().size();
         if (i != 0) {
             titleTextfield.setText(client.getAccount().getListOfMails().get(0).getTitle());
             fromTextfield.setText(client.getAccount().getListOfMails().get(0).getReciver());
             dateTextfield.setText(client.getAccount().getListOfMails().get(0).getDate());
             toTextfield.setText(client.getAccount().getListOfMails().get(0).getAccount());
-            TextAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
+            textAreaField.setText(client.getAccount().getListOfMails().get(0).getText());
             showingAccountLabel.setText(client.getAccount().getEmailAdress());
 
-        } else {
+        } else {*/
             titleTextfield.clear();
             fromTextfield.clear();
             dateTextfield.clear();
             toTextfield.clear();
+            textAreaField.clear();
             showingAccountLabel.setText(client.getAccount().getEmailAdress());
-        }
+        //}
     }
 
-    public void DeleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
+    public void deleteAccountButtonClick(ActionEvent actionEvent) throws IOException {
         DeleteAccountAlert deleteAccountAlert = new DeleteAccountAlert();
         boolean yesOrNo = deleteAccountAlert.dispplay(client.getAccount().getPassword());
         if (yesOrNo) {
@@ -167,31 +170,29 @@ public class MainPageControler extends Thread {
             } catch (ClassNotFoundException | IOException e) {
                 new Alert().dispplay("Connection with the server has been lost!");
             }
-        } else {
-            new Alert().dispplay("Enter the correct password!");
         }
     }
 
-    public void ListViewClicked(MouseEvent mouseEvent) {
-        if (ListView.getSelectionModel().getSelectedItem() == null || ListView.getSelectionModel().isEmpty())
+    public void listViewClicked(MouseEvent mouseEvent) {
+        if (listView.getSelectionModel().getSelectedItem() == null || listView.getSelectionModel().isEmpty())
             return;
-        int which = ListView.getSelectionModel().getSelectedIndex();
+        int which = listView.getSelectionModel().getSelectedIndex();
         titleTextfield.setText(client.getAccount().getListOfMails().get(which).getTitle());
         fromTextfield.setText(client.getAccount().getListOfMails().get(which).getReciver());
         toTextfield.setText(client.getAccount().getListOfMails().get(which).getAccount());
         dateTextfield.setText(client.getAccount().getListOfMails().get(which).getDate());
-        TextAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
+        textAreaField.setText(client.getAccount().getListOfMails().get(which).getText());
     }
 
     public void loadListview() {
         for (int i = 0; i < client.getAccount().getListOfMails().size(); i++) {
-            ListView.getItems().add(client.getAccount().getListOfMails().get(i).getTitle());
+            listView.getItems().add(client.getAccount().getListOfMails().get(i).getTitle());
         }
 
     }
 
     public void clearListView() {
-        ListView.getItems().clear();
+        listView.getItems().clear();
     }
 
     private String getTime() {

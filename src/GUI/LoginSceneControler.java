@@ -1,4 +1,4 @@
-package Visual;
+package GUI;
 
 import Comunication.Client;
 import Comunication.Message;
@@ -18,16 +18,15 @@ import java.util.Objects;
 public class LoginSceneControler {
     public Client client;
     public Button loginButton;
-    public Button RegisterButton;
-    public Label LoginLabel;
-    public Label PasswordLabel;
-    public TextField LoginTextField;
-    public TextField PasswordTextField;
-    public Label AlertLabel;
-    public Button tempButton;
+    public Button registerButton;
+    public Label loginLabel;
+    public Label passwordLabel;
+    public TextField loginTextField;
+    public TextField passwordTextField;
+    public Label alertLabel;
 
 
-    public void RegisterClick(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void registerClick(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RegisterScene.fxml")));
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -36,16 +35,16 @@ public class LoginSceneControler {
 
     }
 
-    public void LoginClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
-        if (!LoginTextField.getText().equals("")&&!PasswordTextField.getText().equals("")) {
+    public void loginClick(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
+        if (!loginTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
             try {
                 client = new Client(6666, "192.168.178.69");
-                Message message = new Message("LogIn", LoginTextField.getText(), PasswordTextField.getText(), true);
+                Message message = new Message("LogIn", loginTextField.getText(), passwordTextField.getText(), true);
                 client.openConection();
                 client.send(message);
                 if (client.read()) {
-                    client.getAccount().setEmailAdress(LoginTextField.getText());
-                    client.getAccount().setPassword(PasswordTextField.getText());
+                    client.getAccount().setEmailAdress(loginTextField.getText());
+                    client.getAccount().setPassword(passwordTextField.getText());
                     message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
                     client.send(message);
                     client.read();
@@ -63,23 +62,22 @@ public class LoginSceneControler {
                     new Alert().dispplay("Wrong account or password!");
                     refreshLabels();
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 new Alert().dispplay("Cannot connect to the server!");
             }
-        }else {
+        } else {
             new Alert().dispplay("Please complete empty boxes!");
             refreshLabels();
         }
     }
-    public void refreshLabels(){
-        LoginTextField.clear();
-        PasswordTextField.clear();
+
+    public void refreshLabels() {
+        loginTextField.clear();
+        passwordTextField.clear();
     }
 
-    public void setClient(Client client){
+    public void setClient(Client client) {
         this.client = client;
     }
 
-    public void TempClick(ActionEvent actionEvent) {
-    }
 }

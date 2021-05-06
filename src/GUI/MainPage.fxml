@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.MainPageControler">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainPageControler">
    <top>
       <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="74.0" prefWidth="600.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/refresh_icon.png');" />
-            <Button fx:id="NewMailButton" mnemonicParsing="false" onAction="#NewMailButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/sendMail_icon.png');" />
-            <Button fx:id="DeleteMailButton" mnemonicParsing="false" onAction="#DeleteMailButtonClick" prefHeight="64.0" prefWidth="57.0" style="-fx-background-image: url('/Visual/img/deleteMail_icon.png');" />
-            <Button fx:id="ChangePasswordButton" mnemonicParsing="false" onAction="#ChangePasswordButtonClick" prefHeight="64.0" prefWidth="63.0" style="-fx-background-image: url('/Visual/img/changePass_icon.png');" />
-            <Button fx:id="LogOotButton" mnemonicParsing="false" onAction="#LogOotButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/signOut_icon.png');" />
-            <Button fx:id="DeleteAccountButton" mnemonicParsing="false" onAction="#DeleteAccountButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/Visual/img/deleteAcc_icon.png');" />
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/GUI/img/refresh_icon.png');" />
+            <Button fx:id="newMailButton" mnemonicParsing="false" onAction="#newMailButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/GUI/img/sendMail_icon.png');" />
+            <Button fx:id="deleteMailButton" mnemonicParsing="false" onAction="#deleteMailButtonClick" prefHeight="64.0" prefWidth="57.0" style="-fx-background-image: url('/GUI/img/deleteMail_icon.png');" />
+            <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#changePasswordButtonClick" prefHeight="64.0" prefWidth="63.0" style="-fx-background-image: url('/GUI/img/changePass_icon.png');" />
+            <Button fx:id="logOotButton" mnemonicParsing="false" onAction="#logOotButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/GUI/img/signOut_icon.png');" />
+            <Button fx:id="deleteAccountButton" mnemonicParsing="false" onAction="#deleteAccountButtonClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-image: url('/GUI/img/deleteAcc_icon.png');" />
             <VBox prefHeight="64.0" prefWidth="175.0" spacing="10.0">
                <children>
                   <Label fx:id="showingAccountLabel" alignment="CENTER" prefHeight="17.0" prefWidth="226.0">
@@ -36,9 +36,9 @@
          </padding></HBox>
    </top>
    <left>
-      <VBox fx:id="ListOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="listOfMailsView" prefHeight="360.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="ListView" editable="true" onMouseClicked="#ListViewClicked" prefHeight="389.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="listView" editable="true" onMouseClicked="#listViewClicked" prefHeight="389.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
          </children></VBox>
    </left>
    <center>
@@ -46,29 +46,29 @@
          <children>
             <HBox prefHeight="11.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="TitleLabel" prefHeight="26.0" prefWidth="51.0" text="Title:" />
+                  <Label fx:id="titleLabel" prefHeight="26.0" prefWidth="51.0" text="Title:" />
                   <TextField fx:id="titleTextfield" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="550.0" />
                </children>
             </HBox>
             <HBox prefHeight="10.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="FromLabel" prefHeight="26.0" prefWidth="51.0" text="From:" />
+                  <Label fx:id="fromLabel" prefHeight="26.0" prefWidth="51.0" text="From:" />
                   <TextField fx:id="fromTextfield" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="550.0" />
                </children>
             </HBox>
             <HBox prefHeight="6.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="ToLabel" prefHeight="26.0" prefWidth="51.0" text="To:" />
+                  <Label fx:id="toLabel" prefHeight="26.0" prefWidth="51.0" text="To:" />
                   <TextField fx:id="toTextfield" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="550.0" />
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="DateLabel" prefHeight="26.0" prefWidth="51.0" text="Date:" />
+                  <Label fx:id="dateLabel" prefHeight="26.0" prefWidth="51.0" text="Date:" />
                   <TextField fx:id="dateTextfield" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="550.0" />
                </children>
             </HBox>
-            <TextArea fx:id="TextAreaField" editable="false" prefHeight="365.0" prefWidth="400.0" wrapText="true" />
+            <TextArea fx:id="textAreaField" editable="false" prefHeight="365.0" prefWidth="400.0" wrapText="true" />
          </children></VBox>
    </center>
 </BorderPane>

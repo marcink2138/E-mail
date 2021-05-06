@@ -1,4 +1,4 @@
-package Visual;
+package GUI;
 
 import Comunication.Client;
 import Comunication.Mail;
@@ -21,25 +21,25 @@ import java.util.Objects;
 
 public class NewMailPageControler {
     public Client client;
-    public Button GoBackButton;
-    public Button SendButton;
-    public Button LogOutButton;
-    public TextField FromTextField;
-    public TextField ToTextField;
-    public TextField TitleTextField;
-    public TextArea TextAreaField;
+    public Button goBackButton;
+    public Button sendButton;
+    public Button logOutButton;
+    public TextField fromTextField;
+    public TextField toTextField;
+    public TextField titleTextField;
+    public TextArea textAreaField;
 
     public void setClient(Client client) {
         this.client = client;
         Tooltip tooltip = new Tooltip("Go Back");
-        GoBackButton.setTooltip(tooltip);
+        goBackButton.setTooltip(tooltip);
         tooltip = new Tooltip("Send");
-        SendButton.setTooltip(tooltip);
+        sendButton.setTooltip(tooltip);
         tooltip = new Tooltip("Log Out");
-        LogOutButton.setTooltip(tooltip);
+        logOutButton.setTooltip(tooltip);
     }
 
-    public void GoBackButtonClicked(ActionEvent actionEvent) throws IOException {
+    public void goBackButtonClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         MainPageControler mainPageControler = fxmlLoader.getController();
@@ -52,14 +52,14 @@ public class NewMailPageControler {
         window.show();
     }
 
-    public void SendButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        if (!ToTextField.getText().isEmpty() && !FromTextField.getText().equals(ToTextField.getText())) {
-            String reciver = ToTextField.getText();
-            String title = TitleTextField.getText();
+    public void sendButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        if (!toTextField.getText().isEmpty() && !fromTextField.getText().equals(toTextField.getText())) {
+            String reciver = toTextField.getText();
+            String title = titleTextField.getText();
             String date = getData();
-            String text = TextAreaField.getText();
-            Message message = new Mail("Mail", client.getAccount().getEmailAdress(), null, true,
-                    reciver, -1, title, date, text);
+            String text = textAreaField.getText();
+            Message message = new Mail("Mail", reciver, null, true,
+                    client.getAccount().getEmailAdress(), -1, title, date, text);
             try {
                 client.send(message);
                 if (client.read()) {
@@ -76,7 +76,7 @@ public class NewMailPageControler {
 
     }
 
-    public void LogOutButtonClicked(ActionEvent actionEvent) {
+    public void logOutButtonClicked(ActionEvent actionEvent) {
         try {
             client.closeConection();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
@@ -91,9 +91,9 @@ public class NewMailPageControler {
     }
 
     public void setFromTextField() {
-        FromTextField.setText(client.getAccount().getEmailAdress());
-        FromTextField.setEditable(false);
-        FromTextField.setDisable(true);
+        fromTextField.setText(client.getAccount().getEmailAdress());
+        fromTextField.setEditable(false);
+        fromTextField.setDisable(true);
     }
 
     public String getData() {
@@ -103,8 +103,8 @@ public class NewMailPageControler {
     }
 
     public void refreshLabels() {
-        ToTextField.setText("");
-        TitleTextField.setText("");
-        TextAreaField.setText("");
+        toTextField.setText("");
+        titleTextField.setText("");
+        textAreaField.setText("");
     }
 }

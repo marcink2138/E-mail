@@ -1,7 +1,6 @@
 package Comunication;
 
 public class ChangePassword extends Message {
-    private String password;
     private String newpassword;
 
     public ChangePassword(String alert, String account, String password, boolean status, String newpassword) {

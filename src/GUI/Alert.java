@@ -1,4 +1,4 @@
-package Visual;
+package GUI;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +17,8 @@ public class Alert {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AlertScene.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         AlertControler alertControler = fxmlLoader.getController();
-        alertControler.AlertLabel.setText(message);
-        alertControler.OkButton.setOnAction(e -> window.close());
+        alertControler.alertLabel.setText(message);
+        alertControler.okButton.setOnAction(e -> window.close());
         Scene scene = new Scene(root, 300,100);
         window.setScene(scene);
         window.setResizable(false);

@@ -3,7 +3,6 @@ package Comunication;
 import Server.StreamProcessing;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.Socket;
 
 public class Client {
@@ -11,7 +10,7 @@ public class Client {
     private final int port;
     private final String address;
     private boolean isWorking = false;
-    private InterpretterClient interpretterClient;
+    private InterpreterClient interpreterClient;
     private Account account;
     private StreamProcessing streamProcessing;
     private Message messageTosend;
@@ -19,7 +18,7 @@ public class Client {
     public Client(int port, String addres) {
         this.port = port;
         this.address = addres;
-        this.interpretterClient = new InterpretterClient();
+        this.interpreterClient = new InterpreterClient();
         this.account = new Account(null, null);
     }
 
@@ -47,7 +46,7 @@ public class Client {
     public boolean read() throws IOException, ClassNotFoundException {
         if (isWorking) {
             Message recivedMessage = streamProcessing.readData();
-            return interpretterClient.Do(recivedMessage, account, messageTosend);
+            return interpreterClient.Do(recivedMessage, account, messageTosend);
         }
         return false;
     }

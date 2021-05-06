@@ -1,14 +1,14 @@
 package Comunication;
 
-public class InterpretterClient {
+public class InterpreterClient {
 
 
-    public boolean Do(Message recivedMessage, Account account, Message sendMessage) {
+    public boolean Do(Message receivedMessage, Account account, Message sendMessage) {
 
-        switch (recivedMessage.getCommand()) {
+        switch (receivedMessage.getCommand()) {
             case "Mail":
-                if (recivedMessage.isStatus()) {
-                    account.addMail(sendMessage);
+                if (receivedMessage.isStatus()) {
+                    //account.addMail(sendMessage);
                     System.out.println("Udało sie wysłac");
                     return true;
                 } else {
@@ -16,7 +16,7 @@ public class InterpretterClient {
                     return false;
                 }
             case "LogIn":
-                if (recivedMessage.isStatus()) {
+                if (receivedMessage.isStatus()) {
                     account.setEmailAdress(sendMessage.getAccount());
                     account.setPassword(sendMessage.getPassword());
                     //wyslac by pobrac maile
@@ -27,7 +27,7 @@ public class InterpretterClient {
                     return false;
                 }
             case "Register":
-                if (recivedMessage.isStatus()) {
+                if (receivedMessage.isStatus()) {
                     System.out.println("Zarejestrowano");
                     return true;
                 } else {
@@ -35,16 +35,16 @@ public class InterpretterClient {
                     return false;
                 }
             case "SendMails":
-                if (recivedMessage.isStatus()) {
+                if (receivedMessage.isStatus()) {
                     account.clear();
-                    account.setListOfMails(recivedMessage.getListOfMails());
+                    account.setListOfMails(receivedMessage.getListOfMails());
                     return true;
                 } else {
                     System.out.println("Nie udalo sie pobrac maili");
                     return false;
                 }
             case "DeleteAccount":
-                if (recivedMessage.isStatus()) {
+                if (receivedMessage.isStatus()) {
                     System.out.println("Usunieto");
                     return true;
                 } else {
@@ -52,8 +52,8 @@ public class InterpretterClient {
                     return false;
                 }
             case "DeleteMail":
-                if (recivedMessage.isStatus()) {
-                    account.deleteMail(recivedMessage);
+                if (receivedMessage.isStatus()) {
+                    account.deleteMail(receivedMessage);
                     System.out.println("Usunieto");
                     return true;
                 } else {
@@ -61,7 +61,7 @@ public class InterpretterClient {
                     return false;
                 }
             case "ChangePassword":
-                if (recivedMessage.isStatus()) {
+                if (receivedMessage.isStatus()) {
                     account.setPassword(sendMessage.getNewPassword());
                     System.out.println("Zmieniono haslo");
                     return true;

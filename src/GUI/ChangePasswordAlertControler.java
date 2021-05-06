@@ -1,4 +1,4 @@
-package Visual;
+package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -6,12 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ChangePasswordAlertControler {
-    public TextField OldPasswordTextField;
-    public TextField NewPasswordTextField;
-    public TextField ConfitmNewPasswordTextField;
-    public Button ApplyButton;
-    public Button CloseButton;
-    public Label AlertLabel;
+    public TextField oldPasswordTextField;
+    public TextField newPasswordTextField;
+    public TextField confitmNewPasswordTextField;
+    public Button applyButton;
+    public Button closeButton;
+    public Label alertLabel;
 
     public void ApplyButtonClick(ActionEvent actionEvent) {
     }

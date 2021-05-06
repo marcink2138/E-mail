@@ -1,4 +1,4 @@
-package Visual;
+package GUI;
 
 import Comunication.Client;
 import Comunication.Message;
@@ -10,25 +10,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class RegisterSceneControler {
-    public Button LoginButton;
-    public Button RegisterButton;
-    public TextField ConfirmPasswordTextField;
-    public Label ConfirmPasswordLabel;
-    public TextField PasswordTextField;
-    public Label PasswordLabel;
-    public TextField LoginTextField;
-    public Label LoginLabel;
-    public Label AlertLabel;
+    public Button loginButton;
+    public Button registerButton;
+    public TextField confirmPasswordTextField;
+    public Label confirmPasswordLabel;
+    public TextField passwordTextField;
+    public Label passwordLabel;
+    public TextField loginTextField;
+    public Label loginLabel;
+    public Label alertLabel;
     private Client client;
-    public void LoginClick(ActionEvent actionEvent) throws IOException {
+    public void loginClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScene.fxml")));
         //bierzemy scene głowna
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -36,17 +34,17 @@ public class RegisterSceneControler {
         window.show();
     }
 
-    public void RegisterClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        if (!LoginTextField.getText().equals("") && !PasswordTextField.getText().equals("") &&
-                !ConfirmPasswordTextField.getText().equals("") && PasswordTextField.getText().equals(ConfirmPasswordTextField.getText())){
+    public void registerClick(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        if (!loginTextField.getText().equals("") && !passwordTextField.getText().equals("") &&
+                !confirmPasswordTextField.getText().equals("") && passwordTextField.getText().equals(confirmPasswordTextField.getText())){
             try {
                 client = new Client(6666, "192.168.178.69");
                 client.openConection();
-                Message message = new Message("Register", LoginTextField.getText(), PasswordTextField.getText(), true);
+                Message message = new Message("Register", loginTextField.getText(), passwordTextField.getText(), true);
                 client.send(message);
                 if (client.read()) {
-                    client.getAccount().setEmailAdress(LoginTextField.getText());
-                    client.getAccount().setPassword(LoginTextField.getText());
+                    client.getAccount().setEmailAdress(loginTextField.getText());
+                    client.getAccount().setPassword(loginTextField.getText());
                     message = new Message("SendMails", client.getAccount().getEmailAdress(), client.getAccount().getPassword(), true);
                     client.send(message);
                     client.read();
@@ -75,8 +73,8 @@ public class RegisterSceneControler {
 
     }
     public void refreshLabels(){
-        LoginTextField.clear();
-        PasswordTextField.clear();
-        ConfirmPasswordTextField.clear();
+        loginTextField.clear();
+        passwordTextField.clear();
+        confirmPasswordTextField.clear();
     }
 }

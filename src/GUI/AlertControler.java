@@ -1,13 +1,13 @@
-package Visual;
+package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class AlertControler {
-    public Label AlertLabel;
-    public Button OkButton;
+    public Label alertLabel;
+    public Button okButton;
 
-    public void OkButtonClick(ActionEvent actionEvent) {
+    public void okButtonClick(ActionEvent actionEvent) {
     }
 }
