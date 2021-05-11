@@ -13,7 +13,6 @@ public class StreamProcessing {
     public StreamProcessing(Socket socket) throws IOException {
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();
-        outputStream.flush();
     }
 
     public Message readData() throws IOException, ClassNotFoundException {
@@ -24,5 +23,6 @@ public class StreamProcessing {
     public void sendData(Message message) throws IOException {
         objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream.writeObject(message);
+        objectOutputStream.flush();
     }
 }
